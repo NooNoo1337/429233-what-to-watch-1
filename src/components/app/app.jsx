@@ -4,7 +4,7 @@ function App() {
   return (
     <Fragment>
       <div className="visually-hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <symbol id="add" viewBox="0 0 19 20">
             <title>+</title>
             <desc>Created with Sketch.</desc>
