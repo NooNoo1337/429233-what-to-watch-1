@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Михаил Черемухин-Рерберг](https://up.htmlacademy.ru/react/1/user/429233).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Усов](https://htmlacademy.ru/profile/id172343).
 
 ---
 
