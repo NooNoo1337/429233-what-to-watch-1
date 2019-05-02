@@ -6,6 +6,11 @@ module.exports = {
     filename: `bundle.js`,
     path: path.join(__dirname, `public`)
   },
+  resolve: {
+    alias: {
+      '@': path.join(__dirname, `./src`)
+    }
+  },
   devServer: {
     contentBase: path.join(__dirname, `public`),
     compress: false,
