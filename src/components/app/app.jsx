@@ -1,13 +1,10 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
-App.propTypes = {
-  movieTitles: PropTypes.arrayOf(PropTypes.string)
-};
 
-function App({movieTitles}) {
+const App = ({movieTitles}) => {
   const filmCard = movieTitles.map((movieTitle, index) =>
-    <article className="small-movie-card catalog__movies-card" key = {index}>
+    <article className="small-movie-card catalog__movies-card" key={index}>
       <button className="small-movie-card__play-btn" type="button">Play</button>
       <div className="small-movie-card__image">
         <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
@@ -170,6 +167,11 @@ function App({movieTitles}) {
       </div>
     </Fragment>
   );
-}
+};
+
+App.propTypes = {
+  movieTitles: PropTypes.arrayOf(PropTypes.string)
+};
+
 
 export default App;
