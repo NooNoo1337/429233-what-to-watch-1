@@ -3,4 +3,6 @@ import {render} from 'react-dom';
 
 import App from '@/components/app/app.jsx';
 
-render(<App />, document.getElementById(`root`));
+const movieTitlesCollection = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`, `Aviator`];
+
+render(<App movieTitles = {movieTitlesCollection}/>, document.getElementById(`root`));
