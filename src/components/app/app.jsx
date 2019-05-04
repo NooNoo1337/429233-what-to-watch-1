@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
-
 const App = ({movieTitles}) => {
   const filmCard = movieTitles.map((movieTitle, index) =>
     <article className="small-movie-card catalog__movies-card" key={index}>
