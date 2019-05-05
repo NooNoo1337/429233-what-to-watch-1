@@ -1,8 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
-
-const App = ({movieTitles}) => {
+const App = ({movieTitles, onClick}) => {
   const filmCard = movieTitles.map((movieTitle, index) =>
     <article className="small-movie-card catalog__movies-card" key={index}>
       <button className="small-movie-card__play-btn" type="button">Play</button>
@@ -10,7 +9,7 @@ const App = ({movieTitles}) => {
         <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">
+        <a className="small-movie-card__link" href="movie-page.html" onClick={onClick}>
           { movieTitle }
         </a>
       </h3>
@@ -170,7 +169,8 @@ const App = ({movieTitles}) => {
 };
 
 App.propTypes = {
-  movieTitles: PropTypes.arrayOf(PropTypes.string)
+  movieTitles: PropTypes.arrayOf(PropTypes.string),
+  onClick: PropTypes.func
 };
 
 
