@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AppComponent should render AppComponent correctly 1`] = `
+exports[`AppComponent should render correctly 1`] = `
 Array [
   <div
     className="visually-hidden"
@@ -381,6 +381,9 @@ Array [
         >
           <button
             className="small-movie-card__play-btn"
+            data-film-id={1}
+            onClick={[Function]}
+            onMouseEnter={[Function]}
             type="button"
           >
             Play
@@ -400,7 +403,6 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
             >
               Fantastic Beasts
             </a>
@@ -411,6 +413,9 @@ Array [
         >
           <button
             className="small-movie-card__play-btn"
+            data-film-id={2}
+            onClick={[Function]}
+            onMouseEnter={[Function]}
             type="button"
           >
             Play
@@ -430,7 +435,6 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
             >
               Bohemian Rhapsody
             </a>
@@ -441,6 +445,9 @@ Array [
         >
           <button
             className="small-movie-card__play-btn"
+            data-film-id={3}
+            onClick={[Function]}
+            onMouseEnter={[Function]}
             type="button"
           >
             Play
@@ -460,7 +467,6 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
             >
               Macbeth
             </a>
@@ -471,6 +477,9 @@ Array [
         >
           <button
             className="small-movie-card__play-btn"
+            data-film-id={4}
+            onClick={[Function]}
+            onMouseEnter={[Function]}
             type="button"
           >
             Play
@@ -490,7 +499,6 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
             >
               Aviator
             </a>

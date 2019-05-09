@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import App from './app.jsx';
+import FilmsList from './films-list.jsx';
 const filmsCollection = [
   {
     id: 1,
@@ -18,14 +18,15 @@ const filmsCollection = [
   {
     id: 4,
     title: `Aviator`,
-  }
+  },
 ];
 
-describe(`AppComponent`, () => {
-  it(`should render correctly`, () => {
+describe(`FilmsListComponent`, () => {
+  it(`should render FilmsListComponent correctly`, () => {
     const tree = renderer
-      .create(<App
+      .create(<FilmsList
         films={filmsCollection}
+        handleClick={() => {}}
       />)
       .toJSON();
 
