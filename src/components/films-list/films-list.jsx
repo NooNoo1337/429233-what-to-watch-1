@@ -18,8 +18,8 @@ export default class FilmsList extends PureComponent {
         film={film}
         key={film.id}
         onCardTitleClick={onCardTitleClick}
-        onPlayButtonClick={(evt) => this._handlePlayButtonClick(evt)}
-        onCardHover={(evt) => this._handleCardHover(evt)}
+        onPlayButtonClick={this.handlePlayButtonClick.bind(this)}
+        onCardHover={this.handleCardHover.bind(this)}
       />);
 
     return (
@@ -29,13 +29,13 @@ export default class FilmsList extends PureComponent {
     );
   }
 
-  _handleCardHover(evt) {
+  handleCardHover(evt) {
     this.setState({
       activeFilmCard: evt.target.dataset.filmId
     });
   }
 
-  _handlePlayButtonClick(evt) {
+  handlePlayButtonClick(evt) {
     return evt.target.dataset.filmId;
   }
 }

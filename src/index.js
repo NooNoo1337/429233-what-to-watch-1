@@ -6,4 +6,4 @@ import App from '@/components/app/app.jsx';
 import filmsCollection from '@/mocks/films.js';
 
 
-ReactDOM.render(<App films={filmsCollection} onCardTitleClick={() => {}}/>, document.getElementById(`root`));
+ReactDOM.render(<App films={filmsCollection}/>, document.getElementById(`root`));
