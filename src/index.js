@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import App from '@/components/app/app.jsx';
 
-const movieTitlesCollection = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`, `Aviator`];
+import filmsCollection from '@/mocks/films.js';
 
-ReactDOM.render(<App movieTitles = {movieTitlesCollection}/>, document.getElementById(`root`));
+
+ReactDOM.render(<App films={filmsCollection}/>, document.getElementById(`root`));
