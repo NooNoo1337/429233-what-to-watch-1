@@ -9,43 +9,25 @@ export default class FilmsList extends PureComponent {
     this.state = {
       activeFilmCard: ``,
     };
-
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleCardMouseEnter = this.handleCardMouseEnter.bind(this);
   }
 
   render() {
     const {films, onCardTitleClick} = this.props;
-    const filmElement = films.map((film) =>
-      <FilmCard
-        film={film}
-        key={film.id}
-        onCardTitleClick={onCardTitleClick}
-        onPlayButtonClick={this.handlePlayButtonClick}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      />);
-
     return (
       <div className="catalog__movies-list">
-        {filmElement}
+        {films.map((film) =>
+          <FilmCard
+            film={film}
+            key={film.id}
+            onCardTitleClick={onCardTitleClick}
+            onCardMouseEnter={this.handleCardMouseEnter}
+          />)}
       </div>
     );
   }
 
-  handleMouseEnter(evt) {
-    this.setState({
-      activeFilmCard: evt.target.dataset.filmId
-    });
-  }
-
-  handleMouseLeave() {
-    this.setState({
-      activeFilmCard: ``
-    });
-  }
-
-  handlePlayButtonClick(evt) {
+  handleCardMouseEnter(evt) {
     return evt.target.dataset.filmId;
   }
 }

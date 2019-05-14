@@ -3,24 +3,21 @@
 exports[`FilmCardComponent should render FilmCardComponent correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  data-film-id={1}
 >
-  <button
-    className="small-movie-card__play-btn"
-    data-film-id={1}
-    type="button"
-  >
-    Play
-  </button>
-  <div
+  <video
     className="small-movie-card__image"
+    height="175"
+    muted={true}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+    width="280"
   >
-    <img
-      alt="Fantastic Beasts: The Crimes of Grindelwald"
-      height="175"
-      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-      width="280"
+    <source
+      type="video/mp4"
     />
-  </div>
+  </video>
   <h3
     className="small-movie-card__title"
   >

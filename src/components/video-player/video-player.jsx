@@ -1,19 +1,55 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-const VideoPlayer = ({previewSrc, videoSrc, videoFormat = `video/mp4`, isSoundOff = false}) => {
-  return (
-    <video poster={{previewSrc}} muted={isSoundOff}>
-      <source src={{videoSrc}} type={{videoFormat}} />
-    </video>
-  );
-};
+export default class VideoPlayer extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.videoRef = React.createRef();
+  }
+
+  render() {
+    const {
+      posterSrc,
+      videoSrc,
+      videoFormat = `video/mp4`,
+      isSoundOff = true,
+      onMouseEnter,
+      onMouseLeave
+    } = this.props;
+    return (
+      <video
+        className="small-movie-card__image"
+        poster={posterSrc}
+        muted={isSoundOff}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        ref={this.videoRef}
+        width="280"
+        height="175"
+      >
+        <source src={videoSrc} type={videoFormat}/>
+      </video>
+    );
+  }
+
+  componentDidUpdate() {
+    const video = this.videoRef.current;
+    if (this.props.isVideoPlaying) {
+      video.load();
+      video.play();
+    } else {
+      video.load();
+    }
+  }
+}
+
 
 VideoPlayer.propTypes = {
-  previewSrc: PropTypes.string,
+  posterSrc: PropTypes.string,
   videoSrc: PropTypes.string,
   videoFormat: PropTypes.string,
-  isSoundOff: PropTypes.bool
+  isSoundOff: PropTypes.bool,
+  isVideoPlaying: PropTypes.bool,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 };
-
-export default VideoPlayer;

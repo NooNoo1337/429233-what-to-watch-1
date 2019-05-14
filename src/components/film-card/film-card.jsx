@@ -1,22 +1,54 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import VideoPlayer from '../video-player/video-player.jsx';
 
-const FilmCard = ({film, onCardTitleClick, onMouseEnter, onMouseLeave, onPlayButtonClick}) => {
-  return (
-    <article className="small-movie-card catalog__movies-card">
-      <button className="small-movie-card__play-btn" type="button" data-film-id={film.id} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onPlayButtonClick}>Play</button>
-      <div className="small-movie-card__image">
-        <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-      </div>
-      <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" onClick={onCardTitleClick}>
-          {film.title}
-        </a>
-      </h3>
-    </article>
-  );
-};
+export default class FilmCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isVideoPlaying: false,
+    };
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+  }
+
+  render() {
+    const {film, onCardMouseEnter, onCardTitleClick} = this.props;
+    const defaultPoster = `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`;
+
+    return (
+      <article className="small-movie-card catalog__movies-card" data-film-id={film.id} onMouseEnter={onCardMouseEnter}>
+        <VideoPlayer
+          posterSrc={defaultPoster}
+          videoSrc={film.preview}
+          isVideoPlaying={this.state.isVideoPlaying}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+        />
+        <h3 className="small-movie-card__title">
+          <a className="small-movie-card__link" onClick={onCardTitleClick}>
+            {film.title}
+          </a>
+        </h3>
+      </article>
+    );
+  }
+
+  handleMouseEnter() {
+    setTimeout(() => {
+      this.setState({
+        isVideoPlaying: true,
+      });
+    }, 1000);
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      isVideoPlaying: false,
+    });
+  }
+}
 
 FilmCard.propTypes = {
   film: PropTypes.shape({
@@ -24,10 +56,10 @@ FilmCard.propTypes = {
     title: PropTypes.oneOf([`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`, `Aviator`, `Filth`]),
     preview: PropTypes.string
   }),
+  onCardMouseEnter: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   onCardTitleClick: PropTypes.func,
   onPlayButtonClick: PropTypes.func
 };
 
-export default FilmCard;
