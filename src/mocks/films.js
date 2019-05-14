@@ -1,31 +1,37 @@
 export default [
   {
     id: 1,
-    genre: ``,
     title: `Fantastic Beasts`,
-    src: ``,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    genre: ``,
+    src: ``
   },
   {
     id: 2,
-    genre: ``,
     title: `Bohemian Rhapsody`,
-    src: ``,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    genre: ``,
+    src: ``
   },
   {
     id: 3,
-    genre: ``,
     title: `Macbeth`,
-    src: ``,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    genre: ``,
+    src: ``
   },
   {
     id: 4,
-    genre: ``,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     title: `Aviator`,
-    src: ``,
+    genre: ``,
+    src: ``
   },
   {
     id: 5,
-    genre: ``,
     title: `Filth`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    genre: ``,
+    src: ``
   },
 ];

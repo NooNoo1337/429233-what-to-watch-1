@@ -8,7 +8,7 @@ const mockFilm = {id: 1, title: `Fantastic Beasts`};
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`FilmCardComponent`, () => {
-  it(`should simulate card title click`, () => {
+  it(`should simulate link click`, () => {
     const handleTitleClick = jest.fn();
     const wrapper = shallow(<FilmCard film={mockFilm} filmID={mockFilm.id} onCardTitleClick={handleTitleClick}/>);
     const filmCardTitle = wrapper.find(`.small-movie-card__link`);

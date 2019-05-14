@@ -9,6 +9,9 @@ export default class FilmsList extends PureComponent {
     this.state = {
       activeFilmCard: ``,
     };
+
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   render() {
@@ -18,8 +21,9 @@ export default class FilmsList extends PureComponent {
         film={film}
         key={film.id}
         onCardTitleClick={onCardTitleClick}
-        onPlayButtonClick={this.handlePlayButtonClick.bind(this)}
-        onCardHover={this.handleCardHover.bind(this)}
+        onPlayButtonClick={this.handlePlayButtonClick}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       />);
 
     return (
@@ -29,9 +33,15 @@ export default class FilmsList extends PureComponent {
     );
   }
 
-  handleCardHover(evt) {
+  handleMouseEnter(evt) {
     this.setState({
       activeFilmCard: evt.target.dataset.filmId
+    });
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      activeFilmCard: ``
     });
   }
 
@@ -43,7 +53,8 @@ export default class FilmsList extends PureComponent {
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    title: PropTypes.string
+    title: PropTypes.string,
+    preview: PropTypes.string
   })).isRequired,
   onCardTitleClick: PropTypes.func,
 };

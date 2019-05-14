@@ -16,8 +16,8 @@ describe(`FilmCardComponent`, () => {
         film={mockFilm}
         key={mockFilm.id}
         handleClick={() => {}}
-        handleMouseEnter={() => {
-        }}
+        handleMouseEnter={() => {}}
+        handleMouseLeave={() => {}}
       />)
       .toJSON();
 
