@@ -8,6 +8,7 @@ export default class FilmCard extends Component {
     super(props);
     this.state = {
       isVideoPlaying: false,
+      timeoutId: 0,
     };
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -36,17 +37,23 @@ export default class FilmCard extends Component {
   }
 
   handleMouseEnter() {
-    setTimeout(() => {
+    const id = setTimeout(() => {
       this.setState({
         isVideoPlaying: true,
       });
     }, 1000);
+
+    this.setState({
+      timeoutId: id,
+    });
   }
 
   handleMouseLeave() {
     this.setState({
       isVideoPlaying: false,
     });
+
+    clearTimeout(this.state.timeoutId);
   }
 }
 
