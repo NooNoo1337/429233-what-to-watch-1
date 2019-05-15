@@ -64,9 +64,6 @@ FilmCard.propTypes = {
     preview: PropTypes.string
   }),
   onCardMouseEnter: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
   onCardTitleClick: PropTypes.func,
-  onPlayButtonClick: PropTypes.func
 };
 
