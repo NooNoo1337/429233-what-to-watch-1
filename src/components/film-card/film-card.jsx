@@ -8,24 +8,20 @@ export default class FilmCard extends Component {
     super(props);
     this.state = {
       isVideoPlaying: false,
-      timeoutId: 0,
+      timeoutID: null,
     };
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   render() {
-    const {film, onCardMouseEnter, onCardTitleClick} = this.props;
+    const {film, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
     const defaultPoster = `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`;
 
     return (
-      <article className="small-movie-card catalog__movies-card" data-film-id={film.id} onMouseEnter={onCardMouseEnter}>
+      <article className="small-movie-card catalog__movies-card" data-film-id={film.id} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         <VideoPlayer
           posterSrc={defaultPoster}
           videoSrc={film.preview}
           isVideoPlaying={this.state.isVideoPlaying}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
         />
         <h3 className="small-movie-card__title">
           <a className="small-movie-card__link" onClick={onCardTitleClick}>
@@ -36,24 +32,37 @@ export default class FilmCard extends Component {
     );
   }
 
-  handleMouseEnter() {
-    const id = setTimeout(() => {
+  activatePlayer() {
+    const timerDelay = 1000;
+
+    const timeoutId = setTimeout(() => {
       this.setState({
         isVideoPlaying: true,
       });
-    }, 1000);
-
+    }, timerDelay);
     this.setState({
-      timeoutId: id,
+      timeoutID: timeoutId
     });
   }
 
-  handleMouseLeave() {
+  deactivatePlayer() {
+    clearTimeout(this.state.timeoutID);
     this.setState({
       isVideoPlaying: false,
+      timeoutID: null
     });
+  }
 
-    clearTimeout(this.state.timeoutId);
+  componentDidUpdate(prevProps) {
+    const {isCardActive} = this.props;
+
+    if (isCardActive !== prevProps.isCardActive) {
+      if (isCardActive) {
+        this.activatePlayer();
+      } else {
+        this.deactivatePlayer();
+      }
+    }
   }
 }
 
@@ -63,7 +72,9 @@ FilmCard.propTypes = {
     title: PropTypes.oneOf([`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`, `Aviator`, `Filth`]),
     preview: PropTypes.string
   }),
-  onCardMouseEnter: PropTypes.func,
   onCardTitleClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  isCardActive: PropTypes.bool
 };
 

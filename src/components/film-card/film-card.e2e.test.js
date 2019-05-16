@@ -20,7 +20,7 @@ describe(`FilmCardComponent`, () => {
 
   it(`should return active card id`, () => {
     const handleMouseEnter = jest.fn(() => mockFilm.id);
-    const wrapper = mount(<FilmCard film={mockFilm} filmID={mockFilm.id} onCardMouseEnter={handleMouseEnter}/>);
+    const wrapper = mount(<FilmCard film={mockFilm} filmID={mockFilm.id} onMouseEnter={handleMouseEnter}/>);
 
     wrapper.find(`.catalog__movies-card`).simulate(`mouseenter`);
     expect(handleMouseEnter).toHaveBeenCalled();

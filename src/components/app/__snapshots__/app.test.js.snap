@@ -380,13 +380,12 @@ Array [
           className="small-movie-card catalog__movies-card"
           data-film-id={1}
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <video
             className="small-movie-card__image"
             height="175"
             muted={true}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
             poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
@@ -408,13 +407,12 @@ Array [
           className="small-movie-card catalog__movies-card"
           data-film-id={2}
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <video
             className="small-movie-card__image"
             height="175"
             muted={true}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
             poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
@@ -436,13 +434,12 @@ Array [
           className="small-movie-card catalog__movies-card"
           data-film-id={3}
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <video
             className="small-movie-card__image"
             height="175"
             muted={true}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
             poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
@@ -464,13 +461,12 @@ Array [
           className="small-movie-card catalog__movies-card"
           data-film-id={4}
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <video
             className="small-movie-card__image"
             height="175"
             muted={true}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
             poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >

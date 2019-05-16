@@ -13,16 +13,12 @@ export default class VideoPlayer extends PureComponent {
       videoSrc,
       videoFormat = `video/mp4`,
       isSoundOff = true,
-      onMouseEnter,
-      onMouseLeave
     } = this.props;
     return (
       <video
         className="small-movie-card__image"
         poster={posterSrc}
         muted={isSoundOff}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
         ref={this.videoRef}
         width="280"
         height="175"
@@ -50,6 +46,4 @@ VideoPlayer.propTypes = {
   videoFormat: PropTypes.string,
   isSoundOff: PropTypes.bool,
   isVideoPlaying: PropTypes.bool,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func
 };
