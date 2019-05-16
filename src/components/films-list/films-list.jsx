@@ -7,43 +7,48 @@ export default class FilmsList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      activeFilmCard: ``,
+      activeCardId: null,
     };
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   render() {
     const {films, onCardTitleClick} = this.props;
-    const filmElement = films.map((film) =>
-      <FilmCard
-        film={film}
-        key={film.id}
-        onCardTitleClick={onCardTitleClick}
-        onPlayButtonClick={this.handlePlayButtonClick.bind(this)}
-        onCardHover={this.handleCardHover.bind(this)}
-      />);
-
     return (
       <div className="catalog__movies-list">
-        {filmElement}
+        {films.map((film) =>
+          <FilmCard
+            film={film}
+            key={film.id}
+            onCardTitleClick={onCardTitleClick}
+            onMouseEnter={this.handleMouseEnter.bind(this, film.id)}
+            onMouseLeave={this.handleMouseLeave}
+            isCardActive={this.state.activeCardId === film.id}
+          />)}
       </div>
     );
   }
 
-  handleCardHover(evt) {
+  handleMouseEnter(activeCardId) {
     this.setState({
-      activeFilmCard: evt.target.dataset.filmId
+      activeCardId: (this.state.activeCardId === activeCardId) ? null : activeCardId,
     });
+    return activeCardId;
   }
 
-  handlePlayButtonClick(evt) {
-    return evt.target.dataset.filmId;
+  handleMouseLeave() {
+    this.setState({
+      activeCardId: null
+    });
   }
 }
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    title: PropTypes.string
+    title: PropTypes.string,
+    preview: PropTypes.string
   })).isRequired,
   onCardTitleClick: PropTypes.func,
 };

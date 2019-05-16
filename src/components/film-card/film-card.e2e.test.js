@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import FilmCard from './film-card.jsx';
@@ -8,9 +8,9 @@ const mockFilm = {id: 1, title: `Fantastic Beasts`};
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`FilmCardComponent`, () => {
-  it(`should simulate card title click`, () => {
+  it(`should simulate link click`, () => {
     const handleTitleClick = jest.fn();
-    const wrapper = shallow(<FilmCard film={mockFilm} filmID={mockFilm.id} onCardTitleClick={handleTitleClick}/>);
+    const wrapper = mount(<FilmCard film={mockFilm} filmID={mockFilm.id} onCardTitleClick={handleTitleClick}/>);
     const filmCardTitle = wrapper.find(`.small-movie-card__link`);
 
     expect(filmCardTitle.length).toEqual(1);
@@ -19,12 +19,12 @@ describe(`FilmCardComponent`, () => {
   });
 
   it(`should return active card id`, () => {
-    const handleClick = jest.fn(() => mockFilm.id);
-    const wrapper = shallow(<FilmCard film={mockFilm} filmID={mockFilm.id} onPlayButtonClick={handleClick}/>);
+    const handleMouseEnter = jest.fn(() => mockFilm.id);
+    const wrapper = mount(<FilmCard film={mockFilm} filmID={mockFilm.id} onMouseEnter={handleMouseEnter}/>);
 
-    wrapper.find(`.small-movie-card__play-btn`).simulate(`click`);
-    expect(handleClick).toHaveBeenCalled();
-    handleClick(mockFilm);
-    expect(handleClick).toHaveReturnedWith(mockFilm.id);
+    wrapper.find(`.catalog__movies-card`).simulate(`mouseenter`);
+    expect(handleMouseEnter).toHaveBeenCalled();
+    handleMouseEnter(mockFilm);
+    expect(handleMouseEnter).toHaveReturnedWith(mockFilm.id);
   });
 });

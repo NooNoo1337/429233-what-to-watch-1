@@ -6,26 +6,21 @@ exports[`FilmsListComponent should render FilmsListComponent correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
+    data-film-id={1}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      data-film-id={1}
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      type="button"
-    >
-      Play
-    </button>
-    <div
+    <video
       className="small-movie-card__image"
+      height="175"
+      muted={true}
+      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      width="280"
     >
-      <img
-        alt="Fantastic Beasts: The Crimes of Grindelwald"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
+      <source
+        type="video/mp4"
       />
-    </div>
+    </video>
     <h3
       className="small-movie-card__title"
     >
@@ -38,26 +33,21 @@ exports[`FilmsListComponent should render FilmsListComponent correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    data-film-id={2}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      data-film-id={2}
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      type="button"
-    >
-      Play
-    </button>
-    <div
+    <video
       className="small-movie-card__image"
+      height="175"
+      muted={true}
+      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      width="280"
     >
-      <img
-        alt="Fantastic Beasts: The Crimes of Grindelwald"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
+      <source
+        type="video/mp4"
       />
-    </div>
+    </video>
     <h3
       className="small-movie-card__title"
     >
@@ -70,26 +60,21 @@ exports[`FilmsListComponent should render FilmsListComponent correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    data-film-id={3}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      data-film-id={3}
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      type="button"
-    >
-      Play
-    </button>
-    <div
+    <video
       className="small-movie-card__image"
+      height="175"
+      muted={true}
+      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      width="280"
     >
-      <img
-        alt="Fantastic Beasts: The Crimes of Grindelwald"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
+      <source
+        type="video/mp4"
       />
-    </div>
+    </video>
     <h3
       className="small-movie-card__title"
     >
@@ -102,26 +87,21 @@ exports[`FilmsListComponent should render FilmsListComponent correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    data-film-id={4}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <button
-      className="small-movie-card__play-btn"
-      data-film-id={4}
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      type="button"
-    >
-      Play
-    </button>
-    <div
+    <video
       className="small-movie-card__image"
+      height="175"
+      muted={true}
+      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      width="280"
     >
-      <img
-        alt="Fantastic Beasts: The Crimes of Grindelwald"
-        height="175"
-        src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-        width="280"
+      <source
+        type="video/mp4"
       />
-    </div>
+    </video>
     <h3
       className="small-movie-card__title"
     >
