@@ -1,13 +1,23 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import FilmsList from '../../components/films-list/films-list.jsx';
+import GenreList from '../../components/genre-list/genre-list.jsx';
+import {ActionCreators} from '../../reducer/reducer.js';
 
-export default class App extends Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      genres: [],
+    };
+  }
+
   render() {
-    const {films, onCardTitleClick} = this.props;
+    const {films, activeGenre, onCardTitleClick} = this.props;
     return (
-      <Fragment>
+      <>
         <div className="visually-hidden">
           <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <symbol id="add" viewBox="0 0 19 20">
@@ -99,38 +109,8 @@ export default class App extends Component {
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <ul className="catalog__genres-list">
-              <li className="catalog__genres-item catalog__genres-item--active">
-                <a href="#" className="catalog__genres-link">All genres</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Comedies</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Crime</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Documentary</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Dramas</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Horror</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Kids & Family</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Romance</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Sci-Fi</a>
-              </li>
-              <li className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">Thrillers</a>
-              </li>
-            </ul>
+            <GenreList genres={this.state.genres} activeGenre={activeGenre} onGenreChange={this.props.onGenreChange}/>
+
             <FilmsList films={films} onCardTitleClick={onCardTitleClick}/>
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
@@ -151,15 +131,49 @@ export default class App extends Component {
             </div>
           </footer>
         </div>
-      </Fragment>
+      </>
     );
+  }
+
+  componentWillMount() {
+    this.getGenres(this.props.films);
+  }
+
+  getGenres(films) {
+    const filmGenresCollection = films.map((film) => film.genre);
+    this.setState({
+      genres: [...new Set(filmGenresCollection)]
+    });
   }
 }
 
 App.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    title: PropTypes.string
+    genre: PropTypes.string,
+    title: PropTypes.string,
+    preview: PropTypes.string,
   })).isRequired,
+  activeGenre: PropTypes.string,
   onCardTitleClick: PropTypes.func,
+  onGenreChange: PropTypes.func
 };
+
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    activeGenre: state.activeGenre,
+    films: state.films,
+  });
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreChange: (evt, genre) => {
+    evt.preventDefault();
+    dispatch(ActionCreators[`CHANGE_GENRE_FILTER`](genre));
+    dispatch(ActionCreators[`GET_FILMS_BY_FILTER`](genre));
+  },
+});
+
+export {App};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
