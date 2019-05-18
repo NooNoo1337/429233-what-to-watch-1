@@ -51,33 +51,33 @@ const mockFilteredCollection = [
 describe(`reducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(rootReducer(undefined, {})).toEqual({
-      genre: `All genres`,
+      activeGenre: `All genres`,
       films: mockFilmCollection,
     });
   });
 
   it(`Should change genre filter`, () => {
     expect(rootReducer({
-      genre: `All genres`,
+      activeGenre: `All genres`,
       films: mockFilmCollection,
     }, {
       type: `CHANGE_GENRE_FILTER`,
       payload: `Comedies`
     })).toEqual({
-      genre: `Comedies`,
+      activeGenre: `Comedies`,
       films: mockFilmCollection,
     });
   });
 
   it(`Should return filtered collection`, () => {
     expect(rootReducer({
-      genre: `Comedies`,
+      activeGenre: `Comedies`,
       films: mockFilmCollection,
     }, {
       type: `GET_FILMS_BY_FILTER`,
       payload: mockFilteredCollection
     })).toEqual({
-      genre: `Comedies`,
+      activeGenre: `Comedies`,
       films: mockFilteredCollection,
     });
   });
