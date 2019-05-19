@@ -3,14 +3,10 @@ import renderer from 'react-test-renderer';
 
 import FilmCard from './film-card.jsx';
 
-const mockFilm =
-  {
-    id: 1,
-    title: `Fantastic Beasts`,
-  };
+const mockFilm = {id: 1, title: `Fantastic Beasts`};
 
 describe(`FilmCardComponent`, () => {
-  it(`should render FilmCardComponent correctly`, () => {
+  it(`should render component correctly`, () => {
     const tree = renderer
       .create(<FilmCard
         film={mockFilm}

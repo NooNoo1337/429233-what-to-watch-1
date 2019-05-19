@@ -9,7 +9,6 @@ export default class FilmsList extends PureComponent {
     this.state = {
       activeCardId: null,
     };
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
