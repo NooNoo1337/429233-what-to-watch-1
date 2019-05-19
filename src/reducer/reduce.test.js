@@ -59,25 +59,21 @@ describe(`reducer`, () => {
   it(`Should change genre filter`, () => {
     expect(rootReducer({
       activeGenre: `All genres`,
-      films: mockFilmCollection,
     }, {
       type: `CHANGE_GENRE_FILTER`,
       payload: `Comedies`
     })).toEqual({
       activeGenre: `Comedies`,
-      films: mockFilmCollection,
     });
   });
 
   it(`Should return filtered collection`, () => {
     expect(rootReducer({
-      activeGenre: `Comedies`,
       films: mockFilmCollection,
     }, {
       type: `GET_FILMS_BY_FILTER`,
       payload: mockFilteredCollection
     })).toEqual({
-      activeGenre: `Comedies`,
       films: mockFilteredCollection,
     });
   });

@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   render() {
-    const {films, activeGenre, onCardTitleClick} = this.props;
+    const {films, activeGenre, onGenreChange, onCardTitleClick} = this.props;
     return (
       <>
         <div className="visually-hidden">
@@ -109,7 +109,7 @@ class App extends Component {
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <GenreList genres={this.state.genres} activeGenre={activeGenre} onGenreChange={this.props.onGenreChange}/>
+            <GenreList genres={this.state.genres} activeGenre={activeGenre} onGenreChange={onGenreChange}/>
 
             <FilmsList films={films} onCardTitleClick={onCardTitleClick}/>
             <div className="catalog__more">
