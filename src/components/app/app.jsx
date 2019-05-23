@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import {ActionCreators} from '../../reducer/reducer.js';
 import FilmsList from '../../components/films-list/films-list.jsx';
 import GenreList from '../../components/genre-list/genre-list.jsx';
-import {ActionCreators} from '../../reducer/reducer.js';
+import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
+
+const FilmListWrapped = withActiveCard(FilmsList);
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +15,17 @@ class App extends Component {
     this.state = {
       genres: [],
     };
+  }
+
+  componentWillMount() {
+    this.getGenres(this.props.films);
+  }
+
+  getGenres(films) {
+    const filmGenresCollection = films.map((film) => film.genre);
+    this.setState({
+      genres: [...new Set(filmGenresCollection)]
+    });
   }
 
   render() {
@@ -111,7 +125,7 @@ class App extends Component {
 
             <GenreList genres={this.state.genres} activeGenre={activeGenre} onGenreChange={onGenreChange}/>
 
-            <FilmsList films={films} onCardTitleClick={onCardTitleClick}/>
+            <FilmListWrapped films={films} onCardTitleClick={onCardTitleClick}/>
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
             </div>
@@ -133,17 +147,6 @@ class App extends Component {
         </div>
       </>
     );
-  }
-
-  componentWillMount() {
-    this.getGenres(this.props.films);
-  }
-
-  getGenres(films) {
-    const filmGenresCollection = films.map((film) => film.genre);
-    this.setState({
-      genres: [...new Set(filmGenresCollection)]
-    });
   }
 }
 

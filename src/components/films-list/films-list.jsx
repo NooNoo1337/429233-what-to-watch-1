@@ -9,11 +9,10 @@ export default class FilmsList extends PureComponent {
     this.state = {
       activeCardId: null,
     };
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   render() {
-    const {films, onCardTitleClick} = this.props;
+    const {films, activeCardId, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
     return (
       <div className="catalog__movies-list">
         {films.map((film) =>
@@ -21,26 +20,26 @@ export default class FilmsList extends PureComponent {
             film={film}
             key={film.id}
             onCardTitleClick={onCardTitleClick}
-            onMouseEnter={this.handleMouseEnter.bind(this, film.id)}
-            onMouseLeave={this.handleMouseLeave}
-            isCardActive={this.state.activeCardId === film.id}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            isCardActive={activeCardId === film.id}
           />)}
       </div>
     );
   }
 
-  handleMouseEnter(activeCardId) {
-    this.setState({
-      activeCardId: (this.state.activeCardId === activeCardId) ? null : activeCardId,
-    });
-    return activeCardId;
-  }
-
-  handleMouseLeave() {
-    this.setState({
-      activeCardId: null
-    });
-  }
+  // handleMouseEnter(activeCardId) {
+  //   this.setState({
+  //     activeCardId: (this.state.activeCardId === activeCardId) ? null : activeCardId,
+  //   });
+  //   return activeCardId;
+  // }
+  //
+  // handleMouseLeave() {
+  //   this.setState({
+  //     activeCardId: null
+  //   });
+  // }
 }
 
 FilmsList.propTypes = {
