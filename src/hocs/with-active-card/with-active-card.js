@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 const withActiveCard = (WrappedComponent) => {
-  return class WithActivePlayer extends Component {
+  class WithActiveCard extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -13,16 +13,26 @@ const withActiveCard = (WrappedComponent) => {
 
     render() {
       return <WrappedComponent
-        data={this.state.data}
+        activeCardId={this.state.activeCardId}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         {...this.props} />;
     }
 
-    handleMouseEnter(hoveredCardId) {
+    handleMouseEnter(evt) {
+      const target = evt.target;
+      let hoveredCardId;
+
+      if (!target.classList.contains(`small-movie-card`)) {
+        hoveredCardId = +target.parentElement.dataset.filmId;
+      } else {
+        hoveredCardId = +target.dataset.filmId;
+      }
+
       this.setState({
         activeCardId: (this.state.activeCardId === hoveredCardId) ? null : hoveredCardId,
       });
+
       return hoveredCardId;
     }
 
@@ -31,7 +41,9 @@ const withActiveCard = (WrappedComponent) => {
         activeCardId: null
       });
     }
-  };
+  }
+
+  return WithActiveCard;
 };
 
 export default withActiveCard;

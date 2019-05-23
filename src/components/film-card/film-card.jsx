@@ -6,14 +6,10 @@ import VideoPlayer from '../video-player/video-player.jsx';
 export default class FilmCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isVideoPlaying: false,
-      timeoutID: null,
-    };
   }
 
   render() {
-    const {film, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
+    const {film, isVideoPlaying, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
     const defaultPoster = `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`;
 
     return (
@@ -21,7 +17,7 @@ export default class FilmCard extends Component {
         <VideoPlayer
           posterSrc={defaultPoster}
           videoSrc={film.preview}
-          isVideoPlaying={this.state.isVideoPlaying}
+          isVideoPlaying={isVideoPlaying}
         />
         <h3 className="small-movie-card__title">
           <a className="small-movie-card__link" onClick={onCardTitleClick}>
@@ -30,39 +26,6 @@ export default class FilmCard extends Component {
         </h3>
       </article>
     );
-  }
-
-  activatePlayer() {
-    const timerDelay = 1000;
-
-    const timeoutId = setTimeout(() => {
-      this.setState({
-        isVideoPlaying: true,
-      });
-    }, timerDelay);
-    this.setState({
-      timeoutID: timeoutId
-    });
-  }
-
-  deactivatePlayer() {
-    clearTimeout(this.state.timeoutID);
-    this.setState({
-      isVideoPlaying: false,
-      timeoutID: null
-    });
-  }
-
-  componentDidUpdate(prevProps) {
-    const {isCardActive} = this.props;
-
-    if (isCardActive !== prevProps.isCardActive) {
-      if (isCardActive) {
-        this.activatePlayer();
-      } else {
-        this.deactivatePlayer();
-      }
-    }
   }
 }
 
@@ -75,6 +38,7 @@ FilmCard.propTypes = {
   onCardTitleClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
-  isCardActive: PropTypes.bool
+  isCardActive: PropTypes.bool,
+  isVideoPlaying: PropTypes.bool
 };
 

@@ -2,13 +2,13 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import FilmCard from '../../components/film-card/film-card.jsx';
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
+
+const FilCardWrapped = withVideoPlayer(FilmCard);
 
 export default class FilmsList extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activeCardId: null,
-    };
   }
 
   render() {
@@ -16,7 +16,7 @@ export default class FilmsList extends PureComponent {
     return (
       <div className="catalog__movies-list">
         {films.map((film) =>
-          <FilmCard
+          <FilCardWrapped
             film={film}
             key={film.id}
             onCardTitleClick={onCardTitleClick}
@@ -27,19 +27,6 @@ export default class FilmsList extends PureComponent {
       </div>
     );
   }
-
-  // handleMouseEnter(activeCardId) {
-  //   this.setState({
-  //     activeCardId: (this.state.activeCardId === activeCardId) ? null : activeCardId,
-  //   });
-  //   return activeCardId;
-  // }
-  //
-  // handleMouseLeave() {
-  //   this.setState({
-  //     activeCardId: null
-  //   });
-  // }
 }
 
 FilmsList.propTypes = {
@@ -48,5 +35,8 @@ FilmsList.propTypes = {
     title: PropTypes.string,
     preview: PropTypes.string
   })).isRequired,
+  activeCardId: PropTypes.number,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
   onCardTitleClick: PropTypes.func,
 };
