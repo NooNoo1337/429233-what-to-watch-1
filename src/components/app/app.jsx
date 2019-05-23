@@ -24,7 +24,7 @@ class App extends Component {
   getGenres(films) {
     const filmGenresCollection = films.map((film) => film.genre);
     this.setState({
-      genres: [...new Set(filmGenresCollection)]
+      genres: [`All genres`, ...new Set(filmGenresCollection)]
     });
   }
 
