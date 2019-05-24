@@ -6,26 +6,14 @@ import {ActionCreators} from '../../reducer/reducer.js';
 import FilmsList from '../../components/films-list/films-list.jsx';
 import GenreList from '../../components/genre-list/genre-list.jsx';
 import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
+import withGenres from '../../hocs/with-genres/with-genres.js';
 
 const FilmListWrapped = withActiveCard(FilmsList);
+const GenreListWrapped = withGenres(GenreList);
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      genres: [],
-    };
-  }
-
-  componentWillMount() {
-    this.getGenres(this.props.films);
-  }
-
-  getGenres(films) {
-    const filmGenresCollection = films.map((film) => film.genre);
-    this.setState({
-      genres: [`All genres`, ...new Set(filmGenresCollection)]
-    });
   }
 
   render() {
@@ -123,7 +111,8 @@ class App extends Component {
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <GenreList genres={this.state.genres} activeGenre={activeGenre} onGenreChange={onGenreChange}/>
+            {/*<GenreList genres={this.props.genres} activeGenre={activeGenre} onGenreChange={onGenreChange}/>*/}
+            <GenreListWrapped films={films} activeGenre={activeGenre} onGenreChange={onGenreChange} />
 
             <FilmListWrapped films={films} onCardTitleClick={onCardTitleClick}/>
             <div className="catalog__more">
