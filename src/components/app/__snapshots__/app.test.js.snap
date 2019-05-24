@@ -273,7 +273,7 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item "
+          className="catalog__genres-item"
         >
           <a
             className="catalog__genres-link"

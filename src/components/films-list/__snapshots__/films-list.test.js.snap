@@ -7,8 +7,6 @@ exports[`FilmsListComponent should render component correctly 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     data-film-id={1}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <video
       className="small-movie-card__image"
@@ -35,8 +33,6 @@ exports[`FilmsListComponent should render component correctly 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     data-film-id={2}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <video
       className="small-movie-card__image"
@@ -63,8 +59,6 @@ exports[`FilmsListComponent should render component correctly 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     data-film-id={3}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <video
       className="small-movie-card__image"
@@ -91,8 +85,6 @@ exports[`FilmsListComponent should render component correctly 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     data-film-id={4}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <video
       className="small-movie-card__image"
@@ -119,8 +111,6 @@ exports[`FilmsListComponent should render component correctly 1`] = `
   <article
     className="small-movie-card catalog__movies-card"
     data-film-id={5}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <video
       className="small-movie-card__image"
