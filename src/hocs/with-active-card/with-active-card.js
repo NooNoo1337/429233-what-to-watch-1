@@ -13,24 +13,19 @@ const withActiveCard = (WrappedComponent) => {
 
     render() {
       return <WrappedComponent
+        {...this.props}
         activeCardId={this.state.activeCardId}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        {...this.props} />;
+      />;
     }
 
     handleMouseEnter(evt) {
-      const target = evt.target;
-      let hoveredCardId;
-
-      if (!target.classList.contains(`small-movie-card`)) {
-        hoveredCardId = +target.parentElement.dataset.filmId;
-      } else {
-        hoveredCardId = +target.dataset.filmId;
-      }
+      const target = evt.currentTarget;
+      const hoveredCardId = +target.dataset.filmId;
 
       this.setState({
-        activeCardId: (this.state.activeCardId === hoveredCardId) ? null : hoveredCardId,
+        activeCardId: hoveredCardId,
       });
 
       return hoveredCardId;

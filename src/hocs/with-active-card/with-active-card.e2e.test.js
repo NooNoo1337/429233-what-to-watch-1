@@ -9,10 +9,7 @@ Enzyme.configure({adapter: new Adapter()});
 const MockComponent = () => <div/>;
 const MockComponentWrapped = withActiveCard(MockComponent);
 const mockEvent = {
-  target: {
-    classList: {
-      contains: jest.fn(() => (true))
-    },
+  currentTarget: {
     dataset: {
       filmId: 1
     }

@@ -23,8 +23,9 @@ const withGenres = (WrappedComponent) => {
 
     render() {
       return <WrappedComponent
+        {...this.props}
         genres={this.state.genres}
-        {...this.props} />;
+      />;
     }
   }
 

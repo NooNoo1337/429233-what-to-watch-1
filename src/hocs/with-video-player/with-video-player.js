@@ -46,8 +46,9 @@ const withVideoPlayer = (WrappedComponent) => {
 
     render() {
       return <WrappedComponent
+        {...this.props}
         isVideoPlaying={this.state.isVideoPlaying}
-        {...this.props} />;
+      />;
     }
   }
 
