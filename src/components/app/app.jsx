@@ -8,14 +8,10 @@ import GenreList from '../../components/genre-list/genre-list.jsx';
 import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
 import withGenres from '../../hocs/with-genres/with-genres.js';
 
-const FilmListWrapped = withActiveCard(FilmsList);
-const GenreListWrapped = withGenres(GenreList);
+const FilmListWithActiveCard = withActiveCard(FilmsList);
+const GenreListWithGenres = withGenres(GenreList);
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {films, activeGenre, onGenreChange, onCardTitleClick} = this.props;
     return (
@@ -110,8 +106,8 @@ class App extends Component {
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
-            <GenreListWrapped films={films} activeGenre={activeGenre} onGenreChange={onGenreChange} />
-            <FilmListWrapped films={films} onCardTitleClick={onCardTitleClick}/>
+            <GenreListWithGenres films={films} activeGenre={activeGenre} onGenreChange={onGenreChange} />
+            <FilmListWithActiveCard films={films} onCardTitleClick={onCardTitleClick}/>
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
             </div>

@@ -4,19 +4,15 @@ import PropTypes from 'prop-types';
 import FilmCard from '../../components/film-card/film-card.jsx';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player.js';
 
-const FilCardWrapped = withVideoPlayer(FilmCard);
+const FilCardWithVideoPlayer = withVideoPlayer(FilmCard);
 
 export default class FilmsList extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {films, activeCardId, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
     return (
       <div className="catalog__movies-list">
         {films.map((film) =>
-          <FilCardWrapped
+          <FilCardWithVideoPlayer
             film={film}
             key={film.id}
             onCardTitleClick={onCardTitleClick}
