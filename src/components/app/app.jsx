@@ -5,12 +5,10 @@ import {connect} from 'react-redux';
 import FilmsList from '../../components/films-list/films-list.jsx';
 import GenreList from '../../components/genre-list/genre-list.jsx';
 import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
-import withGenres from '../../hocs/with-genres/with-genres.js';
 import {ActionCreators} from '../../reducer/data/data.js';
 import {getFilms, getGenres} from '../../reducer/data/selectors.js';
 
 const FilmListWithActiveCard = withActiveCard(FilmsList);
-const GenreListWithGenres = withGenres(GenreList);
 
 class App extends Component {
   render() {
@@ -107,7 +105,7 @@ class App extends Component {
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
-            <GenreListWithGenres allGenres={allGenres} activeGenre={activeGenre} onGenreChange={onGenreChange} />
+            <GenreList genres={allGenres} activeGenre={activeGenre} onGenreChange={onGenreChange} />
             <FilmListWithActiveCard films={films} onCardTitleClick={onCardTitleClick}/>
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
@@ -171,7 +169,7 @@ const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (evt, genre) => {
     evt.preventDefault();
     dispatch(ActionCreators.changeGenreFilter(genre));
-    dispatch(ActionCreators.getFilmsByFilter(genre));
+    // dispatch(ActionCreators.getFilmsByFilter(genre));
   },
 });
 
