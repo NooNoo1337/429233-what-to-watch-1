@@ -168,8 +168,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (evt, genre) => {
     evt.preventDefault();
-    dispatch(ActionCreators.changeGenreFilter(genre));
-    dispatch(ActionCreators.getFilmsByFilter(genre));
+    dispatch(ActionCreators.changeActiveGenre(genre));
+    dispatch(ActionCreators.getFilmsByGenre(genre));
   },
 });
 

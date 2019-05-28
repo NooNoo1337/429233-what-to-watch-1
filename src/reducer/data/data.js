@@ -10,15 +10,15 @@ const ActionType = {
 };
 
 const ActionCreators = {
-  changeGenreFilter: (genre) => {
+  changeActiveGenre: (genre) => {
     return {
       type: ActionType.CHANGE_GENRE_FILTER,
       payload: genre,
     };
   },
 
-  getFilmsByFilter: (genre) => {
-    const filteredList = initialState.films;
+  getFilmsByGenre: (genre) => {
+    const filteredList = [];
 
     // if (genre === `All genres`) {
     //   filteredList.push(...initialState.films);
@@ -58,8 +58,12 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.GET_FILMS_BY_FILTER:
+      const films = state.films;
+      const activeGenre = state.activeGenre;
+      // (films, activeGenre) => films.filter((film) => film.genre === activeGenre)
+
       return Object.assign({}, state, {
-        films: action.payload
+        films: films.filter((film) => film.genre === activeGenre)
       });
 
     case ActionType.LOAD_FILMS:
