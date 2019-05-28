@@ -18,17 +18,17 @@ const ActionCreators = {
   },
 
   getFilmsByFilter: (genre) => {
-    let filteredList = [];
+    const filteredList = [];
 
-    if (genre === `All genres`) {
-      filteredList = initialState.films;
-    } else {
-      initialState.films.forEach((filmCard) => {
-        if (filmCard.genre === genre) {
-          filteredList.push(filmCard);
-        }
-      });
-    }
+    // if (genre === `All genres`) {
+    //   filteredList.push(...initialState.films);
+    // } else {
+    //   initialState.films.forEach((filmCard) => {
+    //     if (filmCard.genre === genre) {
+    //       filteredList.push(filmCard);
+    //     }
+    //   });
+    // }
     return {
       type: ActionType.GET_FILMS_BY_FILTER,
       payload: filteredList
