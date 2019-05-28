@@ -280,17 +280,19 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            All genres
+            Horror
           </a>
         </li>
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
-          />
+          >
+            Drama
+          </a>
         </li>
       </ul>
       <div
@@ -317,7 +319,9 @@ Array [
           >
             <a
               className="small-movie-card__link"
-            />
+            >
+              Fantastic Beasts
+            </a>
           </h3>
         </article>
         <article
@@ -341,7 +345,9 @@ Array [
           >
             <a
               className="small-movie-card__link"
-            />
+            >
+              Bohemian Rhapsody
+            </a>
           </h3>
         </article>
         <article
@@ -365,7 +371,9 @@ Array [
           >
             <a
               className="small-movie-card__link"
-            />
+            >
+              Macbeth
+            </a>
           </h3>
         </article>
         <article
@@ -389,7 +397,9 @@ Array [
           >
             <a
               className="small-movie-card__link"
-            />
+            >
+              Aviator
+            </a>
           </h3>
         </article>
       </div>
