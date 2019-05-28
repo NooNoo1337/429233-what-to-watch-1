@@ -2,7 +2,7 @@ import filmsCollection from '../mocks/films.js';
 
 const initialState = {
   activeGenre: `All genres`,
-  films: filmsCollection
+  films: []
 };
 
 const ActionCreators = {
@@ -32,6 +32,14 @@ const ActionCreators = {
   }
 };
 
+const Operations = {
+  loadFilms: () => (dispatch) => {
+    return fetch(`https://es31-server.appspot.com/wtw/films`)
+      .then((response) => response.json())
+      .then((films) => dispatch(ActionCreators[`LOAD_FILMS`](films)));
+  }
+};
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case `CHANGE_GENRE_FILTER`:
@@ -43,9 +51,14 @@ const rootReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         films: action.payload
       });
+
+    case `LOAD_FILMS`:
+      return Object.assign({}, state, {
+        films: action.payload
+      });
   }
 
   return state;
 };
 
-export {rootReducer, ActionCreators};
+export {rootReducer, ActionCreators, Operations};

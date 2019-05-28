@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 
-import {rootReducer} from '@/reducer/reducer';
+import {rootReducer, Operations} from '@/reducer/reducer';
 import App from '@/components/app/app.jsx';
 import configureAPI from './api.js';
 
@@ -19,5 +19,7 @@ const store = createStore(
 );
 
 // thunk.withExtraArgument(api);
+
+store.loadFilms();
 
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById(`root`));
