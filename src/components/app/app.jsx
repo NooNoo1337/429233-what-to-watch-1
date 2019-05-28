@@ -6,7 +6,7 @@ import FilmsList from '../../components/films-list/films-list.jsx';
 import GenreList from '../../components/genre-list/genre-list.jsx';
 import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
 import {ActionCreators} from '../../reducer/data/data.js';
-import {getFilms, getUniqGenres, getFilteredFilms, getActiveGenre} from '../../reducer/data/selectors.js';
+import {getFilms, getUniqGenres, getActiveGenre} from '../../reducer/data/selectors.js';
 
 const FilmListWithActiveCard = withActiveCard(FilmsList);
 

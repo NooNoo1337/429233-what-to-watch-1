@@ -18,7 +18,7 @@ const ActionCreators = {
   },
 
   getFilmsByFilter: (genre) => {
-    const filteredList = [];
+    const filteredList = initialState.films;
 
     // if (genre === `All genres`) {
     //   filteredList.push(...initialState.films);
