@@ -12,7 +12,7 @@ exports[`FilmsListComponent should render component correctly 1`] = `
       className="small-movie-card__image"
       height="175"
       muted={true}
-      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      poster="https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg"
       width="280"
     >
       <source
@@ -38,7 +38,7 @@ exports[`FilmsListComponent should render component correctly 1`] = `
       className="small-movie-card__image"
       height="175"
       muted={true}
-      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      poster="https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg"
       width="280"
     >
       <source
@@ -64,7 +64,7 @@ exports[`FilmsListComponent should render component correctly 1`] = `
       className="small-movie-card__image"
       height="175"
       muted={true}
-      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      poster="https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg"
       width="280"
     >
       <source
@@ -78,7 +78,7 @@ exports[`FilmsListComponent should render component correctly 1`] = `
       <a
         className="small-movie-card__link"
       >
-        Macbeth
+        Moonrise Kingdom
       </a>
     </h3>
   </article>
@@ -90,7 +90,7 @@ exports[`FilmsListComponent should render component correctly 1`] = `
       className="small-movie-card__image"
       height="175"
       muted={true}
-      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+      poster="https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg"
       width="280"
     >
       <source
@@ -104,33 +104,7 @@ exports[`FilmsListComponent should render component correctly 1`] = `
       <a
         className="small-movie-card__link"
       >
-        Aviator
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    data-film-id={5}
-  >
-    <video
-      className="small-movie-card__image"
-      height="175"
-      muted={true}
-      poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-      width="280"
-    >
-      <source
-        src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-        type="video/mp4"
-      />
-    </video>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-      >
-        Filth
+        We need to talk about Kevin
       </a>
     </h3>
   </article>

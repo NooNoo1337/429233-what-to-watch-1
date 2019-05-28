@@ -306,7 +306,6 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
-            poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
             <source
@@ -318,9 +317,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-            >
-              Fantastic Beasts
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -333,7 +330,6 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
-            poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
             <source
@@ -345,9 +341,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-            >
-              Bohemian Rhapsody
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -360,7 +354,6 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
-            poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
             <source
@@ -372,9 +365,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-            >
-              Macbeth
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -387,7 +378,6 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
-            poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
             <source
@@ -399,9 +389,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-            >
-              Aviator
-            </a>
+            />
           </h3>
         </article>
       </div>

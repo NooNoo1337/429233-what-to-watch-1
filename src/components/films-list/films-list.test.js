@@ -4,39 +4,28 @@ import renderer from 'react-test-renderer';
 import FilmsList from './films-list.jsx';
 const mockFilmCollection = [
   {
-    id: 1,
-    genre: `Comedies`,
-    title: `Fantastic Beasts`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    src: ``
+    'id': 1,
+    'name': `Fantastic Beasts`,
+    'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
+    'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
-    id: 2,
-    genre: `Crime`,
-    title: `Bohemian Rhapsody`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    src: ``
+    'id': 2,
+    'name': `Bohemian Rhapsody`,
+    'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
+    'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
-    id: 3,
-    genre: `Documentary`,
-    title: `Macbeth`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    src: ``
+    'id': 3,
+    'name': `Moonrise Kingdom`,
+    'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
+    'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
-    id: 4,
-    genre: `Dramas`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    title: `Aviator`,
-    src: ``
-  },
-  {
-    id: 5,
-    genre: `Horror`,
-    title: `Filth`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    src: ``
+    'id': 4,
+    'name': `We need to talk about Kevin`,
+    'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
+    'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
 ];
 

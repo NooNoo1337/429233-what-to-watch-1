@@ -10,21 +10,21 @@ const withGenres = (WrappedComponent) => {
       };
     }
 
-    componentWillMount() {
-      this.getGenres(this.props.films);
-    }
-
-    getGenres(films) {
-      const filmGenresCollection = films.map((film) => film.genre);
-      this.setState({
-        genres: [`All genres`, ...new Set(filmGenresCollection)]
-      });
-    }
+    // componentWillMount() {
+    //   this.getGenres(this.props.films);
+    // }
+    //
+    // getGenres(films) {
+    //   const filmGenresCollection = films.map((film) => film.genre);
+    //   this.setState({
+    //     genres: [`All genres`, ...new Set(filmGenresCollection)]
+    //   });
+    // }
 
     render() {
       return <WrappedComponent
         {...this.props}
-        genres={this.state.genres}
+        genres={this.props.allGenres}
       />;
     }
   }
@@ -36,6 +36,7 @@ const withGenres = (WrappedComponent) => {
       title: PropTypes.string,
       preview: PropTypes.string,
     })).isRequired,
+    allGenres: PropTypes.array,
   };
 
   return WithGenres;
