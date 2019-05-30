@@ -22,5 +22,7 @@ export const getUniqGenres = createSelector(
 export const getFilteredFilms = createSelector(
     getFilms,
     getActiveGenre,
-    (films, activeGenre) => films.filter((film) => film.genre === activeGenre)
+    (films, activeGenre) => {
+      return (activeGenre === `All genres`) ? films : films.filter((film) => film.genre === activeGenre);
+    }
 );

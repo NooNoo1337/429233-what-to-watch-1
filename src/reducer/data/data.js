@@ -18,20 +18,9 @@ const ActionCreators = {
   },
 
   getFilmsByGenre: (genre) => {
-    const filteredList = [];
-
-    // if (genre === `All genres`) {
-    //   filteredList.push(...initialState.films);
-    // } else {
-    //   initialState.films.forEach((filmCard) => {
-    //     if (filmCard.genre === genre) {
-    //       filteredList.push(filmCard);
-    //     }
-    //   });
-    // }
     return {
       type: ActionType.GET_FILMS_BY_FILTER,
-      payload: filteredList
+      payload: genre
     };
   },
 
@@ -58,12 +47,8 @@ const reducer = (state = initialState, action) => {
       });
 
     case ActionType.GET_FILMS_BY_FILTER:
-      const films = state.films;
-      const activeGenre = state.activeGenre;
-      // (films, activeGenre) => films.filter((film) => film.genre === activeGenre)
-
       return Object.assign({}, state, {
-        films: films.filter((film) => film.genre === activeGenre)
+        activeGenre: action.payload,
       });
 
     case ActionType.LOAD_FILMS:

@@ -6,7 +6,7 @@ import FilmsList from '../../components/films-list/films-list.jsx';
 import GenreList from '../../components/genre-list/genre-list.jsx';
 import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
 import {ActionCreators} from '../../reducer/data/data.js';
-import {getFilms, getUniqGenres, getActiveGenre} from '../../reducer/data/selectors.js';
+import {getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors.js';
 
 const FilmListWithActiveCard = withActiveCard(FilmsList);
 
@@ -159,7 +159,7 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    films: getFilms(state),
+    films: getFilteredFilms(state),
     genres: getUniqGenres(state),
     activeGenre: getActiveGenre(state),
   });

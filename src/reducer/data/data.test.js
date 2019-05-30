@@ -1,8 +1,26 @@
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../api.js';
-import {ActionType, Operations} from './data.js';
+import {reducer, ActionType, Operations} from './data.js';
 
 describe(`Load data reducer`, () => {
+  it(`Should return initial state by default`, () => {
+    expect(reducer(undefined, {})).toEqual({
+      films: [],
+      activeGenre: `All genres`,
+    });
+  });
+
+  it(`Should change genre filter`, () => {
+    expect(reducer({
+      activeGenre: `All genres`,
+    }, {
+      type: `CHANGE_GENRE_FILTER`,
+      payload: `Comedies`
+    })).toEqual({
+      activeGenre: `Comedies`,
+    });
+  });
+
   it(`Should make a correct API GET call to /films`, () => {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
