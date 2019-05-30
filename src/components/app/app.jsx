@@ -2,18 +2,17 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {ActionCreators} from '../../reducer/reducer.js';
 import FilmsList from '../../components/films-list/films-list.jsx';
 import GenreList from '../../components/genre-list/genre-list.jsx';
 import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
-import withGenres from '../../hocs/with-genres/with-genres.js';
+import {ActionCreators} from '../../reducer/data/data.js';
+import {getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors.js';
 
 const FilmListWithActiveCard = withActiveCard(FilmsList);
-const GenreListWithGenres = withGenres(GenreList);
 
 class App extends Component {
   render() {
-    const {films, activeGenre, onGenreChange, onCardTitleClick} = this.props;
+    const {films, genres, activeGenre, onGenreChange, onCardTitleClick} = this.props;
     return (
       <>
         <div className="visually-hidden">
@@ -106,7 +105,7 @@ class App extends Component {
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
-            <GenreListWithGenres films={films} activeGenre={activeGenre} onGenreChange={onGenreChange} />
+            <GenreList genres={genres} activeGenre={activeGenre} onGenreChange={onGenreChange} />
             <FilmListWithActiveCard films={films} onCardTitleClick={onCardTitleClick}/>
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
@@ -134,28 +133,43 @@ class App extends Component {
 
 App.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    genre: PropTypes.string,
-    title: PropTypes.string,
-    preview: PropTypes.string,
+    'id': PropTypes.number,
+    'background_color': PropTypes.string,
+    'background_image': PropTypes.string,
+    'description': PropTypes.string,
+    'director': PropTypes.string,
+    'genre': PropTypes.string,
+    'is_favorite': PropTypes.bool,
+    'name': PropTypes.string,
+    'poster_image': PropTypes.string,
+    'preview_image': PropTypes.string,
+    'preview_video_link': PropTypes.string,
+    'rating': PropTypes.number,
+    'released': PropTypes.number,
+    'run_time': PropTypes.number,
+    'scores_count': PropTypes.number,
+    'starring': PropTypes.array,
+    'video_link': PropTypes.string,
   })).isRequired,
   activeGenre: PropTypes.string,
   onCardTitleClick: PropTypes.func,
-  onGenreChange: PropTypes.func
+  onGenreChange: PropTypes.func,
+  genres: PropTypes.array,
 };
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    activeGenre: state.activeGenre,
-    films: state.films,
+    films: getFilteredFilms(state),
+    genres: getUniqGenres(state),
+    activeGenre: getActiveGenre(state),
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (evt, genre) => {
     evt.preventDefault();
-    dispatch(ActionCreators[`CHANGE_GENRE_FILTER`](genre));
-    dispatch(ActionCreators[`GET_FILMS_BY_FILTER`](genre));
+    dispatch(ActionCreators.changeActiveGenre(genre));
+    dispatch(ActionCreators.getFilmsByGenre(genre));
   },
 });
 

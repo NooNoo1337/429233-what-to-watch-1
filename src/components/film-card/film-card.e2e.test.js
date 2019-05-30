@@ -3,7 +3,12 @@ import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import FilmCard from './film-card.jsx';
-const mockFilm = {id: 1, title: `Fantastic Beasts`};
+const mockFilm = {
+  'id': 1,
+  'name': `Fantastic Beasts`,
+  'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
+  'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+};
 
 Enzyme.configure({adapter: new Adapter()});
 

@@ -280,17 +280,19 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            All genres
+            Horror
           </a>
         </li>
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
-          />
+          >
+            Drama
+          </a>
         </li>
       </ul>
       <div
@@ -306,7 +308,6 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
-            poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
             <source
@@ -333,7 +334,6 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
-            poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
             <source
@@ -360,7 +360,6 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
-            poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
             <source
@@ -387,7 +386,6 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
-            poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
             width="280"
           >
             <source

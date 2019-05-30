@@ -5,19 +5,19 @@ import {App} from './app.jsx';
 const filmsCollection = [
   {
     id: 1,
-    title: `Fantastic Beasts`,
+    name: `Fantastic Beasts`,
   },
   {
     id: 2,
-    title: `Bohemian Rhapsody`,
+    name: `Bohemian Rhapsody`,
   },
   {
     id: 3,
-    title: `Macbeth`,
+    name: `Macbeth`,
   },
   {
     id: 4,
-    title: `Aviator`,
+    name: `Aviator`,
   }
 ];
 
@@ -26,6 +26,7 @@ describe(`AppComponent`, () => {
     const tree = renderer
       .create(<App
         films={filmsCollection}
+        genres={[`Horror`, `Drama`]}
       />)
       .toJSON();
 

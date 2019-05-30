@@ -27,9 +27,23 @@ export default class FilmsList extends PureComponent {
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    preview: PropTypes.string
+    'id': PropTypes.number,
+    'background_color': PropTypes.string,
+    'background_image': PropTypes.string,
+    'description': PropTypes.string,
+    'director': PropTypes.string,
+    'genre': PropTypes.string,
+    'is_favorite': PropTypes.bool,
+    'name': PropTypes.string,
+    'poster_image': PropTypes.string,
+    'preview_image': PropTypes.string,
+    'preview_video_link': PropTypes.string,
+    'rating': PropTypes.number,
+    'released': PropTypes.number,
+    'run_time': PropTypes.number,
+    'scores_count': PropTypes.number,
+    'starring': PropTypes.array,
+    'video_link': PropTypes.string,
   })).isRequired,
   activeCardId: PropTypes.number,
   onMouseEnter: PropTypes.func,
