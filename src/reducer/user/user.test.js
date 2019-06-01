@@ -53,6 +53,11 @@ describe(`user reducer`, () => {
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.REQUIRE_AUTHENTICATION,
+          payload: false
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.GET_ACCOUNT_DATA,
           payload: [{fake: true}]
         });

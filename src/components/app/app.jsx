@@ -20,7 +20,6 @@ class App extends Component {
       films,
       genres,
       activeGenre,
-      accountData,
       onGenreChange,
       onSignInSubmit,
       onCardTitleClick,

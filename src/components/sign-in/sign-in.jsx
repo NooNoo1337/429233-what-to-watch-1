@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 
 export default class SignIn extends PureComponent {
   render() {
@@ -52,3 +53,7 @@ export default class SignIn extends PureComponent {
     );
   }
 }
+
+SignIn.propTypes = {
+  onSignInSubmit: PropTypes.func,
+};

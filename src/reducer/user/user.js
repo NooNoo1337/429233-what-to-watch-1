@@ -39,6 +39,7 @@ const Operations = {
       .then(({data, status}) => {
         if (status === 200) {
           dispatch(ActionCreators.registerUser(true));
+          dispatch(ActionCreators.requireAuthentication(false));
           dispatch(ActionCreators.getAccountData(data));
         }
       });
