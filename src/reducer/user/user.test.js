@@ -1,20 +1,49 @@
-import {reducer} from './user.js';
+import MockAdapter from 'axios-mock-adapter';
+import {createAPI} from '../../api.js';
+import {reducer, ActionType, Operations} from './user.js';
 
-describe(`user reducer`, () => {
+describe(`UserReducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
-      isAuthorizationRequired: false,
+      isAuthenticationRequired: false,
+      isUserAuthenticated: false,
     });
   });
 
-  it(`Should change isAuthorizationRequired to true`, () => {
+  it(`Should require authentication`, () => {
     expect(reducer({
-      isAuthorizationRequired: false,
+      isAuthenticationRequired: false,
     }, {
-      type: `REQUIRED_AUTHORIZATION`,
+      type: `REQUIRE_AUTHENTICATION`,
       payload: true
     })).toEqual({
-      isAuthorizationRequired: true,
+      isAuthenticationRequired: true,
     });
+  });
+
+  it(`Should make a correct API POST call to /login`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const mockAccountData = {email: `test@mail.ru`, password: 123};
+    const sendUserData = Operations.sendUserData(mockAccountData);
+    apiMock
+      .onPost(`/login`)
+      .reply(200, [{fake: true}]);
+
+    return sendUserData(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalled();
+
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.REQUIRE_AUTHENTICATION,
+          payload: false
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.GET_ACCOUNT_DATA,
+          payload: [{fake: true}]
+        });
+      });
   });
 });

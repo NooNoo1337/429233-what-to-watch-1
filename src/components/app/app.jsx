@@ -4,15 +4,23 @@ import {connect} from 'react-redux';
 
 import FilmsList from '../../components/films-list/films-list.jsx';
 import GenreList from '../../components/genre-list/genre-list.jsx';
+import SignIn from '../../components/sign-in/sign-in.jsx';
+
 import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
-import {ActionCreators} from '../../reducer/data/data.js';
+import withFormData from '../../hocs/with-form-data/with-form-data.js';
+
+import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';
+import {ActionCreators as UserActionCreators, Operations as UserOperations} from '../../reducer/user/user.js';
+
 import {getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors.js';
 
 const FilmListWithActiveCard = withActiveCard(FilmsList);
+const SignInWithFormData = withFormData({'user-email': ``, 'user-password': ``})(SignIn);
 
 class App extends Component {
   render() {
-    const {films, genres, activeGenre, onGenreChange, onCardTitleClick} = this.props;
+    const {isAuthenticationRequired} = this.props;
+
     return (
       <>
         <div className="visually-hidden">
@@ -47,6 +55,32 @@ class App extends Component {
           </svg>
         </div>
 
+       {
+         (isAuthenticationRequired) ? this.renderLoginScreen() : this.renderMainScreen()
+       }
+      </>
+    );
+  }
+
+  renderLoginScreen() {
+    return (
+      <SignInWithFormData onSignInSubmit={this.props.onSignInSubmit}/>
+    );
+  }
+
+  renderMainScreen() {
+    const {
+      films,
+      genres,
+      activeGenre,
+      accountData,
+      onGenreChange,
+      onCardTitleClick,
+      onSignInClick,
+    } = this.props;
+
+    return (
+      <>
         <section className="movie-card">
           <div className="movie-card__bg">
             <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
@@ -64,9 +98,19 @@ class App extends Component {
             </div>
 
             <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
+              {
+                accountData ?
+                  (
+                    <div className="user-block__avatar">
+                      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+                    </div>
+                  ) :
+                  (
+                    <div className="user-block">
+                      <a href="sign-in.html" className="user-block__link" onClick={onSignInClick}>Sign in</a>
+                    </div>
+                  )
+              }
             </div>
           </header>
 
@@ -101,7 +145,6 @@ class App extends Component {
             </div>
           </div>
         </section>
-
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -151,10 +194,20 @@ App.propTypes = {
     'starring': PropTypes.array,
     'video_link': PropTypes.string,
   })).isRequired,
+  accountData: PropTypes.shape(({
+    'id': PropTypes.number,
+    'email': PropTypes.string,
+    'name': PropTypes.string,
+    'avatar_url': PropTypes.string,
+  })),
+  genres: PropTypes.array.isRequired,
   activeGenre: PropTypes.string,
+  isAuthenticationRequired: PropTypes.bool,
+  isUserAuthenticated: PropTypes.bool,
   onCardTitleClick: PropTypes.func,
   onGenreChange: PropTypes.func,
-  genres: PropTypes.array,
+  onSignInClick: PropTypes.func,
+  onSignInSubmit: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -162,14 +215,27 @@ const mapStateToProps = (state, ownProps) => {
     films: getFilteredFilms(state),
     genres: getUniqGenres(state),
     activeGenre: getActiveGenre(state),
+    isAuthenticationRequired: state[`USER`].isAuthenticationRequired,
+    isUserAuthenticated: state[`USER`].isUserAuthenticated,
+    accountData: state[`USER`].accountData,
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (evt, genre) => {
     evt.preventDefault();
-    dispatch(ActionCreators.changeActiveGenre(genre));
-    dispatch(ActionCreators.getFilmsByGenre(genre));
+    dispatch(DataActionCreators.changeActiveGenre(genre));
+    dispatch(DataActionCreators.getFilmsByGenre(genre));
+  },
+
+  onSignInSubmit: (evt, data) => {
+    evt.preventDefault();
+    dispatch(UserOperations.sendUserData(data));
+  },
+
+  onSignInClick: (evt) => {
+    evt.preventDefault();
+    dispatch(UserActionCreators.requireAuthentication(true));
   },
 });
 

@@ -1,29 +1,61 @@
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthenticationRequired: false,
+  isUserAuthenticated: false,
 };
 
 const ActionType = {
-  'REQUIRED_AUTHORIZATION': `REQUIRED_AUTHORIZATION`
+  'REQUIRE_AUTHENTICATION': `REQUIRE_AUTHENTICATION`,
+  'CHANGE_AUTHENTICATION_STATUS': `CHANGE_AUTHENTICATION_STATUS`,
+  'GET_ACCOUNT_DATA': `GET_ACCOUNT_DATA`,
 };
 
 const ActionCreators = {
-  requireAuthorization: (status) => {
+  requireAuthentication: (status) => {
     return {
-      type: ActionType.REQUIRED_AUTHORIZATION,
+      type: ActionType.REQUIRE_AUTHENTICATION,
       payload: status
     };
+  },
+
+  getAccountData: (data) => {
+    return {
+      type: ActionType.GET_ACCOUNT_DATA,
+      payload: data
+    };
+  },
+};
+
+const Operations = {
+  sendUserData: ({email, password}) => (dispatch, getState, api) => {
+    return api.post(`/login`, {email, password})
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreators.requireAuthentication(false));
+          dispatch(ActionCreators.getAccountData(response.data));
+        }
+      });
   }
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
+    case ActionType.REQUIRE_AUTHENTICATION:
       return Object.assign({}, state, {
-        isAuthorizationRequired: action.payload
+        isAuthenticationRequired: action.payload
+      });
+
+    case ActionType.GET_ACCOUNT_DATA:
+      return Object.assign({}, state, {
+        accountData: action.payload
       });
   }
 
   return state;
 };
 
-export {reducer, ActionCreators, ActionType};
+export {
+  reducer,
+  ActionCreators,
+  ActionType,
+  Operations
+};
