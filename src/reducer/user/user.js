@@ -1,7 +1,6 @@
 const initialState = {
   isAuthenticationRequired: false,
   isUserAuthenticated: false,
-  accountData: {},
 };
 
 const ActionType = {
@@ -18,29 +17,21 @@ const ActionCreators = {
     };
   },
 
-  registerUser: (status) => {
-    return {
-      type: ActionType.CHANGE_AUTHENTICATION_STATUS,
-      payload: status
-    };
-  },
-
   getAccountData: (data) => {
     return {
       type: ActionType.GET_ACCOUNT_DATA,
       payload: data
     };
-  }
+  },
 };
 
 const Operations = {
   sendUserData: ({email, password}) => (dispatch, getState, api) => {
     return api.post(`/login`, {email, password})
-      .then(({data, status}) => {
-        if (status === 200) {
-          dispatch(ActionCreators.registerUser(true));
+      .then((response) => {
+        if (response.status === 200) {
           dispatch(ActionCreators.requireAuthentication(false));
-          dispatch(ActionCreators.getAccountData(data));
+          dispatch(ActionCreators.getAccountData(response.data));
         }
       });
   }
@@ -51,11 +42,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.REQUIRE_AUTHENTICATION:
       return Object.assign({}, state, {
         isAuthenticationRequired: action.payload
-      });
-
-    case ActionType.CHANGE_AUTHENTICATION_STATUS:
-      return Object.assign({}, state, {
-        isUserAuthenticated: action.payload
       });
 
     case ActionType.GET_ACCOUNT_DATA:

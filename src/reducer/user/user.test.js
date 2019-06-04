@@ -2,12 +2,11 @@ import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../api.js';
 import {reducer, ActionType, Operations} from './user.js';
 
-describe(`user reducer`, () => {
+describe(`UserReducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
       isAuthenticationRequired: false,
       isUserAuthenticated: false,
-      accountData: {},
     });
   });
 
@@ -19,17 +18,6 @@ describe(`user reducer`, () => {
       payload: true
     })).toEqual({
       isAuthenticationRequired: true,
-    });
-  });
-
-  it(`Should change user authentication status`, () => {
-    expect(reducer({
-      isUserAuthenticated: false,
-    }, {
-      type: `CHANGE_AUTHENTICATION_STATUS`,
-      payload: true
-    })).toEqual({
-      isUserAuthenticated: true,
     });
   });
 
@@ -48,16 +36,11 @@ describe(`user reducer`, () => {
         expect(dispatch).toHaveBeenCalled();
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.CHANGE_AUTHENTICATION_STATUS,
-          payload: true
-        });
-
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.REQUIRE_AUTHENTICATION,
           payload: false
         });
 
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.GET_ACCOUNT_DATA,
           payload: [{fake: true}]
         });
