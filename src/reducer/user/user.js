@@ -1,6 +1,5 @@
 const initialState = {
   isAuthenticationRequired: false,
-  isUserAuthenticated: false,
 };
 
 const ActionType = {
@@ -30,6 +29,7 @@ const Operations = {
     return api.post(`/login`, {email, password})
       .then((response) => {
         if (response.status === 200) {
+          history.pushState(null, null, `/`);
           dispatch(ActionCreators.requireAuthentication(false));
           dispatch(ActionCreators.getAccountData(response.data));
         }
