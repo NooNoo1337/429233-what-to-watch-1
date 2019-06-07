@@ -5,15 +5,13 @@ import {Provider} from 'react-redux';
 import {compose} from 'recompose';
 import {Router} from 'react-router-dom';
 import thunk from 'redux-thunk';
+import history from './history.js';
 
 import combineReducers from './reducer/index.js';
 import {Operations} from './reducer/data/data.js';
 import {createAPI} from './api.js';
 
 import App from '@/components/app/app.jsx';
-
-import {createBrowserHistory} from 'history';
-const history = createBrowserHistory();
 
 const api = createAPI();
 const store = createStore(

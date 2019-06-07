@@ -46,6 +46,7 @@ const reducer = (state = initialState, action) => {
         activeGenre: action.payload,
       });
 
+      // remove ?
     case ActionType.GET_FILMS_BY_FILTER:
       return Object.assign({}, state, {
         activeGenre: action.payload,

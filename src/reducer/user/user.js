@@ -1,5 +1,8 @@
+import history from '../../history.js';
+
 const initialState = {
   isAuthenticationRequired: false,
+  accountData: null
 };
 
 const ActionType = {
@@ -29,7 +32,7 @@ const Operations = {
     return api.post(`/login`, {email, password})
       .then((response) => {
         if (response.status === 200) {
-          history.pushState(null, null, `/`);
+          history.push(`/`);
           dispatch(ActionCreators.requireAuthentication(false));
           dispatch(ActionCreators.getAccountData(response.data));
         }

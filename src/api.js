@@ -1,4 +1,9 @@
 import axios from 'axios';
+import history from './history.js';
+
+const serverErrors = {
+  accessForbidden: 403,
+};
 
 export const createAPI = () => {
   const api = axios.create({
@@ -9,8 +14,8 @@ export const createAPI = () => {
 
   const onSuccess = (response) => response;
   const onFail = (error) => {
-    if (error.response.status === 403) {
-      history.pushState(null, null, `/login`);
+    if (error.response.status === serverErrors.accessForbidden) {
+      history.push(`/login`);
     }
     return error;
   };

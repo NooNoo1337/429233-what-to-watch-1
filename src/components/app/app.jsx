@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {Switch, Route, Link} from 'react-router-dom';
 
 // Component
 import FilmsList from '../../components/films-list/films-list.jsx';
@@ -26,7 +26,7 @@ const SignInWithFormData = withFormData({'user-email': ``, 'user-password': ``})
 class App extends Component {
   render() {
     return (
-      <Router>
+      <>
         <div className="visually-hidden">
           <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <symbol id="add" viewBox="0 0 19 20">
@@ -60,10 +60,10 @@ class App extends Component {
         </div>
         <Switch>
           <Route path="/" exact component={() => <Main {...this.props}/>}/>
-          <Route path="/login" exact component={() => <SignInWithFormData onSignInSubmit={this.props.onSignInSubmit}/>}/>
-          <Route path="/favourites" exact component={withPrivateRoute(Favourites)}/>
+          <Route path="/login" component={() => <SignInWithFormData onSignInSubmit={this.props.onSignInSubmit}/>}/>
+          <Route path="/favourites" component={withPrivateRoute(Favourites)}/>
         </Switch>
-      </Router>
+      </>
     );
   }
 }
@@ -99,7 +99,7 @@ const Main = (props) => {
 
           <div className="user-block">
             {
-              accountData ?
+              accountData !== null ?
                 (
                   <Link to="/favourites">
                     <div className="user-block__avatar">
@@ -219,7 +219,6 @@ const mapStateToProps = (state, ownProps) => {
     genres: getUniqGenres(state),
     activeGenre: getActiveGenre(state),
     isAuthenticationRequired: state[`USER`].isAuthenticationRequired,
-    isUserAuthenticated: state[`USER`].isUserAuthenticated,
     accountData: state[`USER`].accountData,
   });
 };
