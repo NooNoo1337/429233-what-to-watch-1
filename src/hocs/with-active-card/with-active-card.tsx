@@ -1,7 +1,19 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+import {Subtract} from 'utility-types';
+
+interface InjectedProps {
+  activeCardId: number,
+}
+
+interface State {
+  activeCardId: number,
+}
 
 const withActiveCard = (WrappedComponent) => {
-  class WithActiveCard extends Component {
+  type P = React.ComponentProps<typeof WrappedComponent>;
+  type T = Subtract<P, InjectedProps>;
+
+  class WithActiveCard extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
       this.state = {

@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+// TODO: make e2e tests for App routes
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 
 // Component
-import SignIn from '../../components/sign-in/sign-in.jsx';
-import Favourites from '../my-list/my-list.jsx';
-import Main from '../main/main.jsx';
+import SignIn from '../../components/sign-in/sign-in';
+import Favourites from '../my-list/my-list';
+import Main from '../main/main';
 
 // HOCS
-import withFormData from '../../hocs/with-form-data/with-form-data.js';
-import withPrivateRoute from '../../hocs/with-private-route/with-private-route.js';
+import withFormData from '../../hocs/with-form-data/with-form-data';
+import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 
 // Wrapped Components
 const SignInWithFormData = withFormData({'user-email': ``, 'user-password': ``})(SignIn);
@@ -18,11 +18,23 @@ const SignInWithFormData = withFormData({'user-email': ``, 'user-password': ``})
 // Reducers
 import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';
 import {Operations as UserOperations} from '../../reducer/user/user.js';
-import {getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors.js';
+import {getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors';
 
-// TODO: make e2e tests for App routes
+// Types
+import {Film, SignInData, accountData} from "../../types";
 
-class App extends Component {
+interface Props {
+  films: Film[],
+  genres: string[],
+  accountData: accountData,
+  activeGenre: string,
+  isAuthenticationRequired: boolean,
+  onCardTitleClick: () => void,
+  onGenreChange: (evt, genre: string) => void,
+  onSignInSubmit: (evt, data: SignInData) => void,
+}
+
+class App extends React.Component<Props, null> {
   render() {
     return (
       <>
@@ -66,41 +78,6 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    'id': PropTypes.number,
-    'background_color': PropTypes.string,
-    'background_image': PropTypes.string,
-    'description': PropTypes.string,
-    'director': PropTypes.string,
-    'genre': PropTypes.string,
-    'is_favorite': PropTypes.bool,
-    'name': PropTypes.string,
-    'poster_image': PropTypes.string,
-    'preview_image': PropTypes.string,
-    'preview_video_link': PropTypes.string,
-    'rating': PropTypes.number,
-    'released': PropTypes.number,
-    'run_time': PropTypes.number,
-    'scores_count': PropTypes.number,
-    'starring': PropTypes.array,
-    'video_link': PropTypes.string,
-  })).isRequired,
-  accountData: PropTypes.shape(({
-    'id': PropTypes.number,
-    'email': PropTypes.string,
-    'name': PropTypes.string,
-    'avatar_url': PropTypes.string,
-  })),
-  genres: PropTypes.array.isRequired,
-  activeGenre: PropTypes.string,
-  isAuthenticationRequired: PropTypes.bool,
-  isUserAuthenticated: PropTypes.bool,
-  onCardTitleClick: PropTypes.func,
-  onGenreChange: PropTypes.func,
-  onSignInSubmit: PropTypes.func,
-};
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {

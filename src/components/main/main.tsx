@@ -1,18 +1,32 @@
-import React, {PureComponent} from 'react';
-import PropTypes from "prop-types";
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 // Components
-import GenreList from '../../components/genre-list/genre-list.jsx';
-import FilmsList from '../../components/films-list/films-list.jsx';
+import GenreList from '../../components/genre-list/genre-list';
+import FilmsList from '../../components/films-list/films-list';
 
 // HOCS
-import withActiveCard from '../../hocs/with-active-card/with-active-card.js';
+import withActiveCard from '../../hocs/with-active-card/with-active-card';
 
 // Wrapped Components
 const FilmListWithActiveCard = withActiveCard(FilmsList);
 
-class Main extends PureComponent {
+// Types
+import {accountData, Film, SignInData} from "../../types";
+
+
+interface Props {
+  films: Film[],
+  genres: string[],
+  accountData: accountData,
+  activeGenre: string,
+  isAuthenticationRequired: boolean,
+  onCardTitleClick: () => void,
+  onGenreChange: (evt, genre: string) => void,
+  onSignInSubmit: (evt, data: SignInData) => void,
+}
+
+class Main extends React.PureComponent<Props, null> {
   render() {
     const {
       films,
@@ -121,41 +135,5 @@ class Main extends PureComponent {
     );
   }
 }
-
-Main.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    'id': PropTypes.number,
-    'background_color': PropTypes.string,
-    'background_image': PropTypes.string,
-    'description': PropTypes.string,
-    'director': PropTypes.string,
-    'genre': PropTypes.string,
-    'is_favorite': PropTypes.bool,
-    'name': PropTypes.string,
-    'poster_image': PropTypes.string,
-    'preview_image': PropTypes.string,
-    'preview_video_link': PropTypes.string,
-    'rating': PropTypes.number,
-    'released': PropTypes.number,
-    'run_time': PropTypes.number,
-    'scores_count': PropTypes.number,
-    'starring': PropTypes.array,
-    'video_link': PropTypes.string,
-  })).isRequired,
-  accountData: PropTypes.shape(({
-    'id': PropTypes.number,
-    'email': PropTypes.string,
-    'name': PropTypes.string,
-    'avatar_url': PropTypes.string,
-  })),
-  genres: PropTypes.array.isRequired,
-  activeGenre: PropTypes.string,
-  isAuthenticationRequired: PropTypes.bool,
-  isUserAuthenticated: PropTypes.bool,
-  onCardTitleClick: PropTypes.func,
-  onGenreChange: PropTypes.func,
-  onSignInClick: PropTypes.func,
-  onSignInSubmit: PropTypes.func,
-};
 
 export default Main;

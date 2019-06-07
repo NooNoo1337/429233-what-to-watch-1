@@ -1,8 +1,21 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Subtract} from 'utility-types';
+
+
+interface InjectedProps {
+  isCardActive: boolean,
+}
+
+interface State {
+  isVideoPlaying: boolean,
+  timeoutID: any, // TODO: remove any, because it can be number | null | function that returns number (?)
+}
 
 const withVideoPlayer = (WrappedComponent) => {
-  class WithVideoPlayer extends Component {
+  type P = React.ComponentProps<typeof WrappedComponent>;
+  type T = Subtract<P, InjectedProps>;
+
+  class WithVideoPlayer extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
       this.state = {
@@ -26,13 +39,12 @@ const withVideoPlayer = (WrappedComponent) => {
     activatePlayer() {
       const timerDelay = 1000;
 
-      const timeoutId = setTimeout(() => {
-        this.setState({
-          isVideoPlaying: true,
-        });
+      const timeout = setTimeout(() => {
+        this.setState({ isVideoPlaying: true });
       }, timerDelay);
+
       this.setState({
-        timeoutID: timeoutId
+        timeoutID: timeout
       });
     }
 
@@ -51,10 +63,6 @@ const withVideoPlayer = (WrappedComponent) => {
       />;
     }
   }
-
-  WithVideoPlayer.propTypes = {
-    isCardActive: PropTypes.bool,
-  };
 
   return WithVideoPlayer;
 };

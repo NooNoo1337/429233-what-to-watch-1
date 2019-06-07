@@ -1,8 +1,21 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Subtract} from 'utility-types';
+import {SignInData} from "../../types";
+
+interface InjectedProps {
+  handleInput: (evt) => void,
+  handleSubmit: (evt) => void,
+}
+
+interface State {
+  data: SignInData
+}
 
 const withFormData = (initialState) => (WrappedComponent) => {
-  class WithFormData extends Component {
+  type P = React.ComponentProps<typeof WrappedComponent>;
+  type T = Subtract<P, InjectedProps>;
+
+  class WithFormData extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 
@@ -35,10 +48,6 @@ const withFormData = (initialState) => (WrappedComponent) => {
       this.props.onSignInSubmit(evt, this.state.data);
     }
   }
-
-  WithFormData.propTypes = {
-    onSignInSubmit: PropTypes.func,
-  };
 
   return WithFormData;
 };
