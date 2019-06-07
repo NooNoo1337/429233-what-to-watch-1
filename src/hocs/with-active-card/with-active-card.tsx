@@ -30,8 +30,6 @@ const withActiveCard = (WrappedComponent) => {
       this.setState({
         activeCardId: hoveredCardId,
       });
-
-      return hoveredCardId;
     }
 
     handleMouseLeave() {

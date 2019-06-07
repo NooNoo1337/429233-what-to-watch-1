@@ -227,6 +227,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
+              onClick={[Function]}
             >
               The Grand Budapest Hotel
             </a>

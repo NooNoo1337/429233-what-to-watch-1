@@ -1,44 +1,43 @@
-// import * as React from 'react';
-// import renderer from 'react-test-renderer';
-//
-// import FilmsList from './films-list';
-// const mockFilmCollection = [
-//   {
-//     'id': 1,
-//     'name': `Fantastic Beasts`,
-//     'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
-//     'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-//   },
-//   {
-//     'id': 2,
-//     'name': `Bohemian Rhapsody`,
-//     'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
-//     'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-//   },
-//   {
-//     'id': 3,
-//     'name': `Moonrise Kingdom`,
-//     'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
-//     'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-//   },
-//   {
-//     'id': 4,
-//     'name': `We need to talk about Kevin`,
-//     'preview_image': `https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg`,
-//     'preview_video_link': `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-//   },
-// ];
-//
-// describe(`FilmsListComponent`, () => {
-//   it(`should render component correctly`, () => {
-//     const tree = renderer
-//       .create(
-//         <FilmsList
-//         films={mockFilmCollection}
-//         handleClick={() => {}}
-//       />)
-//       .toJSON();
-//
-//     expect(tree).toMatchSnapshot();
-//   });
-// });
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import {Film} from '../../types';
+
+import FilmsList from './films-list';
+const mockFilms: Film[] = [
+  {
+    'id': 1,
+    'name': `The Grand Budapest Hotel`,
+    'poster_image': `img/the-grand-budapest-hotel-poster.jpg`,
+    'preview_image': `img/the-grand-budapest-hotel.jpg`,
+    'background_image': `img/the-grand-budapest-hotel-bg.jpg`,
+    'background_color': `#ffffff`,
+    'video_link': `https://some-link`,
+    'preview_video_link': `https://some-link`,
+    'description': `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+    'rating': 8.9,
+    'scores_count': 240,
+    'director': `Wes Andreson`,
+    'starring': [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+    'run_time': 99,
+    'genre': `Comedy`,
+    'released': 2014,
+    'is_favorite': false,
+  }
+];
+
+describe(`FilmsListComponent`, () => {
+  it(`should render component correctly`, () => {
+    const tree = renderer
+      .create(
+        <FilmsList
+          activeCardId={mockFilms[0].id}
+          films={mockFilms}
+          onCardTitleClick={() => {}}
+          onMouseEnter={() => {return mockFilms[0].id}}
+          onMouseLeave={() => {}}
+      />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+});

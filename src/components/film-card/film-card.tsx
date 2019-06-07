@@ -9,7 +9,7 @@ import {Film} from "../../types";
 interface Props {
   film: Film,
   onCardTitleClick: () => void,
-  onMouseEnter: (evt) => number,
+  onMouseEnter: (evt) => void,
   onMouseLeave: () => void,
   isVideoPlaying: boolean
 }
@@ -22,7 +22,7 @@ export default class FilmCard extends React.PureComponent<Props, null> {
         <VideoPlayer
           posterSrc={film.preview_image}
           videoSrc={film.preview_video_link}
-          videoFormat="mp4"
+          videoFormat="video/mp4"
           isVideoPlaying={isVideoPlaying}
           isSoundOff={true}
         />

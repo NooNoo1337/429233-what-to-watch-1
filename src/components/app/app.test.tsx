@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
+import {Film} from "../../types";
 
 import {App} from './app';
-const mockGenres = [`Horror`, `Drama`];
-const mockFilms = [
+const mockGenres = [`All genres`, `Horror`, `Drama`];
+const mockFilms: Film[] = [
   {
     'id': 1,
     'name': `The Grand Budapest Hotel`,
@@ -31,8 +32,14 @@ describe(`AppComponent`, () => {
       .create(
           <BrowserRouter>
             <App
+              activeGenre={mockGenres[0]}
               films={mockFilms}
               genres={mockGenres}
+              accountData={null}
+              isAuthenticationRequired={false}
+              onCardTitleClick={() => {}}
+              onGenreChange={(evt, genre) =>{}}
+              onSignInSubmit={() => {}}
             />
           </BrowserRouter>
       )

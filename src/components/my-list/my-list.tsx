@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 
-class MyList extends PureComponent {
+class MyList extends React.PureComponent {
   render() {
     return (
       <div className="user-page">

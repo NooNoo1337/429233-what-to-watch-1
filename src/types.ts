@@ -19,7 +19,7 @@ interface Film {
   released: number,
   run_time: number,
   scores_count: number,
-  starring: [],
+  starring: string[],
   video_link: string,
 }
 
