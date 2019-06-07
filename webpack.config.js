@@ -1,7 +1,7 @@
 const path = require(`path`);
 
 module.exports = {
-  entry: `./src/index.js`,
+  entry: `./src/index.tsx`,
   output: {
     filename: `bundle.js`,
     path: path.join(__dirname, `public`)
@@ -9,7 +9,8 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.join(__dirname, `./src`)
-    }
+    },
+    extensions: [`.ts`, `.tsx`, `.js`, `json`]
   },
   devServer: {
     contentBase: path.join(__dirname, `public`),
@@ -32,5 +33,6 @@ module.exports = {
       }
     ],
   },
+
   devtool: `source-map`
 };
