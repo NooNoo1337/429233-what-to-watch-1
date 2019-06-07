@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
 
 import {App} from './app.jsx';
 const filmsCollection = [
@@ -24,10 +25,14 @@ const filmsCollection = [
 describe(`AppComponent`, () => {
   it(`should render correctly`, () => {
     const tree = renderer
-      .create(<App
-        films={filmsCollection}
-        genres={[`Horror`, `Drama`]}
-      />)
+      .create(
+          <BrowserRouter>
+            <App
+              films={filmsCollection}
+              genres={[`Horror`, `Drama`]}
+            />
+          </BrowserRouter>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();

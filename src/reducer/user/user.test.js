@@ -6,7 +6,7 @@ describe(`UserReducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
       isAuthenticationRequired: false,
-      isUserAuthenticated: false,
+      accountData: null,
     });
   });
 
