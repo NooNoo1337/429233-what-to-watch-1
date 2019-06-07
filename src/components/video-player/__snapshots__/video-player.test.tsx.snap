@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenresListComponent should render component correctly 1`] = `
+<video
+  className="small-movie-card__image"
+  height="175"
+  muted={true}
+  width="280"
+>
+  <source
+    type="video/mp4"
+  />
+</video>
+`;

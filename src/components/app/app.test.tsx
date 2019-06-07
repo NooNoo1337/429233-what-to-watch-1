@@ -1,10 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
+import {Film} from "../../types";
 
-import Main from './main.jsx';
-
-const mockFilms = [
+import {App} from './app';
+const mockGenres = [`All genres`, `Horror`, `Drama`];
+const mockFilms: Film[] = [
   {
     'id': 1,
     'name': `The Grand Budapest Hotel`,
@@ -25,14 +26,21 @@ const mockFilms = [
     'is_favorite': false,
   }
 ];
-const mockGenres = [`All genres`, `Comedies`, `Crime`, `Documentary`];
-
-describe(`MainComponent`, () => {
-  it(`should render component correctly`, () => {
+describe(`AppComponent`, () => {
+  it(`should render correctly`, () => {
     const tree = renderer
       .create(
           <BrowserRouter>
-            <Main films={mockFilms} genres={mockGenres} activeGenre={mockGenres[0]} accountData={null} />
+            <App
+              activeGenre={mockGenres[0]}
+              films={mockFilms}
+              genres={mockGenres}
+              accountData={null}
+              isAuthenticationRequired={false}
+              onCardTitleClick={() => {}}
+              onGenreChange={(evt, genre) =>{}}
+              onSignInSubmit={() => {}}
+            />
           </BrowserRouter>
       )
       .toJSON();

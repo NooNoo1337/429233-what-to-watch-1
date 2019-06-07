@@ -1,8 +1,13 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import * as React from 'react';
+import * as classNames from 'classnames';
 
-class GenreList extends PureComponent {
+interface Props {
+  genres: string[],
+  activeGenre: string,
+  onGenreChange: (evt, genre: string) => void,
+}
+
+export default class GenreList extends React.PureComponent<Props, null> {
   render() {
     const {genres, activeGenre, onGenreChange} = this.props;
 
@@ -20,11 +25,3 @@ class GenreList extends PureComponent {
     );
   }
 }
-
-GenreList.propTypes = {
-  genres: PropTypes.array.isRequired,
-  activeGenre: PropTypes.string,
-  onGenreChange: PropTypes.func,
-};
-
-export default GenreList;

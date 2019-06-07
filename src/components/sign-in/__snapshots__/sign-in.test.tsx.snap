@@ -45,7 +45,7 @@ Array [
       <form
         action="#"
         className="sign-in__form"
-        onSubmit={[Function]}
+        onSubmit={[MockFunction]}
       >
         <div
           className="sign-in__fields"
@@ -57,7 +57,7 @@ Array [
               className="sign-in__input"
               id="user-email"
               name="user-email"
-              onInput={[Function]}
+              onInput={[MockFunction]}
               placeholder="Email address"
               required={true}
               type="email"
@@ -76,7 +76,7 @@ Array [
               className="sign-in__input"
               id="user-password"
               name="user-password"
-              onInput={[Function]}
+              onInput={[MockFunction]}
               placeholder="Password"
               required={true}
               type="password"

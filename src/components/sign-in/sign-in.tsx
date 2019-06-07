@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 
-export default class SignIn extends Component {
+interface Props {
+  handleInput: (evt) => void,
+  handleSubmit: (evt) => void,
+}
+
+export default class SignIn extends React.PureComponent<Props, null> {
   render() {
     const {handleInput, handleSubmit} = this.props;
     return (
@@ -54,8 +58,3 @@ export default class SignIn extends Component {
     );
   }
 }
-
-SignIn.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-};

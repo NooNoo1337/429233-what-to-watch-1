@@ -1,10 +1,18 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import {Subtract} from 'utility-types';
+import {accountData} from '../../types';
+
+interface InjectedProps {
+  accountData: accountData
+}
 
 const withPrivateRoute = (WrappedComponent) => {
-  class WithPrivateRoute extends Component {
+  type P = React.ComponentProps<typeof WrappedComponent>;
+  type T = Subtract<P, InjectedProps>;
+
+  class WithPrivateRoute extends React.PureComponent<T, null> {
     constructor(props) {
       super(props);
     }
@@ -17,10 +25,6 @@ const withPrivateRoute = (WrappedComponent) => {
       return <WrappedComponent { ...this.props }/>;
     }
   }
-
-  WithPrivateRoute.propTypes = {
-    accountData: PropTypes.object,
-  };
 
   const mapStateToProps = (state) => {
     return {

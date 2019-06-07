@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {compose} from 'recompose';
@@ -7,20 +7,27 @@ import {Router} from 'react-router-dom';
 import thunk from 'redux-thunk';
 import history from './history.js';
 
-import combineReducers from './reducer/index.js';
-import {Operations} from './reducer/data/data.js';
-import {createAPI} from './api.js';
+// Components
+import App from './components/app/app';
 
-import App from '@/components/app/app.jsx';
+// Reducers
+import combineReducers from './reducer/index';
+import {Operations} from './reducer/data/data';
+import {createAPI} from './api';
+
+declare const __REDUX_DEVTOOLS_EXTENSION__: () => any;
 
 const api = createAPI();
+
+/* eslint-disable no-underscore-dangle */
 const store = createStore(
     combineReducers,
     compose(
         applyMiddleware(thunk.withExtraArgument(api)),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      __REDUX_DEVTOOLS_EXTENSION__ && __REDUX_DEVTOOLS_EXTENSION__()
     )
 );
+/* eslint-enable */
 
 store.dispatch(Operations.loadFilms());
 

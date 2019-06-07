@@ -168,21 +168,17 @@ Array [
       <div
         className="user-block"
       >
-        <a
-          href="/favourites"
-          onClick={[Function]}
+        <div
+          className="user-block"
         >
-          <div
-            className="user-block__avatar"
+          <a
+            className="user-block__link"
+            href="/login"
+            onClick={[Function]}
           >
-            <img
-              alt="User avatar"
-              height="63"
-              src="img/avatar.jpg"
-              width="63"
-            />
-          </div>
-        </a>
+            Sign in
+          </a>
+        </div>
       </div>
     </header>
     <div
@@ -280,6 +276,17 @@ Array [
         className="catalog__genres-list"
       >
         <li
+          className="catalog__genres-item catalog__genres-item--active"
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            All genres
+          </a>
+        </li>
+        <li
           className="catalog__genres-item"
         >
           <a
@@ -315,9 +322,11 @@ Array [
             className="small-movie-card__image"
             height="175"
             muted={true}
+            poster="img/the-grand-budapest-hotel.jpg"
             width="280"
           >
             <source
+              src="https://some-link"
               type="video/mp4"
             />
           </video>
@@ -326,86 +335,9 @@ Array [
           >
             <a
               className="small-movie-card__link"
+              onClick={[Function]}
             >
-              Fantastic Beasts
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          data-film-id={2}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <video
-            className="small-movie-card__image"
-            height="175"
-            muted={true}
-            width="280"
-          >
-            <source
-              type="video/mp4"
-            />
-          </video>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-            >
-              Bohemian Rhapsody
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          data-film-id={3}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <video
-            className="small-movie-card__image"
-            height="175"
-            muted={true}
-            width="280"
-          >
-            <source
-              type="video/mp4"
-            />
-          </video>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-            >
-              Macbeth
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          data-film-id={4}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <video
-            className="small-movie-card__image"
-            height="175"
-            muted={true}
-            width="280"
-          >
-            <source
-              type="video/mp4"
-            />
-          </video>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-            >
-              Aviator
+              The Grand Budapest Hotel
             </a>
           </h3>
         </article>
