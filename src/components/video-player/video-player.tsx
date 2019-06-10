@@ -16,6 +16,16 @@ export default class VideoPlayer extends React.PureComponent<Props, null> {
     this.videoRef = React.createRef();
   }
 
+  componentDidUpdate() {
+    const video = this.videoRef.current;
+    if (this.props.isVideoPlaying) {
+      video.load();
+      video.play();
+    } else {
+      video.load();
+    }
+  }
+
   render() {
     const {
       posterSrc,
@@ -35,15 +45,5 @@ export default class VideoPlayer extends React.PureComponent<Props, null> {
         <source src={videoSrc} type={videoFormat}/>
       </video>
     );
-  }
-
-  componentDidUpdate() {
-    const video = this.videoRef.current;
-    if (this.props.isVideoPlaying) {
-      video.load();
-      video.play();
-    } else {
-      video.load();
-    }
   }
 }

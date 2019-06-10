@@ -40,12 +40,13 @@ const withVideoPlayer = (WrappedComponent) => {
       const timerDelay = 1000;
 
       const timeout = setTimeout(() => {
-        this.setState({ isVideoPlaying: true });
+        this.setState({isVideoPlaying: true});
       }, timerDelay);
 
       this.setState({
         timeoutID: timeout
       });
+
     }
 
     deactivatePlayer() {
