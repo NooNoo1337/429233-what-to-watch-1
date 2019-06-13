@@ -78,8 +78,8 @@ class App extends React.Component<Props, null> {
         <Switch>
           <Route path="/" exact component={() => <Main {...this.props}/>}/>
           <Route path="/login" component={() => <SignInWithFormData onSignInSubmit={this.props.onSignInSubmit}/>}/>
-          <Route path="/film/:id" component={() =>
-            <FilmDetails film={this.getChosenFilm(this.props.films)}/>
+          <Route path="/film/:id" render={(props) =>
+            <FilmDetails {...props} films={this.props.films}/>
           }/>
           <Route path="/favourites" component={withPrivateRoute(Favourites)}/>
         </Switch>
