@@ -1,5 +1,7 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
+
 import {Film} from "../../types";
 
 import FilmCard from './film-card';
@@ -27,14 +29,18 @@ const mockFilm: Film = {
 describe(`FilmCardComponent`, () => {
   it(`should render component correctly`, () => {
     const tree = renderer
-      .create(<FilmCard
-        film={mockFilm}
-        key={mockFilm.id}
-        onCardTitleClick={() => {}}
-        onMouseEnter={() => mockFilm.id}
-        onMouseLeave={() => {}}
-        isVideoPlaying={false}
-      />)
+      .create(
+        <BrowserRouter>
+          <FilmCard
+            film={mockFilm}
+            key={mockFilm.id}
+            onCardTitleClick={() => {}}
+            onMouseEnter={() => mockFilm.id}
+            onMouseLeave={() => {}}
+            isVideoPlaying={false}
+          />
+        </BrowserRouter>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();

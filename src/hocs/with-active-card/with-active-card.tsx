@@ -13,7 +13,7 @@ const withActiveCard = (WrappedComponent) => {
   type P = React.ComponentProps<typeof WrappedComponent>;
   type T = Subtract<P, InjectedProps>;
 
-  class WithActiveCard extends React.PureComponent<T, State> {
+  class WithActiveCard extends React.Component<T, State> {
     constructor(props) {
       super(props);
       this.state = {

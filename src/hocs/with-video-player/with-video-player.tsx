@@ -24,10 +24,15 @@ const withVideoPlayer = (WrappedComponent) => {
       };
     }
 
+    componentWillUnmount(): void {
+      this.deactivatePlayer();
+    }
+
     componentDidUpdate(prevProps) {
       const {isCardActive} = this.props;
 
       if (isCardActive !== prevProps.isCardActive) {
+
         if (isCardActive) {
           this.activatePlayer();
         } else {
@@ -40,12 +45,13 @@ const withVideoPlayer = (WrappedComponent) => {
       const timerDelay = 1000;
 
       const timeout = setTimeout(() => {
-        this.setState({ isVideoPlaying: true });
+        this.setState({isVideoPlaying: true});
       }, timerDelay);
 
       this.setState({
         timeoutID: timeout
       });
+
     }
 
     deactivatePlayer() {

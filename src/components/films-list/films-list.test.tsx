@@ -1,8 +1,11 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
+import {BrowserRouter} from 'react-router-dom';
+
 import {Film} from '../../types';
 
 import FilmsList from './films-list';
+
 const mockFilms: Film[] = [
   {
     'id': 1,
@@ -29,13 +32,18 @@ describe(`FilmsListComponent`, () => {
   it(`should render component correctly`, () => {
     const tree = renderer
       .create(
-        <FilmsList
-          activeCardId={mockFilms[0].id}
-          films={mockFilms}
-          onCardTitleClick={() => {}}
-          onMouseEnter={() => {return mockFilms[0].id}}
-          onMouseLeave={() => {}}
-      />)
+        <BrowserRouter>
+          <FilmsList
+            activeCardId={mockFilms[0].id}
+            films={mockFilms}
+            onCardTitleClick={() => {}}
+            onMouseEnter={() => {
+              return mockFilms[0].id
+            }}
+            onMouseLeave={() => {}}
+          />
+        </BrowserRouter>
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();

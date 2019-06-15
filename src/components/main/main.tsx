@@ -36,7 +36,6 @@ class Main extends React.PureComponent<Props, null> {
       onGenreChange,
       onCardTitleClick,
     } = this.props;
-
     return (
       <>
         <section className="movie-card">

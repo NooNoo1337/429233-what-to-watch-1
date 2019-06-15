@@ -1,9 +1,12 @@
 import * as React from 'react';
-import {configure, mount} from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import {Film} from '../../types';
+import {configure, mount} from 'enzyme';
+import {BrowserRouter} from 'react-router-dom';
 
 import FilmCard from './film-card';
+
+import {Film} from '../../types';
+
 const mockFilm: Film = {
   'id': 1,
   'name': `The Grand Budapest Hotel`,
@@ -32,13 +35,17 @@ describe(`FilmCardComponent`, () => {
     const handleMouseLeave = jest.fn(() => null);
 
     const wrapper = mount(
-      <FilmCard
-        film={mockFilm}
-        isVideoPlaying={false}
-        onCardTitleClick={() => {}}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      />);
+      <BrowserRouter>
+        <FilmCard
+          film={mockFilm}
+          isVideoPlaying={false}
+          onCardTitleClick={() => {
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
+      </BrowserRouter>
+    );
 
     wrapper.find(`.catalog__movies-card`).simulate(`mouseenter`);
     expect(handleMouseEnter).toHaveBeenCalled();

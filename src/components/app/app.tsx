@@ -7,6 +7,7 @@ import {Switch, Route} from 'react-router-dom';
 import SignIn from '../../components/sign-in/sign-in';
 import Favourites from '../my-list/my-list';
 import Main from '../main/main';
+import FilmDetails from '../film-details/film-details';
 
 // HOCS
 import withFormData from '../../hocs/with-form-data/with-form-data';
@@ -35,6 +36,11 @@ interface Props {
 }
 
 class App extends React.Component<Props, null> {
+  getChosenFilm(films: Film[]): Film {
+    const chosenFilm = films.filter((film) => film.id === 1);
+    return chosenFilm[0];
+  }
+
   render() {
     return (
       <>
@@ -71,7 +77,10 @@ class App extends React.Component<Props, null> {
         </div>
         <Switch>
           <Route path="/" exact component={() => <Main {...this.props}/>}/>
-          <Route path="/login" component={() => <SignInWithFormData onSignInSubmit={this.props.onSignInSubmit}/>}/>
+          <Route path="/login" exact component={() => <SignInWithFormData onSignInSubmit={this.props.onSignInSubmit}/>}/>
+          <Route path="/film/:id" exact render={(props) =>
+            <FilmDetails {...props} exact films={this.props.films}/>
+          }/>
           <Route path="/favourites" component={withPrivateRoute(Favourites)}/>
         </Switch>
       </>
