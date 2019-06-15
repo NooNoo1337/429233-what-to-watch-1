@@ -36,6 +36,9 @@ const mockFilms: Film[] = [
     'is_favorite': false,
   }
 ];
+
+const mockFilmsToShow = 20;
+
 describe(`AppComponent`, () => {
   it(`should render correctly`, () => {
     const tree = renderer
@@ -51,6 +54,9 @@ describe(`AppComponent`, () => {
               onCardTitleClick={() => {}}
               onSignInSubmit={() => {}}
               onGenreChange={() => {}}
+              filmsCounter={mockFilms.length}
+              filmsToShow={mockFilmsToShow}
+              onFilmsLimitChange={() => {}}
             />
           </BrowserRouter>
         </Provider>

@@ -39,8 +39,7 @@ describe(`FilmCardComponent`, () => {
         <FilmCard
           film={mockFilm}
           isVideoPlaying={false}
-          onCardTitleClick={() => {
-          }}
+          onCardTitleClick={() => {}}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         />
