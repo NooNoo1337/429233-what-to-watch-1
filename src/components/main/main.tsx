@@ -109,8 +109,18 @@ class Main extends React.PureComponent<Props, null> {
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
-            <GenreList genres={genres} activeGenre={activeGenre} onGenreChange={onGenreChange} />
-            <FilmListWithActiveCard films={films} onCardTitleClick={onCardTitleClick}/>
+
+            <GenreList
+              genres={genres}
+              activeGenre={activeGenre}
+              onGenreChange={onGenreChange} />
+
+            <FilmListWithActiveCard
+              films={films}
+              activeGenre={activeGenre}
+              onCardTitleClick={onCardTitleClick}
+            />
+
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
             </div>

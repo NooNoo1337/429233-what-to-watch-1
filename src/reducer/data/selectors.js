@@ -26,3 +26,4 @@ export const getFilteredFilms = createSelector(
       (activeGenre === `All genres`) ? films : films.filter((film) => film.genre === activeGenre)
     )
 );
+
