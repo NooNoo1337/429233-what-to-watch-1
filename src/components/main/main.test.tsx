@@ -2,7 +2,14 @@ import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
+// Components
 import Main from './main';
+
+// Reducers
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import combineReducers from '../../reducer/index';
+const store = createStore(combineReducers);
 
 const mockFilms = [
   {
@@ -31,18 +38,18 @@ describe(`MainComponent`, () => {
   it(`should render component correctly`, () => {
     const tree = renderer
       .create(
+        <Provider store={store}>
           <BrowserRouter>
             <Main
               films={mockFilms}
               genres={mockGenres}
-              activeGenre={mockGenres[0]}
               accountData={null}
               isAuthenticationRequired={false}
               onCardTitleClick={() => {}}
-              onGenreChange={() => {}}
               onSignInSubmit={() => {}}
             />
           </BrowserRouter>
+        </Provider>
       )
       .toJSON();
 

@@ -1,37 +1,67 @@
 import * as React from 'react';
 import {Link, RouteComponentProps} from 'react-router-dom';
+
+// Components
+import Tabs from '../tabs/tabs';
+import FilmsList from "../films-list/films-list";
+
+// HOCS
+import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
+import withActiveCard from '../../hocs/with-active-card/with-active-card';
+
+// Wrapped Components
+const TabsWithActiveTab = withActiveTab(Tabs);
+const FilmListWithActiveCard = withActiveCard(FilmsList);
+
+// Reducers
+import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';
+import {getFilms} from '../../reducer/data/selectors';
+
+// Types
 import {Film} from '../../types';
 
+
 interface Props {
-  film: Film
+  films: Film[]
 }
 
-export default class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null> {
-  getMovieRation(rating: number): string {
-    switch (true) {
-      case (rating <= 3):
-        return `bad`;
-        break;
-      case (rating >= 3 && rating <= 5):
-        return `normal`;
-        break;
-      case (rating >= 5 && rating <= 8):
-        return `good`;
-        break;
-      case (rating >= 8 && rating <= 10):
-        return `very good`;
-        break;
-      case (rating === 10):
-        return `awesome`;
-        break;
-      default:
-        return `no rank`;
-        break;
-    }
+class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null> {
+  constructor(props) {
+    super(props);
   }
 
+  componentWillMount(): void {
+    console.log('films --->', this.props.films);
+  }
+
+
   render() {
+    const {films} = this.props;
     const film = this.props.films.filter((film) => film.id === +this.props.match.params.id)[0];
+    // const film = {
+    //   name: "What We Do in the Shadows",
+    //   poster_image: "https://es31-server.appspot.com/wtw/static/film/poster/What-We-Do-in-the-Shadows.jpg",
+    //   preview_image: "https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg",
+    //   background_image: "https://es31-server.appspot.com/wtw/static/film/background/What-We-Do-in-the-Shadows.jpg",
+    //   background_color: "#A39E81",
+    //   description: "A look into the daily (or rather, nightly) lives of three vampires who've lived together for over 100 years, in Staten Island.",
+    //   rating: 4.2,
+    //   scores_count: 6173,
+    //   director: "Jemaine Clement",
+    //   run_time: 30,
+    //   genre: "Comedy",
+    //   released: 2019,
+    //   id: 1,
+    //   is_favorite: false,
+    //   video_link: "http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4",
+    //   preview_video_link: "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+    //   starring: [`Kayvan Novak`, `Kayvan Novak`, `Kayvan Novak`]
+    // };
+
+    const similarFilms = films.reduce((store, currentFilm) => (
+      (store.length <= 4 && currentFilm.genre === film.genre) ? store.concat(currentFilm) : store
+    ), []);
+
     return (
       <>
         <section className="movie-card movie-card--full">
@@ -93,56 +123,16 @@ export default class FilmDetails extends React.PureComponent<Props & RouteCompon
               </div>
 
               <div className="movie-card__desc">
-                <nav className="movie-nav movie-card__nav">
-                  <ul className="movie-nav__list">
-                    <li className="movie-nav__item movie-nav__item--active">
-                      <a href="#" className="movie-nav__link">Overview</a>
-                    </li>
-                    <li className="movie-nav__item">
-                      <a href="#" className="movie-nav__link">Details</a>
-                    </li>
-                    <li className="movie-nav__item">
-                      <a href="#" className="movie-nav__link">Reviews</a>
-                    </li>
-                  </ul>
-                </nav>
-
-                <div className="movie-rating">
-                  <div className="movie-rating__score">{film.rating}</div>
-                  <p className="movie-rating__meta">
-                    <span className="movie-rating__level">
-                      {this.getMovieRation(film.rating)}
-                    </span>
-                    <span className="movie-rating__count">
-                      {film.scores_count} ratings
-                    </span>
-                  </p>
-                </div>
-
-                <div className="movie-card__text">
-                  <p>
-                    {film.description}
-                  </p>
-
-                  <p className="movie-card__director">
-                    <strong>
-                      Director: {film.director}
-                    </strong>
-                  </p>
-
-                  <p className="movie-card__starring">
-                    <strong>
-                      Starring: {`${film.starring}`}   and other
-                    </strong>
-                  </p>
-                </div>
+                <TabsWithActiveTab filmInfo={film} />
               </div>
+
             </div>
           </div>
         </section>
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
+            <FilmListWithActiveCard films={similarFilms}/>
           </section>
 
           <footer className="page-footer">
@@ -163,3 +153,6 @@ export default class FilmDetails extends React.PureComponent<Props & RouteCompon
     );
   }
 }
+
+
+export default FilmDetails;

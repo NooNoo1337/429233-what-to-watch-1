@@ -24,6 +24,7 @@ interface Props {
 export default class FilmsList extends React.PureComponent<Props, null> {
   render() {
     const {films, activeCardId, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
+
     return (
       <div className="catalog__movies-list">
         {films.map((film) =>
