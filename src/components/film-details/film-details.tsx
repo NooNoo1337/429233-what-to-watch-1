@@ -30,36 +30,12 @@ class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null>
     super(props);
   }
 
-  componentWillMount(): void {
-    console.log('films --->', this.props.films);
-  }
-
-
   render() {
     const {films} = this.props;
     const film = this.props.films.filter((film) => film.id === +this.props.match.params.id)[0];
-    // const film = {
-    //   name: "What We Do in the Shadows",
-    //   poster_image: "https://es31-server.appspot.com/wtw/static/film/poster/What-We-Do-in-the-Shadows.jpg",
-    //   preview_image: "https://es31-server.appspot.com/wtw/static/film/preview/what-we-do-in-the-shadows.jpg",
-    //   background_image: "https://es31-server.appspot.com/wtw/static/film/background/What-We-Do-in-the-Shadows.jpg",
-    //   background_color: "#A39E81",
-    //   description: "A look into the daily (or rather, nightly) lives of three vampires who've lived together for over 100 years, in Staten Island.",
-    //   rating: 4.2,
-    //   scores_count: 6173,
-    //   director: "Jemaine Clement",
-    //   run_time: 30,
-    //   genre: "Comedy",
-    //   released: 2019,
-    //   id: 1,
-    //   is_favorite: false,
-    //   video_link: "http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4",
-    //   preview_video_link: "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
-    //   starring: [`Kayvan Novak`, `Kayvan Novak`, `Kayvan Novak`]
-    // };
 
     const similarFilms = films.reduce((store, currentFilm) => (
-      (store.length <= 4 && currentFilm.genre === film.genre) ? store.concat(currentFilm) : store
+      (store.length <= 3 && currentFilm.genre === film.genre) ? store.concat(currentFilm) : store
     ), []);
 
     return (

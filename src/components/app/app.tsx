@@ -17,8 +17,9 @@ import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 const SignInWithFormData = withFormData({'user-email': ``, 'user-password': ``})(SignIn);
 
 // Reducers
+import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';
 import {Operations as UserOperations} from '../../reducer/user/user.js';
-import {getFilms, getUniqGenres, getFilteredFilms} from '../../reducer/data/selectors';
+import {getFilms, getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors';
 
 // Types
 import {Film, SignInData, accountData} from "../../types";
@@ -27,15 +28,16 @@ interface Props {
   films: Film[],
   genres: string[],
   accountData: accountData,
+  activeGenre: string,
   isAuthenticationRequired: boolean,
   onCardTitleClick: () => void,
+  onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
 }
 
 class App extends React.PureComponent<Props, null> {
   render() {
     const {films, onSignInSubmit} = this.props;
-
     return (
       <>
         <SvgSprite/>
@@ -88,7 +90,8 @@ const SvgSprite = () => {
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    films: getFilms(state),
+    films: getFilteredFilms(state),
+    activeGenre: getActiveGenre(state),
     genres: getUniqGenres(state),
     isAuthenticationRequired: state[`USER`].isAuthenticationRequired,
     accountData: state[`USER`].accountData,
@@ -96,6 +99,12 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  onGenreChange: (evt, genre) => {
+    evt.preventDefault();
+    dispatch(DataActionCreators.changeActiveGenre(genre));
+    // dispatch(DataActionCreators.getFilmsByGenre(genre));
+  },
+
   onSignInSubmit: (evt, data) => {
     evt.preventDefault();
     dispatch(UserOperations.sendUserData(data));

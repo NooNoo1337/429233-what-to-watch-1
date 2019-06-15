@@ -7,11 +7,9 @@ import FilmsList from '../../components/films-list/films-list';
 
 // HOCS
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
-import withActiveGenre from '../../hocs/with-active-genre/with-active-genre';
 
 // Wrapped Components
 const FilmListWithActiveCard = withActiveCard(FilmsList);
-const GenreListWithActiveGenre = withActiveGenre(GenreList);
 
 // Types
 import {accountData, Film, SignInData} from "../../types";
@@ -21,20 +19,23 @@ interface Props {
   films: Film[],
   genres: string[],
   accountData: accountData,
+  activeGenre: string,
   isAuthenticationRequired: boolean,
   onCardTitleClick: () => void,
+  onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
 }
 
-class Main extends React.Component<Props, null> {
+class Main extends React.PureComponent<Props, null> {
   render() {
     const {
       films,
       genres,
+      activeGenre,
       accountData,
+      onGenreChange,
       onCardTitleClick,
     } = this.props;
-
     return (
       <>
         <section className="movie-card">
@@ -108,8 +109,18 @@ class Main extends React.Component<Props, null> {
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
-            <GenreListWithActiveGenre genres={genres}/>
-            <FilmListWithActiveCard films={films} onCardTitleClick={onCardTitleClick}/>
+
+            <GenreList
+              genres={genres}
+              activeGenre={activeGenre}
+              onGenreChange={onGenreChange} />
+
+            <FilmListWithActiveCard
+              films={films}
+              activeGenre={activeGenre}
+              onCardTitleClick={onCardTitleClick}
+            />
+
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
             </div>

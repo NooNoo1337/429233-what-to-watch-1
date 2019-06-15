@@ -43,13 +43,15 @@ describe(`MainComponent`, () => {
             <Main
               films={mockFilms}
               genres={mockGenres}
+              activeGenre={mockGenres[0]}
               accountData={null}
               isAuthenticationRequired={false}
               onCardTitleClick={() => {}}
               onSignInSubmit={() => {}}
+              onGenreChange={() => {}}
             />
           </BrowserRouter>
-        </Provider>
+    </Provider>
       )
       .toJSON();
 

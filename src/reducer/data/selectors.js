@@ -4,7 +4,6 @@ import NameSpaces from '../name-spaces.js';
 const NAME_SPACE = NameSpaces.DATA;
 
 export const getFilms = (state) => {
-  console.log('get films--->', );
   return state[NAME_SPACE].films;
 };
 

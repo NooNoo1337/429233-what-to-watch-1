@@ -7,7 +7,7 @@ interface Props {
   onGenreChange: (evt, genre: string) => void,
 }
 
-export default class GenreList extends React.PureComponent<Props, null> {
+export default class GenreList extends React.Component<Props, null> {
   render() {
     const {genres, activeGenre, onGenreChange} = this.props;
 
