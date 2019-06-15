@@ -318,23 +318,29 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <video
-            className="small-movie-card__image"
-            height="175"
-            muted={true}
-            poster="img/the-grand-budapest-hotel.jpg"
-            width="280"
+          <a
+            href="/film/1"
+            onClick={[Function]}
           >
-            <source
-              src="https://some-link"
-              type="video/mp4"
-            />
-          </video>
+            <video
+              className="small-movie-card__image"
+              height="175"
+              muted={true}
+              poster="img/the-grand-budapest-hotel.jpg"
+              width="280"
+            >
+              <source
+                src="https://some-link"
+                type="video/mp4"
+              />
+            </video>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
+              href="/film/1"
               onClick={[Function]}
             >
               The Grand Budapest Hotel
