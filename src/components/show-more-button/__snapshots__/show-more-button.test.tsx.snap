@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShowMoreButtonComponent should render correctly 1`] = `
+<div
+  className="catalog__more"
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <button
+    className="catalog__button"
+    onClick={[Function]}
+    type="button"
+  >
+    Show more
+  </button>
+</div>
+`;

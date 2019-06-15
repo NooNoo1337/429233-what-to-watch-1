@@ -19,15 +19,16 @@ interface Props {
   onMouseEnter: (evt) => number,
   onMouseLeave: () => void,
   onCardTitleClick: () => void,
+  filmsToShow: number,
 }
 
 export default class FilmsList extends React.PureComponent<Props, null> {
   render() {
-    const {films, activeCardId, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
+    const {films, activeCardId, filmsToShow, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
 
     return (
       <div className="catalog__movies-list">
-        {films.map((film) =>
+        {films.slice(0, filmsToShow).map((film) =>
           <FilCardWithVideoPlayer
             film={film}
             key={film.id}
@@ -35,7 +36,8 @@ export default class FilmsList extends React.PureComponent<Props, null> {
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             isCardActive={activeCardId === film.id}
-          />)}
+          />
+        )}
       </div>
     );
   }

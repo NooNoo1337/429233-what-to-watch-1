@@ -9,6 +9,7 @@ import Main from './main';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import combineReducers from '../../reducer/index';
+import {App} from "../app/app";
 const store = createStore(combineReducers);
 
 const mockFilms = [
@@ -33,6 +34,7 @@ const mockFilms = [
   }
 ];
 const mockGenres = [`All genres`, `Comedies`, `Crime`, `Documentary`];
+const mockfilmsToShow = 20;
 
 describe(`MainComponent`, () => {
   it(`should render component correctly`, () => {
@@ -49,6 +51,9 @@ describe(`MainComponent`, () => {
               onCardTitleClick={() => {}}
               onSignInSubmit={() => {}}
               onGenreChange={() => {}}
+              filmsCounter={mockFilms.length}
+              filmsToShow={mockfilmsToShow}
+              onFilmsLimitChange={() => {}}
             />
           </BrowserRouter>
     </Provider>

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 // Components
 import GenreList from '../../components/genre-list/genre-list';
 import FilmsList from '../../components/films-list/films-list';
+import ShowMoreButton  from '../show-more-button/show-more-button';
 
 // HOCS
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
@@ -20,10 +21,13 @@ interface Props {
   genres: string[],
   accountData: accountData,
   activeGenre: string,
+  filmsCounter: number,
+  filmsToShow: number,
   isAuthenticationRequired: boolean,
   onCardTitleClick: () => void,
   onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
+  onFilmsLimitChange: (amount: number) => void,
 }
 
 class Main extends React.PureComponent<Props, null> {
@@ -32,9 +36,12 @@ class Main extends React.PureComponent<Props, null> {
       films,
       genres,
       activeGenre,
+      filmsCounter,
+      filmsToShow,
       accountData,
       onGenreChange,
       onCardTitleClick,
+      onFilmsLimitChange
     } = this.props;
     return (
       <>
@@ -117,13 +124,16 @@ class Main extends React.PureComponent<Props, null> {
 
             <FilmListWithActiveCard
               films={films}
+              filmsToShow={filmsToShow}
               activeGenre={activeGenre}
               onCardTitleClick={onCardTitleClick}
             />
 
-            <div className="catalog__more">
-              <button className="catalog__button" type="button">Show more</button>
-            </div>
+            <ShowMoreButton
+              filmsCounter={filmsCounter}
+              filmsToShow={filmsToShow}
+              onFilmsLimitChange={onFilmsLimitChange}
+            />
           </section>
 
           <footer className="page-footer">

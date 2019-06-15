@@ -7,6 +7,8 @@ describe(`DataReducer`, () => {
     expect(reducer(undefined, {})).toEqual({
       films: [],
       activeGenre: `All genres`,
+      filmsToShow: 20,
+      filmsCounter: null,
     });
   });
 
@@ -18,6 +20,17 @@ describe(`DataReducer`, () => {
       payload: `Comedies`
     })).toEqual({
       activeGenre: `Comedies`,
+    });
+  });
+
+  it(`Should change films limit`, () => {
+    expect(reducer({
+      filmsToShow: 20,
+    }, {
+      type: `GET_MORE_FILMS`,
+      payload: 40
+    })).toEqual({
+      filmsToShow: 40,
     });
   });
 

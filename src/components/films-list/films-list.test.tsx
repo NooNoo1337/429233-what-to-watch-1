@@ -5,6 +5,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {Film} from '../../types';
 
 import FilmsList from './films-list';
+import Main from "../main/main";
 
 const mockFilms: Film[] = [
   {
@@ -27,6 +28,7 @@ const mockFilms: Film[] = [
     'is_favorite': false,
   }
 ];
+const mockFilmsToShow = 20;
 
 describe(`FilmsListComponent`, () => {
   it(`should render component correctly`, () => {
@@ -41,6 +43,7 @@ describe(`FilmsListComponent`, () => {
               return mockFilms[0].id
             }}
             onMouseLeave={() => {}}
+            filmsToShow={mockFilmsToShow}
           />
         </BrowserRouter>
       )

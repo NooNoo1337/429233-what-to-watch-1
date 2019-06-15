@@ -25,14 +25,17 @@ import {getFilms, getUniqGenres, getActiveGenre, getFilteredFilms} from '../../r
 import {Film, SignInData, accountData} from "../../types";
 
 interface Props {
-  films: Film[],
-  genres: string[],
   accountData: accountData,
   activeGenre: string,
+  films: Film[],
+  filmsCounter: number,
+  filmsToShow: number,
+  genres: string[],
   isAuthenticationRequired: boolean,
   onCardTitleClick: () => void,
   onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
+  onFilmsLimitChange: (amount: number) => void,
 }
 
 class App extends React.PureComponent<Props, null> {
@@ -91,6 +94,8 @@ const SvgSprite = () => {
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
     films: getFilteredFilms(state),
+    filmsCounter: state[`DATA`].filmsCounter,
+    filmsToShow: state[`DATA`].filmsToShow,
     activeGenre: getActiveGenre(state),
     genres: getUniqGenres(state),
     isAuthenticationRequired: state[`USER`].isAuthenticationRequired,
@@ -104,6 +109,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataActionCreators.changeActiveGenre(genre));
     // dispatch(DataActionCreators.getFilmsByGenre(genre));
   },
+
+  onFilmsLimitChange: (amount) => dispatch(DataActionCreators.getMoreFilms(amount)),
 
   onSignInSubmit: (evt, data) => {
     evt.preventDefault();
