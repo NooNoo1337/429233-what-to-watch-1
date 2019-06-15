@@ -45,7 +45,6 @@ const withVideoPlayer = (WrappedComponent) => {
       const timerDelay = 1000;
 
       const timeout = setTimeout(() => {
-        console.log('--->', 'try');
         this.setState({isVideoPlaying: true});
       }, timerDelay);
 
