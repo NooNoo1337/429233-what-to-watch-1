@@ -4,6 +4,12 @@ import * as renderer from 'react-test-renderer';
 // Components
 import FullPlayer from './full-player';
 
+// HOCs
+import withFullVideoPlayer from '../../hocs/with-video-progress/with-video-progress';
+
+// Wrapped Components
+const FullPlayerWithVideoProgress = withFullVideoPlayer(FullPlayer);
+
 // Types
 import {Film} from "../../types";
 
@@ -32,7 +38,10 @@ describe(`FullPlayerComponent`, () => {
   it(`should render correctly`, () => {
     const tree = renderer
       .create(
-        <FullPlayer />
+        <FullPlayerWithVideoProgress
+          videoSrc={mockFilm.video_link}
+          runTime={mockFilm.run_time}
+        />
       )
       .toJSON();
 

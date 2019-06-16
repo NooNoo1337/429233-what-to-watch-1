@@ -9,11 +9,11 @@ import FullPlayer from "../full-player/full-player";
 
 // HOCS
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
-import withFullVideoPlayer from '../../hocs/with-full-video-player/with-full-video-player';
+import withVideoProgress from '../../hocs/with-video-progress/with-video-progress';
 
 // Wrapped Components
 const FilmListWithActiveCard = withActiveCard(FilmsList);
-const FullPlayerWithFullVideoPlayer = withFullVideoPlayer(FullPlayer);
+const FullPlayerWithVideoProgress = withVideoProgress(FullPlayer);
 
 // Types
 import {accountData, Film, SignInData} from "../../types";
@@ -178,7 +178,7 @@ class Main extends React.PureComponent<Props, null> {
         </div>
 
         { showFilm ?
-          (<FullPlayerWithFullVideoPlayer
+          (<FullPlayerWithVideoProgress
             videoSrc={mockFilm.video_link}
             runTime={mockFilm.run_time}
           />) : null

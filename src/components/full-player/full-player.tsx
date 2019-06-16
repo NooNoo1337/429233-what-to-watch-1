@@ -2,7 +2,6 @@ import * as React from 'react';
 
 interface Props {
   videoSrc: string,
-  posterImg: string,
   runTime: number,
   progressInSecond: number,
   progressInPercents: number,
@@ -45,7 +44,6 @@ export default class FullPlayer extends React.PureComponent<Props, null> {
     const {
       videoSrc,
       runTime,
-      posterImg,
       onStartButtonClick,
       isPlaying,
       progressInPercents,
@@ -58,7 +56,6 @@ export default class FullPlayer extends React.PureComponent<Props, null> {
         <video
           src={videoSrc}
           className="player__video"
-          poster={posterImg}
           ref={this.videoRef}
           id="sas"
         >

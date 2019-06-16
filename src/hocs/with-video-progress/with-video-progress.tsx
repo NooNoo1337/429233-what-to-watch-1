@@ -16,11 +16,11 @@ interface State {
   progressInPercents: null | number,
 }
 
-const withFullVideoPlayer = (WrappedComponent) => {
+const withVideoProgress = (WrappedComponent) => {
   type P = React.ComponentProps<typeof WrappedComponent>;
   type T = Subtract<P, InjectedProps>;
 
-  class WithFullVideoPlayer extends React.PureComponent<T, State> {
+  class WithVideoProgress extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
       this.state = {
@@ -93,7 +93,7 @@ const withFullVideoPlayer = (WrappedComponent) => {
     }
   }
 
-  return WithFullVideoPlayer;
+  return WithVideoProgress;
 };
 
-export default withFullVideoPlayer;
+export default withVideoProgress;
