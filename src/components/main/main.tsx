@@ -5,12 +5,15 @@ import {Link} from 'react-router-dom';
 import GenreList from '../../components/genre-list/genre-list';
 import FilmsList from '../../components/films-list/films-list';
 import ShowMoreButton  from '../show-more-button/show-more-button';
+import FullPlayer from "../full-player/full-player";
 
 // HOCS
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
+import withFullVideoPlayer from '../../hocs/with-full-video-player/with-full-video-player';
 
 // Wrapped Components
 const FilmListWithActiveCard = withActiveCard(FilmsList);
+const FullPlayerWithFullVideoPlayer = withFullVideoPlayer(FullPlayer);
 
 // Types
 import {accountData, Film, SignInData} from "../../types";
@@ -43,6 +46,28 @@ class Main extends React.PureComponent<Props, null> {
       onCardTitleClick,
       onFilmsLimitChange
     } = this.props;
+
+    const showFilm = false;
+
+    const mockFilm = {
+      name: "We need to talk about Kevin",
+      poster_image: "https://es31-server.appspot.com/wtw/static/film/poster/We_need_to_talk_about_Kevin.jpg",
+      preview_image: "https://es31-server.appspot.com/wtw/static/film/preview/we-need-to-talk-about-kevin.jpg",
+      background_image: "https://es31-server.appspot.com/wtw/static/film/background/We_need_to_talk_about_Kevin.jpg",
+      background_color: "#E1DFDE",
+      description: "Kevin's mother struggles to love her strange child, despite the increasingly dangerous things he says and does as he grows up. But Kevin is just getting started, and his final act will be beyond anything anyone imagined.",
+      rating: 3.8,
+      scores_count: 123240,
+      director: "Lynne Ramsay",
+      run_time: 112,
+      genre: "Drama",
+      released: 2011,
+      id: 1,
+      is_favorite: false,
+      video_link: "http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4",
+      preview_video_link: "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+    };
+
     return (
       <>
         <section className="movie-card">
@@ -113,6 +138,7 @@ class Main extends React.PureComponent<Props, null> {
             </div>
           </div>
         </section>
+
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -150,6 +176,14 @@ class Main extends React.PureComponent<Props, null> {
             </div>
           </footer>
         </div>
+
+        { showFilm ?
+          (<FullPlayerWithFullVideoPlayer
+            videoSrc={mockFilm.video_link}
+            runTime={mockFilm.run_time}
+          />) : null
+
+        }
       </>
     );
   }

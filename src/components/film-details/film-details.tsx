@@ -3,7 +3,8 @@ import {Link, RouteComponentProps} from 'react-router-dom';
 
 // Components
 import Tabs from '../tabs/tabs';
-import FilmsList from "../films-list/films-list";
+import FilmsList from '../films-list/films-list';
+import FullPlayer from '../full-player/full-player';
 
 // HOCS
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
