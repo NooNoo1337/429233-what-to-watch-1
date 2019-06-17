@@ -7,6 +7,7 @@ interface Props {
   progressInPercents: number,
   isPlaying: boolean,
   onStartButtonClick: () => void,
+  onPlayerButtonClick: () => void,
 }
 
 export default class FullPlayer extends React.PureComponent<Props, null> {
@@ -15,6 +16,7 @@ export default class FullPlayer extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
     this.videoRef = React.createRef();
+    this.openFullScreenMode = this.openFullScreenMode.bind(this)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -25,6 +27,12 @@ export default class FullPlayer extends React.PureComponent<Props, null> {
     } else {
       video.pause();
     }
+  }
+
+  openFullScreenMode() {
+    const video = this.videoRef.current;
+
+    video.requestFullscreen()
   }
 
 
@@ -45,6 +53,7 @@ export default class FullPlayer extends React.PureComponent<Props, null> {
       videoSrc,
       runTime,
       onStartButtonClick,
+      onPlayerButtonClick,
       isPlaying,
       progressInPercents,
       progressInSecond
@@ -57,12 +66,13 @@ export default class FullPlayer extends React.PureComponent<Props, null> {
           src={videoSrc}
           className="player__video"
           ref={this.videoRef}
-          id="sas"
         >
 
         </video>
 
-        <button type="button" className="player__exit">Exit</button>
+        <button className="player__exit"  type="button" onClick={onPlayerButtonClick}>
+          Exit
+        </button>
 
         <div className="player__controls">
           <div className="player__controls-row">
@@ -91,7 +101,7 @@ export default class FullPlayer extends React.PureComponent<Props, null> {
             </button>
             <div className="player__name">Transpotting</div>
 
-            <button type="button" className="player__full-screen">
+            <button type="button" className="player__full-screen" onClick={this.openFullScreenMode}>
               <svg viewBox="0 0 27 27" width="27" height="27">
                 <use xlinkHref="#full-screen"></use>
               </svg>

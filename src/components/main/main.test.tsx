@@ -34,7 +34,7 @@ const mockFilms = [
   }
 ];
 const mockGenres = [`All genres`, `Comedies`, `Crime`, `Documentary`];
-const mockfilmsToShow = 20;
+const mockFilmsToShow = 20;
 
 describe(`MainComponent`, () => {
   it(`should render component correctly`, () => {
@@ -48,12 +48,14 @@ describe(`MainComponent`, () => {
               activeGenre={mockGenres[0]}
               accountData={null}
               isAuthenticationRequired={false}
+              filmsCounter={mockFilms.length}
+              filmsToShow={mockFilmsToShow}
+              isPlayerActive={false}
+              onPlayerButtonClick={() => {}}
+              onFilmsLimitChange={() => {}}
               onCardTitleClick={() => {}}
               onSignInSubmit={() => {}}
               onGenreChange={() => {}}
-              filmsCounter={mockFilms.length}
-              filmsToShow={mockfilmsToShow}
-              onFilmsLimitChange={() => {}}
             />
           </BrowserRouter>
     </Provider>

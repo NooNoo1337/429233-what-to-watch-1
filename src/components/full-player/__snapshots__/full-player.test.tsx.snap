@@ -6,7 +6,6 @@ exports[`FullPlayerComponent should render correctly 1`] = `
 >
   <video
     className="player__video"
-    id="sas"
     src="https://some-link"
   />
   <button
@@ -80,6 +79,7 @@ exports[`FullPlayerComponent should render correctly 1`] = `
       </div>
       <button
         className="player__full-screen"
+        onClick={[Function]}
         type="button"
       >
         <svg

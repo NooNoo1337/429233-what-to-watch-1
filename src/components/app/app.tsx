@@ -12,14 +12,17 @@ import FilmDetails from '../film-details/film-details';
 // HOCS
 import withFormData from '../../hocs/with-form-data/with-form-data';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
+import withFullPlayer from '../../hocs/with-full-player/with-full-player'
 
 // Wrapped Components
 const SignInWithFormData = withFormData({'user-email': ``, 'user-password': ``})(SignIn);
+const MainWithFullPlayer = withFullPlayer(Main);
+const FilmDetailsWithFullPlayer = withFullPlayer(FilmDetails);
 
 // Reducers
 import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';
 import {Operations as UserOperations} from '../../reducer/user/user.js';
-import {getFilms, getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors';
+import {getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors';
 
 // Types
 import {Film, SignInData, accountData} from "../../types";
@@ -45,9 +48,9 @@ class App extends React.PureComponent<Props, null> {
       <>
         <SvgSprite/>
         <Switch>
-          <Route path="/" exact component={() => <Main {...this.props}/>}/>
+          <Route path="/" exact component={() => <MainWithFullPlayer {...this.props}/>}/>
           <Route path="/login" exact component={() => <SignInWithFormData onSignInSubmit={onSignInSubmit}/>}/>
-          <Route path="/film/:id" exact render={(props) => <FilmDetails {...props} films={films}/>}/>
+          <Route path="/film/:id" exact render={(props) => <FilmDetailsWithFullPlayer {...props} films={films}/>}/>
           <Route path="/favourites" component={withPrivateRoute(Favourites)}/>
         </Switch>
       </>
@@ -107,7 +110,6 @@ const mapDispatchToProps = (dispatch) => ({
   onGenreChange: (evt, genre) => {
     evt.preventDefault();
     dispatch(DataActionCreators.changeActiveGenre(genre));
-    // dispatch(DataActionCreators.getFilmsByGenre(genre));
   },
 
   onFilmsLimitChange: (amount) => dispatch(DataActionCreators.getMoreFilms(amount)),
