@@ -6,14 +6,22 @@ import SignIn from './sign-in';
 
 describe(`SignInComponent`, () => {
   it(`should render component correctly`, () => {
-    const handleInput = jest.fn();
+    const handleFieldChange = jest.fn();
     const handleSubmit = jest.fn();
+    const mockData = {
+      email: ``,
+      password: ``,
+    };
 
     const tree = renderer
       .create(
-          <BrowserRouter>
-            <SignIn handleInput={handleInput} handleSubmit={handleSubmit}/>)
-          </BrowserRouter>
+        <BrowserRouter>
+          <SignIn
+            fetchData={mockData}
+            handleFieldChange={handleFieldChange}
+            onSignInSubmit={handleSubmit}
+          />)
+        </BrowserRouter>
       )
       .toJSON();
 

@@ -10,7 +10,7 @@ Array [
     >
       <img
         alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        src="img/the-grand-budapest-hotel-bg.jpg"
       />
     </div>
     <h1
@@ -92,7 +92,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Comedy
             </span>
             <span
               className="movie-card__year"
@@ -176,7 +176,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Comedies
+            Horror
           </a>
         </li>
         <li
@@ -187,18 +187,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Crime
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Documentary
+            Drama
           </a>
         </li>
       </ul>

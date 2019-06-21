@@ -1,6 +1,5 @@
 const initialState = {
   promoFilm: [],
-  activeFilm: null,
   films: [],
   comments: [],
   activeGenre: `All genres`,

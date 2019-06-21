@@ -46,6 +46,10 @@ const withVideoProgress = (WrappedComponent) => {
       });
     }
 
+    componentWillUnmount(): void {
+      this.deactivatePlayer();
+    }
+
     activatePlayer() {
       const intervalId = window.setInterval(() =>
         this.setState({

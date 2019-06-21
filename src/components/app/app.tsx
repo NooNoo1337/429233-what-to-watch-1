@@ -38,7 +38,6 @@ import {Film, SignInData, accountData} from "../../types";
 interface Props {
   accountData: accountData,
   activeGenre: string,
-  activeFilm: number,
   films: Film[],
   promoFilm: Film,
   filmsCounter: number,
@@ -55,7 +54,6 @@ class App extends React.PureComponent<Props, null> {
   render() {
     const {
       accountData,
-      activeFilm,
       onSignInSubmit,
     } = this.props;
     return (
@@ -78,7 +76,6 @@ class App extends React.PureComponent<Props, null> {
             (props) =>
               <AddReviewWithFormData
                 {...props}
-                activeFilm={activeFilm}
               />}
           />
           <Route path="/favourites" exact component={withPrivateRoute(Favourites)}/>
@@ -127,7 +124,6 @@ const SvgSprite = () => {
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
     films: getFilteredFilms(state),
-    activeFilm: state[`DATA`].activeFilm,
     promoFilm: state[`DATA`].promoFilm,
     filmsCounter: state[`DATA`].filmsCounter,
     filmsToShow: state[`DATA`].filmsToShow,

@@ -6,7 +6,6 @@ describe(`DataReducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
       promoFilm: [],
-      activeFilm: null,
       films: [],
       comments: [],
       activeGenre: `All genres`,

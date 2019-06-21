@@ -29,7 +29,6 @@ interface Props {
   filmsToShow: number,
   isAuthenticationRequired: boolean,
   isPlayerActive: boolean,
-  onCardTitleClick: () => void,
   onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
   onFilmsLimitChange: (amount: number) => void,
