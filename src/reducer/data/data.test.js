@@ -5,7 +5,9 @@ import {reducer, ActionType, Operations} from './data.js';
 describe(`DataReducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
+      promoFilm: [],
       films: [],
+      comments: [],
       activeGenre: `All genres`,
       filmsToShow: 20,
       filmsCounter: null,
@@ -49,6 +51,47 @@ describe(`DataReducer`, () => {
         expect(dispatch).toHaveBeenCalled();
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
+          payload: [{fake: true}]
+        });
+      });
+  });
+
+  it(`Should make a correct API GET call to /films/promo`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const promoFilmLoader = Operations.loadPromoFilm();
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, [{fake: true}]);
+
+    return promoFilmLoader(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROMO_FILM,
+          payload: [{fake: true}]
+        });
+      });
+  });
+
+  it(`Should make a correct API POST call to /comments/:id`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const mockComment = {comment: `comment`, rating: 5, filmId: 1};
+    const commentPoster = Operations.addComment(mockComment);
+
+    apiMock
+      .onPost(`/comments/${mockComment.filmId}`)
+      .reply(200, [{fake: true}]);
+
+    return commentPoster(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.ADD_COMMENT,
           payload: [{fake: true}]
         });
       });

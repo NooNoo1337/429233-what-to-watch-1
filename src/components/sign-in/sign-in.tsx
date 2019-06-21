@@ -2,13 +2,28 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 interface Props {
-  handleInput: (evt) => void,
-  handleSubmit: (evt) => void,
+  handleFieldChange: (evt) => void,
+  onSignInSubmit: (evt) => void,
+  fetchData: Object,
 }
 
 export default class SignIn extends React.PureComponent<Props, null> {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
+
+    const {fetchData, onSignInSubmit} = this.props;
+
+    onSignInSubmit(fetchData);
+  }
+
   render() {
-    const {handleInput, handleSubmit} = this.props;
+    const {handleFieldChange} = this.props;
+
     return (
       <div className="user-page">
         <header className="page-header user-page__head">
@@ -24,14 +39,14 @@ export default class SignIn extends React.PureComponent<Props, null> {
         </header>
 
         <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+          <form action="#" className="sign-in__form" onSubmit={this.handleSubmit}>
             <div className="sign-in__fields">
               <div className="sign-in__field">
-                <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onInput={handleInput} required/>
+                <input className="sign-in__input" type="email" placeholder="Email address" name="email" id="user-email" onChange={handleFieldChange} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
               <div className="sign-in__field">
-                <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" onInput={handleInput} required/>
+                <input className="sign-in__input" type="password" placeholder="Password" name="password" id="user-password" onChange={handleFieldChange} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>

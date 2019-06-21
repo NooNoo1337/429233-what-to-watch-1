@@ -8,16 +8,24 @@ import SignIn from '../../components/sign-in/sign-in';
 import Favourites from '../my-list/my-list';
 import Main from '../main/main';
 import FilmDetails from '../film-details/film-details';
+import AddReview from '../add-review/add-review';
 
 // HOCS
 import withFormData from '../../hocs/with-form-data/with-form-data';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 import withFullPlayer from '../../hocs/with-full-player/with-full-player'
+import withFilms from '../../hocs/with-films/with-films';
 
 // Wrapped Components
-const SignInWithFormData = withFormData({'user-email': ``, 'user-password': ``})(SignIn);
+const SignInWithFormData = withFormData({'email': ``, 'password': ``})(SignIn);
 const MainWithFullPlayer = withFullPlayer(Main);
+
 const FilmDetailsWithFullPlayer = withFullPlayer(FilmDetails);
+const FilmDetailsWithFilms = withFilms(FilmDetailsWithFullPlayer);
+
+const AddReviewWithFilms = withFilms(AddReview);
+const AddReviewWithPrivateRoute = withPrivateRoute(AddReviewWithFilms);
+const AddReviewWithFormData = withFormData({'comment': ``, 'rating': 3})(AddReviewWithPrivateRoute);
 
 // Reducers
 import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';
@@ -31,6 +39,7 @@ interface Props {
   accountData: accountData,
   activeGenre: string,
   films: Film[],
+  promoFilm: Film,
   filmsCounter: number,
   filmsToShow: number,
   genres: string[],
@@ -43,15 +52,33 @@ interface Props {
 
 class App extends React.PureComponent<Props, null> {
   render() {
-    const {films, onSignInSubmit} = this.props;
+    const {
+      accountData,
+      onSignInSubmit,
+    } = this.props;
     return (
       <>
         <SvgSprite/>
         <Switch>
           <Route path="/" exact component={() => <MainWithFullPlayer {...this.props}/>}/>
+
           <Route path="/login" exact component={() => <SignInWithFormData onSignInSubmit={onSignInSubmit}/>}/>
-          <Route path="/film/:id" exact render={(props) => <FilmDetailsWithFullPlayer {...props} films={films}/>}/>
-          <Route path="/favourites" component={withPrivateRoute(Favourites)}/>
+
+          <Route path="/film/:id" exact render={
+            (props) =>
+              <FilmDetailsWithFilms
+                {...props}
+                accountData={accountData}
+              />}
+          />
+
+          <Route path="/reviews/add/:id" exact render={
+            (props) =>
+              <AddReviewWithFormData
+                {...props}
+              />}
+          />
+          <Route path="/favourites" exact component={withPrivateRoute(Favourites)}/>
         </Switch>
       </>
     );
@@ -97,6 +124,7 @@ const SvgSprite = () => {
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
     films: getFilteredFilms(state),
+    promoFilm: state[`DATA`].promoFilm,
     filmsCounter: state[`DATA`].filmsCounter,
     filmsToShow: state[`DATA`].filmsToShow,
     activeGenre: getActiveGenre(state),
@@ -114,10 +142,7 @@ const mapDispatchToProps = (dispatch) => ({
 
   onFilmsLimitChange: (amount) => dispatch(DataActionCreators.getMoreFilms(amount)),
 
-  onSignInSubmit: (evt, data) => {
-    evt.preventDefault();
-    dispatch(UserOperations.sendUserData(data));
-  },
+  onSignInSubmit: (data) => dispatch(UserOperations.sendUserData(data)),
 });
 
 export {App};

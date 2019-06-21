@@ -21,6 +21,7 @@ import {accountData, Film, SignInData} from "../../types";
 
 interface Props {
   films: Film[],
+  promoFilm: Film,
   genres: string[],
   accountData: accountData,
   activeGenre: string,
@@ -28,7 +29,6 @@ interface Props {
   filmsToShow: number,
   isAuthenticationRequired: boolean,
   isPlayerActive: boolean,
-  onCardTitleClick: () => void,
   onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
   onFilmsLimitChange: (amount: number) => void,
@@ -40,33 +40,15 @@ class Main extends React.PureComponent<Props, null> {
     const {
       isPlayerActive,
       onPlayerButtonClick,
+      promoFilm
     } = this.props;
-
-    const mockFilm = {
-      name: "We need to talk about Kevin",
-      poster_image: "https://es31-server.appspot.com/wtw/static/film/poster/We_need_to_talk_about_Kevin.jpg",
-      preview_image: "https://es31-server.appspot.com/wtw/static/film/preview/we-need-to-talk-about-kevin.jpg",
-      background_image: "https://es31-server.appspot.com/wtw/static/film/background/We_need_to_talk_about_Kevin.jpg",
-      background_color: "#E1DFDE",
-      description: "Kevin's mother struggles to love her strange child, despite the increasingly dangerous things he says and does as he grows up. But Kevin is just getting started, and his final act will be beyond anything anyone imagined.",
-      rating: 3.8,
-      scores_count: 123240,
-      director: "Lynne Ramsay",
-      run_time: 112,
-      genre: "Drama",
-      released: 2011,
-      id: 1,
-      is_favorite: false,
-      video_link: "http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4",
-      preview_video_link: "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
-    };
 
     return (
       <>
         {isPlayerActive ?
           <FullPlayerWithVideoProgress
-            videoSrc={mockFilm.video_link}
-            runTime={mockFilm.run_time}
+            videoSrc={promoFilm.video_link}
+            runTime={promoFilm.run_time}
             onPlayerButtonClick={onPlayerButtonClick}
           />
           :
@@ -81,6 +63,7 @@ class Main extends React.PureComponent<Props, null> {
 const MainScene = (props) => {
   const {
     films,
+    promoFilm,
     genres,
     activeGenre,
     filmsCounter,
@@ -96,7 +79,7 @@ const MainScene = (props) => {
     <>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src={promoFilm.background_image} alt={promoFilm.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -134,15 +117,21 @@ const MainScene = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
+              <img src={promoFilm.poster_image} alt="The Grand Budapest Hotel poster" width="218"
                    height="327"/>
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">
+                {promoFilm.name}
+              </h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">
+                  {promoFilm.genre}
+                </span>
+                <span className="movie-card__year">
+                  {promoFilm.released}
+                </span>
               </p>
 
               <div className="movie-card__buttons">
@@ -158,6 +147,14 @@ const MainScene = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
+                {
+                  accountData !== null ?
+                    <Link to={`/reviews/add/${promoFilm.id}`} className="btn movie-card__button">
+                      Add review
+                    </Link>
+                    :
+                    null
+                }
               </div>
             </div>
           </div>
