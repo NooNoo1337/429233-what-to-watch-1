@@ -27,6 +27,7 @@ interface Props {
   filmsFetched: boolean,
   isPlayerActive: boolean,
   onPlayerButtonClick: () => void,
+  onFavouriteChange: ({filmId: number, isFavourite: boolean}) => void,
 }
 
 class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null> {
@@ -63,6 +64,7 @@ const FilmDetailsScreen = (props) => {
     filmsFetched,
     accountData,
     onPlayerButtonClick,
+    onFavouriteChange,
   } = props;
 
   const film = films.filter((film) => (film.id === +props.match.params.id))[0];
@@ -113,9 +115,9 @@ const FilmDetailsScreen = (props) => {
                         </svg>
                         <span>Play</span>
                       </button>
-                      <button className="btn btn--list movie-card__button" type="button">
+                      <button className="btn btn--list movie-card__button" type="button" onClick={() => onFavouriteChange(film)}>
                         <svg viewBox="0 0 18 14" width="18" height="14">
-                          <use xlinkHref="#in-list"></use>
+                          <use xlinkHref={film.is_favorite ? '#in-list' : '#add'}></use>
                         </svg>
                         <span>My list</span>
                       </button>

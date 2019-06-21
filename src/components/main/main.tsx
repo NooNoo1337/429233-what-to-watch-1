@@ -33,6 +33,7 @@ interface Props {
   onSignInSubmit: (evt, data: SignInData) => void,
   onFilmsLimitChange: (amount: number) => void,
   onPlayerButtonClick: () => void,
+  onFavouriteChange: (film) => void,
 }
 
 class Main extends React.PureComponent<Props, null> {
@@ -73,6 +74,7 @@ const MainScene = (props) => {
     onCardTitleClick,
     onFilmsLimitChange,
     onPlayerButtonClick,
+    onFavouriteChange,
   } = props;
 
   return (
@@ -141,9 +143,10 @@ const MainScene = (props) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button className="btn btn--list movie-card__button" type="button"
+                        onClick={() => onFavouriteChange(promoFilm)}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    <use xlinkHref={promoFilm.is_favorite ? '#in-list' : '#add'}></use>
                   </svg>
                   <span>My list</span>
                 </button>

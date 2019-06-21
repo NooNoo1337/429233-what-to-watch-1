@@ -13,6 +13,7 @@ const ActionType = {
   'LOAD_PROMO_FILM': `LOAD_PROMO_FILM`,
   'LOAD_FILMS': `LOAD_FILMS`,
   'ADD_COMMENT': `ADD_COMMENT`,
+  'CHANGE_FAVORITE': `CHANGE_FAVORITE`,
 };
 
 const ActionCreators = {
@@ -50,6 +51,13 @@ const ActionCreators = {
       payload: fetchedComments
     };
   },
+
+  changeFavourite: (film) => {
+    return {
+      type: ActionType.CHANGE_FAVORITE,
+      payload: film
+    };
+  },
 };
 
 const Operations = {
@@ -66,7 +74,12 @@ const Operations = {
   addComment: ({comment, rating, filmId}) => (dispatch, getState, api) => {
     return api.post(`/comments/${filmId}`, {comment, rating})
       .then((response) => dispatch(ActionCreators.addComment(response.data)));
-  }
+  },
+
+  changeFavourite: ({id, is_favorite: isFavorite}) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${id}/${isFavorite ? `0` : `1`}`)
+      .then((response) => dispatch(ActionCreators.changeFavourite(response.data)));
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -95,6 +108,20 @@ const reducer = (state = initialState, action) => {
     case ActionType.ADD_COMMENT:
       return Object.assign({}, state, {
         comments: action.payload,
+      });
+
+    case ActionType.CHANGE_FAVORITE:
+      const films = state.films.filter((film) => film.id !== action.payload.id);
+
+      if (state.promoFilm.id === action.payload.id) {
+        state.promoFilm[`is_favorite`] = !state.promoFilm[`is_favorite`];
+      }
+
+      return Object.assign({}, state, {
+        films: [
+          ...films,
+          ...[action.payload]
+        ]
       });
   }
 

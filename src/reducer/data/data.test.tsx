@@ -96,4 +96,25 @@ describe(`DataReducer`, () => {
         });
       });
   });
+
+  it(`Should make a correct API POST call to /favorite/:id/:status`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const mockFilm = {id: 1, is_favorite: false};
+    const changeFavourite = Operations.changeFavourite(mockFilm);
+
+    apiMock
+      .onPost(`/favorite/${mockFilm.id}/${mockFilm.is_favorite ? `0` : `1`}`)
+      .reply(200, [{fake: true}]);
+
+    return changeFavourite(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.CHANGE_FAVORITE,
+          payload: [{fake: true}]
+        });
+      });
+  });
 });
