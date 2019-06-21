@@ -3,8 +3,8 @@ import {Subtract} from 'utility-types';
 import {SignInData} from "../../types";
 
 interface InjectedProps {
-  handleInput: (evt) => void,
-  handleSubmit: (evt) => void,
+  handleFieldChange: (evt) => void,
+  data: Object,
 }
 
 interface State {
@@ -18,34 +18,28 @@ const withFormData = (initialState) => (WrappedComponent) => {
   class WithFormData extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
-
       this.state = {
         data: initialState,
       };
 
-      this.handleInput = this.handleInput.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleFieldChange = this.handleFieldChange.bind(this);
+    }
+
+    handleFieldChange(evt){
+      const {name, value} = evt.currentTarget;
+      this.setState(({data}) => ({
+        data: Object.assign({}, data, {
+          [name]: value
+        })
+      }));
     }
 
     render() {
       return <WrappedComponent
         {...this.props}
-        handleInput={this.handleInput}
-        handleSubmit={this.handleSubmit}
+        handleFieldChange={this.handleFieldChange}
+        fetchData={this.state.data}
       />;
-    }
-
-    handleInput(evt) {
-      const {type, value} = evt.currentTarget;
-      this.setState(({data}) => ({
-        data: Object.assign({}, data, {
-          [type]: value
-        })
-      }));
-    }
-
-    handleSubmit(evt) {
-      this.props.onSignInSubmit(evt, this.state.data);
     }
   }
 

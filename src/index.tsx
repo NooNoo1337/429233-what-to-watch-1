@@ -30,6 +30,7 @@ const store = createStore(
 /* eslint-enable */
 
 store.dispatch(Operations.loadFilms());
+store.dispatch(Operations.loadPromoFilm());
 
 ReactDOM.render(
     <Provider store={store}>
