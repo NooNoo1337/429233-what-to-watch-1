@@ -49,7 +49,6 @@ interface Props {
   onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
   onFilmsLimitChange: (amount: number) => void,
-  onFilmChange: (id: number) => void,
 }
 
 class App extends React.PureComponent<Props, null> {
@@ -58,7 +57,6 @@ class App extends React.PureComponent<Props, null> {
       accountData,
       activeFilm,
       onSignInSubmit,
-      onFilmChange,
     } = this.props;
     return (
       <>
@@ -73,7 +71,6 @@ class App extends React.PureComponent<Props, null> {
               <FilmDetailsWithFilms
                 {...props}
                 accountData={accountData}
-                onFilmChange={onFilmChange}
               />}
           />
 
@@ -146,8 +143,6 @@ const mapDispatchToProps = (dispatch) => ({
     evt.preventDefault();
     dispatch(DataActionCreators.changeActiveGenre(genre));
   },
-
-  onFilmChange: (id) => dispatch(DataActionCreators.changeActiveFilm(id)),
 
   onFilmsLimitChange: (amount) => dispatch(DataActionCreators.getMoreFilms(amount)),
 

@@ -10,8 +10,6 @@ const initialState = {
 
 const ActionType = {
   'CHANGE_GENRE_FILTER': `CHANGE_GENRE_FILTER`,
-  'CHANGE_ACTIVE_FILM': `CHANGE_ACTIVE_FILM`,
-  'GET_FILMS_BY_FILTER': `GET_FILMS_BY_FILTER`,
   'GET_MORE_FILMS': `GET_MORE_FILMS`,
   'LOAD_PROMO_FILM': `LOAD_PROMO_FILM`,
   'LOAD_FILMS': `LOAD_FILMS`,
@@ -23,20 +21,6 @@ const ActionCreators = {
     return {
       type: ActionType.CHANGE_GENRE_FILTER,
       payload: genre,
-    };
-  },
-
-  changeActiveFilm: (id) => {
-    return {
-      type: ActionType.CHANGE_ACTIVE_FILM,
-      payload: id,
-    };
-  },
-
-  getFilmsByGenre: (genre) => {
-    return {
-      type: ActionType.GET_FILMS_BY_FILTER,
-      payload: genre
     };
   },
 
@@ -89,17 +73,6 @@ const Operations = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_GENRE_FILTER:
-      return Object.assign({}, state, {
-        activeGenre: action.payload,
-      });
-
-    case ActionType.CHANGE_ACTIVE_FILM:
-      return Object.assign({}, state, {
-        activeFilm: action.payload,
-      });
-
-      // TODO: remove?
-    case ActionType.GET_FILMS_BY_FILTER:
       return Object.assign({}, state, {
         activeGenre: action.payload,
       });

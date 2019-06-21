@@ -63,7 +63,6 @@ const FilmDetailsScreen = (props) => {
     filmsFetched,
     accountData,
     onPlayerButtonClick,
-    onFilmChange,
   } = props;
 
   const film = films.filter((film) => (film.id === +props.match.params.id))[0];
@@ -122,7 +121,7 @@ const FilmDetailsScreen = (props) => {
                       </button>
                       {
                         accountData !== null ?
-                          <Link to={`/reviews/add/${film.id}`} className="btn movie-card__button" onClick={() => onFilmChange(film.id)}>
+                          <Link to={`/reviews/add/${film.id}`} className="btn movie-card__button">
                             Add review
                           </Link>
                           :
