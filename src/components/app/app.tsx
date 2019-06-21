@@ -25,7 +25,7 @@ const FilmDetailsWithFilms = withFilms(FilmDetailsWithFullPlayer);
 
 const AddReviewWithFilms = withFilms(AddReview);
 const AddReviewWithPrivateRoute = withPrivateRoute(AddReviewWithFilms);
-const AddReviewWithFormData = withFormData({'comment': ``, 'rating': ``})(AddReviewWithPrivateRoute);
+const AddReviewWithFormData = withFormData({'comment': ``, 'rating': 3})(AddReviewWithPrivateRoute);
 
 // Reducers
 import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';

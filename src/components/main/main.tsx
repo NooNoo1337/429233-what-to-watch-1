@@ -147,6 +147,14 @@ const MainScene = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
+                {
+                  accountData !== null ?
+                    <Link to={`/reviews/add/${promoFilm.id}`} className="btn movie-card__button">
+                      Add review
+                    </Link>
+                    :
+                    null
+                }
               </div>
             </div>
           </div>
