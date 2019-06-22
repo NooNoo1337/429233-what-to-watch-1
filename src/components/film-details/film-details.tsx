@@ -36,27 +36,41 @@ interface Props {
 }
 
 class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null> {
+  chosenFilm = +this.props.match.params.id;
+
   constructor(props) {
     super(props);
   }
 
   render() {
     const {
+      films,
       isPlayerActive,
+      filmsFetched,
       onPlayerButtonClick,
     } = this.props;
+
+    const film = films.filter((film) => (film.id === this.chosenFilm))[0];
 
     return (
       <>
         {
-          isPlayerActive ?
-            <FullPlayerWithVideoProgress
-              onPlayerButtonClick={onPlayerButtonClick}
-            />
-            :
-            <FilmDetailsScreen
-              {...this.props}
-            />
+          filmsFetched &&
+          <>
+            {
+              isPlayerActive ?
+                <FullPlayerWithVideoProgress
+                  videoSrc={film.video_link}
+                  runTime={film.run_time}
+                  onPlayerButtonClick={onPlayerButtonClick}
+                />
+                :
+                <FilmDetailsScreen
+                  {...this.props}
+                  chosenFilm={this.chosenFilm}
+                />
+            }
+          </>
         }
       </>
     );
@@ -70,11 +84,10 @@ const FilmDetailsScreen = (props) => {
     accountData,
     onPlayerButtonClick,
     onFavouriteChange,
+    chosenFilm
   } = props;
 
-  const filmId = +props.match.params.id;
-
-  const film = films.filter((film) => (film.id === filmId))[0];
+  const film = films.filter((film) => (film.id === chosenFilm))[0];
   const similarFilms = films.reduce((store, currentFilm) => (
     (store.length <= 3 && currentFilm.genre === film.genre && currentFilm.name !== film.name) ? store.concat(currentFilm) : store
   ), []);
@@ -135,7 +148,7 @@ const FilmDetailsScreen = (props) => {
                   <div className="movie-card__desc">
                     <TabsWithReviews
                       filmInfo={film}
-                      id={filmId}
+                      id={chosenFilm}
                     />
                   </div>
 
