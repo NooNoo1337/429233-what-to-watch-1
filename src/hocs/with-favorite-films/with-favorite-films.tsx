@@ -20,8 +20,6 @@ const withFavoriteFilms = (WrappedComponent) => {
 
     componentWillMount(): void {
       this.props.loadFavoriteFilms();
-
-      console.log('--->', );
     }
 
     render() {
