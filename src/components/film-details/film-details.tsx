@@ -5,16 +5,21 @@ import {Link, RouteComponentProps} from 'react-router-dom';
 import Tabs from '../tabs/tabs';
 import FilmsList from '../films-list/films-list';
 import FullPlayer from '../full-player/full-player';
+import Header from '../header/header';
 
 // HOCS
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 import withVideoProgress from '../../hocs/with-video-progress/with-video-progress';
+import withAccountInfo from '../../hocs/with-account-info/with-account-info';
+import withReviews from '../../hocs/with-reviews/with-reviews';
 
 // Wrapped Components
 const TabsWithActiveTab = withActiveTab(Tabs);
+const TabsWithReviews = withReviews(TabsWithActiveTab);
 const FilmListWithActiveCard = withActiveCard(FilmsList);
 const FullPlayerWithVideoProgress = withVideoProgress(FullPlayer);
+const HeaderWithAccountInfo = withAccountInfo(Header);
 
 
 // Types
@@ -31,27 +36,41 @@ interface Props {
 }
 
 class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null> {
+  chosenFilm = +this.props.match.params.id;
+
   constructor(props) {
     super(props);
   }
 
   render() {
     const {
+      films,
       isPlayerActive,
+      filmsFetched,
       onPlayerButtonClick,
     } = this.props;
+
+    const film = films.filter((film) => (film.id === this.chosenFilm))[0];
 
     return (
       <>
         {
-          isPlayerActive ?
-            <FullPlayerWithVideoProgress
-              onPlayerButtonClick={onPlayerButtonClick}
-            />
-            :
-            <FilmDetailsScreen
-              {...this.props}
-            />
+          filmsFetched &&
+          <>
+            {
+              isPlayerActive ?
+                <FullPlayerWithVideoProgress
+                  videoSrc={film.video_link}
+                  runTime={film.run_time}
+                  onPlayerButtonClick={onPlayerButtonClick}
+                />
+                :
+                <FilmDetailsScreen
+                  {...this.props}
+                  chosenFilm={this.chosenFilm}
+                />
+            }
+          </>
         }
       </>
     );
@@ -65,16 +84,17 @@ const FilmDetailsScreen = (props) => {
     accountData,
     onPlayerButtonClick,
     onFavouriteChange,
+    chosenFilm
   } = props;
 
-  const film = films.filter((film) => (film.id === +props.match.params.id))[0];
+  const film = films.filter((film) => (film.id === chosenFilm))[0];
   const similarFilms = films.reduce((store, currentFilm) => (
     (store.length <= 3 && currentFilm.genre === film.genre && currentFilm.name !== film.name) ? store.concat(currentFilm) : store
   ), []);
   return (
     <>
       {
-        filmsFetched ?
+        filmsFetched &&
           <>
             <section className="movie-card movie-card--full">
               <div className="movie-card__hero">
@@ -84,21 +104,7 @@ const FilmDetailsScreen = (props) => {
 
                 <h1 className="visually-hidden">WTW</h1>
 
-                <header className="page-header movie-card__head">
-                  <div className="logo">
-                    <Link to="/" className="logo__link">
-                      <span className="logo__letter logo__letter--1">W</span>
-                      <span className="logo__letter logo__letter--2">T</span>
-                      <span className="logo__letter logo__letter--3">W</span>
-                    </Link>
-                  </div>
-
-                  <div className="user-block">
-                    <div className="user-block__avatar">
-                      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                    </div>
-                  </div>
-                </header>
+                <HeaderWithAccountInfo />
 
                 <div className="movie-card__wrap">
                   <div className="movie-card__desc">
@@ -122,12 +128,10 @@ const FilmDetailsScreen = (props) => {
                         <span>My list</span>
                       </button>
                       {
-                        accountData !== null ?
-                          <Link to={`/reviews/add/${film.id}`} className="btn movie-card__button">
-                            Add review
-                          </Link>
-                          :
-                          null
+                        accountData &&
+                        <Link to={`/reviews/add/${film.id}`} className="btn movie-card__button">
+                          Add review
+                        </Link>
                       }
                     </div>
                   </div>
@@ -142,7 +146,10 @@ const FilmDetailsScreen = (props) => {
                   </div>
 
                   <div className="movie-card__desc">
-                    <TabsWithActiveTab filmInfo={film} />
+                    <TabsWithReviews
+                      filmInfo={film}
+                      id={chosenFilm}
+                    />
                   </div>
 
                 </div>
@@ -156,11 +163,11 @@ const FilmDetailsScreen = (props) => {
 
               <footer className="page-footer">
                 <div className="logo">
-                  <a href="main.html" className="logo__link logo__link--light">
+                  <Link to="/" className="logo__link logo__link--light">
                     <span className="logo__letter logo__letter--1">W</span>
                     <span className="logo__letter logo__letter--2">T</span>
                     <span className="logo__letter logo__letter--3">W</span>
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="copyright">
@@ -169,8 +176,6 @@ const FilmDetailsScreen = (props) => {
               </footer>
             </div>
           </>
-          :
-          null
       }
     </>
   );

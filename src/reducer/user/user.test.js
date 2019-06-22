@@ -6,6 +6,7 @@ describe(`UserReducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
       isAuthenticationRequired: false,
+      formErrors: false,
       accountData: null,
     });
   });
@@ -18,6 +19,17 @@ describe(`UserReducer`, () => {
       payload: true
     })).toEqual({
       isAuthenticationRequired: true,
+    });
+  });
+
+  it(`Should change formErrors to true`, () => {
+    expect(reducer({
+      formErrors: false,
+    }, {
+      type: `SET_ERROR`,
+      payload: true
+    })).toEqual({
+      formErrors: true,
     });
   });
 

@@ -2,12 +2,13 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 
 // Types
-import {Film} from '../../types';
+import {Film, Review} from '../../types';
 
 interface Props {
   filmInfo: Film
   onTabClick: Function,
-  activeTab: number
+  activeTab: number,
+  comments: Review[],
 }
 
 class Tabs extends React.PureComponent<Props, null> {
@@ -39,7 +40,13 @@ class Tabs extends React.PureComponent<Props, null> {
   }
 
   render() {
-    const {filmInfo, onTabClick, activeTab} = this.props;
+    const {
+      filmInfo,
+      onTabClick,
+      activeTab,
+      comments
+    } = this.props;
+
     return (
       <>
         <nav className="movie-nav movie-card__nav">
@@ -116,44 +123,62 @@ class Tabs extends React.PureComponent<Props, null> {
         </TabItem>
 
         <TabItem filmInfo={this.props.filmInfo} activeTab={activeTab} tabId={3}>
-          <div className="movie-card__reviews movie-card__row">
-            <div className="movie-card__reviews-col">
-              <div className="review">
-                <blockquote className="review__quote">
-                  <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the glorious
-                                              Mittel-European kitsch of one of the director's funniest and most
-                                              exquisitely designed movies in years.</p>
-
-                  <footer className="review__details">
-                    <cite className="review__author">Kate Muir</cite>
-                    <time className="review__date" dateTime="2016-12-24">December 24, 2016</time>
-                  </footer>
-                </blockquote>
-
-                <div className="review__rating">8,9</div>
-              </div>
-            </div>
-            <div className="movie-card__reviews-col">
-              <div className="review">
-                <blockquote className="review__quote">
-                  <p className="review__text">It is certainly a magical and childlike way of storytelling, even if the
-                                              content is a little more adult.</p>
-
-                  <footer className="review__details">
-                    <cite className="review__author">Paula Fleri-Soler</cite>
-                    <time className="review__date" dateTime="2016-12-20">December 20, 2016</time>
-                  </footer>
-                </blockquote>
-
-                <div className="review__rating">7,0</div>
-              </div>
-            </div>
-          </div>
+          <ReviewsList comments={comments}/>
         </TabItem>
       </>
     );
   }
 }
+
+const ReviewsList = (props) => {
+  const {comments} = props;
+
+  return (
+    <div className="movie-card__reviews movie-card__row">
+      <div className="movie-card__reviews-col">
+        {
+          comments.map((comment) => <Review key={comment.id} {...comment}/>).slice(0, comments.length / 2)
+        }
+      </div>
+      <div className="movie-card__reviews-col">
+        {
+          comments.map((comment) => <Review key={comment.id} {...comment}/>).slice(comments.length / 2)
+        }
+      </div>
+    </div>
+  );
+};
+
+const Review = (props) => {
+  const {comment, user, rating, date} = props;
+
+  const formatDate = (date) => {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const now = new Date(date);
+    return `${months[now.getMonth()]} ${now.getDate()} ${now.getFullYear()}`;
+  };
+
+  return (
+    <div className="review">
+      <blockquote className="review__quote">
+        <p className="review__text">
+          {comment}
+        </p>
+        <footer className="review__details">
+          <cite className="review__author">
+            {user.name}
+          </cite>
+          <time className="review__date" dateTime={ new Date(date).toISOString().split('T')[0] }>
+            {
+              formatDate(date)
+            }
+          </time>
+        </footer>
+      </blockquote>
+      <div className="review__rating">{rating}</div>
+    </div>
+  );
+};
 
 const TabItem = (props) => {
   const {children, activeTab, tabId} = props;

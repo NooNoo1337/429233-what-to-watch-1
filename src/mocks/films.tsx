@@ -21,7 +21,38 @@ const mockFilms: Film[] = [
     'is_favorite': false,
   }
 ];
+
 const mockGenres = [`All genres`, `Horror`, `Drama`];
+
 const mockFilmsToShow = 20;
 
-export {mockFilms, mockGenres, mockFilmsToShow};
+const mockParams = {params: {id: 1}};
+
+const mockAccountData = {
+  avatar_url: `/wtw/static/avatar/9.jpg`,
+  email: `test@test.ru`,
+  id: 1,
+  name: `test`
+};
+
+const mockComments = [
+  {
+    id: 1,
+    user: {
+      id: 4,
+      name: "Kate Muir",
+    },
+    rating: 8.9,
+    comment: "Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.",
+    date: "2019-05-08T14:13:56.569Z"
+  }
+];
+
+export {
+  mockFilms,
+  mockGenres,
+  mockFilmsToShow,
+  mockAccountData,
+  mockParams,
+  mockComments
+};

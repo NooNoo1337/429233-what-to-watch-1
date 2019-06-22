@@ -5,7 +5,10 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 
 // Components
-import {App} from './app';
+import AddReview from './add-review';
+
+// Mocks
+import {mockFilms} from '../../mocks/films';
 
 // Reducers
 import combineReducers from '../../reducer/index';
@@ -14,28 +17,24 @@ const store = createStore(
 );
 
 // Mocks
-import {mockFilms, mockGenres, mockFilmsToShow} from '../../mocks/films';
+const mockParams = {params: {id: 1}};
+const mockFetchedData = {
+  rating: 3,
+  comment: ``,
+};
 
-describe(`AppComponent`, () => {
+describe(`AddReview`, () => {
   it(`should render correctly`, () => {
     const tree = renderer
       .create(
         <Provider store={store}>
           <BrowserRouter>
-            <App
+            <AddReview
               films={mockFilms}
-              promoFilm={mockFilms[0]}
-              genres={mockGenres}
-              activeGenre={mockGenres[0]}
-              accountData={null}
-              isAuthenticationRequired={false}
-              onCardTitleClick={() => {}}
-              onSignInSubmit={() => {}}
-              onGenreChange={() => {}}
-              filmsCounter={mockFilms.length}
-              filmsToShow={mockFilmsToShow}
-              onFilmsLimitChange={() => {}}
-              onFavouriteChange={() => {}}
+              filmsFetched={true}
+              match={mockParams}
+              fetchData={mockFetchedData}
+              handleFieldChange={() => {}}
             />
           </BrowserRouter>
         </Provider>

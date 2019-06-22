@@ -28,6 +28,18 @@ interface accountData {
   email: string,
   name: string,
   avatar_url: string,
+  error: boolean,
 }
 
-export {Film, SignInData, accountData}
+interface Review {
+  id: number,
+  user: {
+    id: number,
+    name: string,
+  },
+  rating: number,
+  comment: string,
+  date: string
+}
+
+export {Film, SignInData, accountData, Review}
