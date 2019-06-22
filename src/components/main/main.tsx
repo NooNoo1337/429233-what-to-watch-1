@@ -2,21 +2,24 @@ import * as React from 'react';
 import {Link} from 'react-router-dom';
 
 // Components
-import GenreList from '../../components/genre-list/genre-list';
-import FilmsList from '../../components/films-list/films-list';
+import GenreList from '../genre-list/genre-list';
+import FilmsList from '../films-list/films-list';
 import ShowMoreButton from '../show-more-button/show-more-button';
-import FullPlayer from "../full-player/full-player";
+import FullPlayer from '../full-player/full-player';
+import Header from '../header/header';
 
 // HOCS
 import withActiveCard from '../../hocs/with-active-card/with-active-card';
 import withVideoProgress from '../../hocs/with-video-progress/with-video-progress';
+import withAccountInfo from '../../hocs/with-account-data/with-account-info';
 
 // Wrapped Components
 const FilmListWithActiveCard = withActiveCard(FilmsList);
 const FullPlayerWithVideoProgress = withVideoProgress(FullPlayer);
+const HeaderWithAccountInfo = withAccountInfo(Header);
 
 // Types
-import {accountData, Film, SignInData} from "../../types";
+import {accountData, Film, SignInData} from '../../types';
 
 
 interface Props {
@@ -85,35 +88,7 @@ const MainScene = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <Link className="logo__link" to="/">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-
-          <div className="user-block">
-            {
-              accountData !== null ?
-                (
-                  <Link to="/mylist">
-                    <div className="user-block__avatar">
-                      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                    </div>
-                  </Link>
-                ) :
-                (
-                  <div className="user-block">
-                    <Link className="user-block__link" to="/login">
-                      Sign in
-                    </Link>
-                  </div>
-                )
-            }
-          </div>
-        </header>
+        <HeaderWithAccountInfo />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">

@@ -2,6 +2,15 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link, RouteComponentProps} from 'react-router-dom'
 
+// Components
+import Header from '../header/header';
+
+// HOCS
+import withAccountInfo from '../../hocs/with-account-data/with-account-info';
+
+// Wrapped Components
+const HeaderWithAccountInfo = withAccountInfo(Header);
+
 // Reducers
 import {Operations as DataOperations} from "../../reducer/data/data";
 
@@ -62,34 +71,7 @@ class AddReview extends React.PureComponent<Props & RouteComponentProps, null> {
 
                 <h1 className="visually-hidden">WTW</h1>
 
-                <header className="page-header">
-                  <div className="logo">
-                    <Link to="/" className="logo__link">
-                      <span className="logo__letter logo__letter--1">W</span>
-                      <span className="logo__letter logo__letter--2">T</span>
-                      <span className="logo__letter logo__letter--3">W</span>
-                    </Link>
-                  </div>
-
-                  <nav className="breadcrumbs">
-                    <ul className="breadcrumbs__list">
-                      <li className="breadcrumbs__item">
-                        <Link to={`/film/${film.id}`} className="breadcrumbs__link">
-                          {film.name}
-                        </Link>
-                      </li>
-                      <li className="breadcrumbs__item">
-                        <a className="breadcrumbs__link">Add review</a>
-                      </li>
-                    </ul>
-                  </nav>
-
-                  <div className="user-block">
-                    <div className="user-block__avatar">
-                      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                    </div>
-                  </div>
-                </header>
+                <HeaderWithAccountInfo />
 
                 <div className="movie-card__poster movie-card__poster--small">
                   <img src={film.poster_image} alt="The Grand Budapest Hotel poster" width="218"
