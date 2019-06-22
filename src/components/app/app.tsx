@@ -29,6 +29,7 @@ const AddReviewWithFormData = withFormData({'comment': ``, 'rating': 3})(AddRevi
 
 // Reducers
 import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';
+import {Operations as DataOperations} from '../../reducer/data/data.js';
 import {Operations as UserOperations} from '../../reducer/user/user.js';
 import {getUniqGenres, getActiveGenre, getFilteredFilms} from '../../reducer/data/selectors';
 
@@ -48,6 +49,7 @@ interface Props {
   onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
   onFilmsLimitChange: (amount: number) => void,
+  onFavouriteChange: (film) => void,
 }
 
 class App extends React.PureComponent<Props, null> {
@@ -55,6 +57,7 @@ class App extends React.PureComponent<Props, null> {
     const {
       accountData,
       onSignInSubmit,
+      onFavouriteChange,
     } = this.props;
     return (
       <>
@@ -69,6 +72,7 @@ class App extends React.PureComponent<Props, null> {
               <FilmDetailsWithFilms
                 {...props}
                 accountData={accountData}
+                onFavouriteChange={onFavouriteChange}
               />}
           />
 
@@ -143,6 +147,8 @@ const mapDispatchToProps = (dispatch) => ({
   onFilmsLimitChange: (amount) => dispatch(DataActionCreators.getMoreFilms(amount)),
 
   onSignInSubmit: (data) => dispatch(UserOperations.sendUserData(data)),
+
+  onFavouriteChange: (film) => dispatch(DataOperations.changeFavourite(film)),
 });
 
 export {App};

@@ -5,12 +5,6 @@ import {BrowserRouter} from 'react-router-dom';
 // Components
 import {App} from './app';
 
-// Reducers
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import combineReducers from '../../reducer/index';
-const store = createStore(combineReducers);
-
 // Mocks
 import {mockFilms, mockGenres, mockFilmsToShow} from '../../mocks/films';
 
@@ -18,7 +12,6 @@ describe(`AppComponent`, () => {
   it(`should render correctly`, () => {
     const tree = renderer
       .create(
-        <Provider store={store}>
           <BrowserRouter>
             <App
               films={mockFilms}
@@ -33,9 +26,9 @@ describe(`AppComponent`, () => {
               filmsCounter={mockFilms.length}
               filmsToShow={mockFilmsToShow}
               onFilmsLimitChange={() => {}}
+              onFavouriteChange={() => {}}
             />
           </BrowserRouter>
-        </Provider>
       )
       .toJSON();
 

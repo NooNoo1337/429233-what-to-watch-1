@@ -5,12 +5,6 @@ import {BrowserRouter} from 'react-router-dom';
 // Components
 import Main from './main';
 
-// Reducers
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import combineReducers from '../../reducer/index';
-const store = createStore(combineReducers);
-
 // Mocks
 import {mockFilms, mockGenres, mockFilmsToShow} from '../../mocks/films';
 
@@ -33,6 +27,7 @@ describe(`MainComponent`, () => {
               onFilmsLimitChange={() => {}}
               onSignInSubmit={() => {}}
               onGenreChange={() => {}}
+              onFavouriteChange={() => {}}
             />
           </BrowserRouter>
       )
