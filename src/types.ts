@@ -30,4 +30,15 @@ interface accountData {
   avatar_url: string,
 }
 
-export {Film, SignInData, accountData}
+interface Review {
+  id: number,
+  user: {
+    id: number,
+    name: string,
+  },
+  rating: number,
+  comment: string,
+  date: string
+}
+
+export {Film, SignInData, accountData, Review}

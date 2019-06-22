@@ -14,6 +14,7 @@ const ActionType = {
   'LOAD_PROMO_FILM': `LOAD_PROMO_FILM`,
   'LOAD_FILMS': `LOAD_FILMS`,
   'LOAD_FAVORITE_FILMS': `LOAD_FAVORITE_FILMS`,
+  'LOAD_COMMENTS': `LOAD_COMMENTS`,
   'ADD_COMMENT': `ADD_COMMENT`,
   'CHANGE_FAVORITE': `CHANGE_FAVORITE`,
 };
@@ -54,6 +55,13 @@ const ActionCreators = {
     };
   },
 
+  loadComments: (fetchedComments) => {
+    return {
+      type: ActionType.LOAD_COMMENTS,
+      payload: fetchedComments
+    };
+  },
+
   addComment: (fetchedComments) => {
     return {
       type: ActionType.ADD_COMMENT,
@@ -83,8 +91,14 @@ const Operations = {
   loadFavoriteFilms: () => (dispatch, getState, api) => {
     return api.get(`/favorite`)
       .then((response) => {
-        console.log('--->', response.data);
-        dispatch(ActionCreators.loadFavoriteFilms(response.data))
+        dispatch(ActionCreators.loadFavoriteFilms(response.data));
+      });
+  },
+
+  loadComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreators.loadComments(response.data));
       });
   },
 
@@ -125,6 +139,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FAVORITE_FILMS:
       return Object.assign({}, state, {
         favoriteFilms: action.payload,
+      });
+
+    case ActionType.LOAD_COMMENTS:
+      return Object.assign({}, state, {
+        comments: action.payload,
       });
 
     case ActionType.ADD_COMMENT:
