@@ -1,5 +1,6 @@
 const initialState = {
   promoFilm: [],
+  favoriteFilms: [],
   films: [],
   comments: [],
   activeGenre: `All genres`,
@@ -12,6 +13,7 @@ const ActionType = {
   'GET_MORE_FILMS': `GET_MORE_FILMS`,
   'LOAD_PROMO_FILM': `LOAD_PROMO_FILM`,
   'LOAD_FILMS': `LOAD_FILMS`,
+  'LOAD_FAVORITE_FILMS': `LOAD_FAVORITE_FILMS`,
   'ADD_COMMENT': `ADD_COMMENT`,
   'CHANGE_FAVORITE': `CHANGE_FAVORITE`,
 };
@@ -45,6 +47,13 @@ const ActionCreators = {
     };
   },
 
+  loadFavoriteFilms: (fetchedFilms) => {
+    return {
+      type: ActionType.LOAD_FAVORITE_FILMS,
+      payload: fetchedFilms
+    };
+  },
+
   addComment: (fetchedComments) => {
     return {
       type: ActionType.ADD_COMMENT,
@@ -69,6 +78,14 @@ const Operations = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => dispatch(ActionCreators.loadFilms(response.data)));
+  },
+
+  loadFavoriteFilms: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        console.log('--->', response.data);
+        dispatch(ActionCreators.loadFavoriteFilms(response.data))
+      });
   },
 
   addComment: ({comment, rating, filmId}) => (dispatch, getState, api) => {
@@ -103,6 +120,11 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         films: action.payload,
         filmsCounter: action.payload.length
+      });
+
+    case ActionType.LOAD_FAVORITE_FILMS:
+      return Object.assign({}, state, {
+        favoriteFilms: action.payload,
       });
 
     case ActionType.ADD_COMMENT:

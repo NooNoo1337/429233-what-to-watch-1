@@ -71,7 +71,6 @@ const MainScene = (props) => {
     filmsToShow,
     accountData,
     onGenreChange,
-    onCardTitleClick,
     onFilmsLimitChange,
     onPlayerButtonClick,
     onFavouriteChange,
@@ -99,7 +98,7 @@ const MainScene = (props) => {
             {
               accountData !== null ?
                 (
-                  <Link to="/favourites">
+                  <Link to="/mylist">
                     <div className="user-block__avatar">
                       <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
                     </div>
@@ -177,7 +176,6 @@ const MainScene = (props) => {
             films={films}
             filmsToShow={filmsToShow}
             activeGenre={activeGenre}
-            onCardTitleClick={onCardTitleClick}
           />
 
           <ShowMoreButton

@@ -5,7 +5,7 @@ import {Switch, Route} from 'react-router-dom';
 
 // Component
 import SignIn from '../../components/sign-in/sign-in';
-import Favourites from '../my-list/my-list';
+import MyList from '../my-list/my-list';
 import Main from '../main/main';
 import FilmDetails from '../film-details/film-details';
 import AddReview from '../add-review/add-review';
@@ -15,9 +15,11 @@ import withFormData from '../../hocs/with-form-data/with-form-data';
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 import withFullPlayer from '../../hocs/with-full-player/with-full-player'
 import withFilms from '../../hocs/with-films/with-films';
+import withFavoriteFilms from '../../hocs/with-favorite-films/with-favorite-films';
 
 // Wrapped Components
 const SignInWithFormData = withFormData({'email': ``, 'password': ``})(SignIn);
+
 const MainWithFullPlayer = withFullPlayer(Main);
 
 const FilmDetailsWithFullPlayer = withFullPlayer(FilmDetails);
@@ -26,6 +28,8 @@ const FilmDetailsWithFilms = withFilms(FilmDetailsWithFullPlayer);
 const AddReviewWithFilms = withFilms(AddReview);
 const AddReviewWithPrivateRoute = withPrivateRoute(AddReviewWithFilms);
 const AddReviewWithFormData = withFormData({'comment': ``, 'rating': 3})(AddReviewWithPrivateRoute);
+
+const MyListWithFavoritesFilms = withFavoriteFilms(withPrivateRoute(MyList));
 
 // Reducers
 import {ActionCreators as DataActionCreators} from '../../reducer/data/data.js';
@@ -82,7 +86,7 @@ class App extends React.PureComponent<Props, null> {
                 {...props}
               />}
           />
-          <Route path="/favourites" exact component={withPrivateRoute(Favourites)}/>
+          <Route path="/mylist" exact component={MyListWithFavoritesFilms}/>
         </Switch>
       </>
     );
