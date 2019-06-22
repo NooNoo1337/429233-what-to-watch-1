@@ -28,6 +28,7 @@ interface accountData {
   email: string,
   name: string,
   avatar_url: string,
+  error: boolean,
 }
 
 interface Review {

@@ -1,14 +1,17 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import {Link} from 'react-router-dom';
-import history from '../../history';
+import {connect} from 'react-redux';
+import {accountData} from '../../types';
 
 interface Props {
   handleFieldChange: (evt) => void,
   onSignInSubmit: (evt) => void,
-  fetchData: Object,
+  formErrors: boolean | object,
+  fetchData: object,
 }
 
-export default class SignIn extends React.PureComponent<Props, null> {
+class SignIn extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +26,15 @@ export default class SignIn extends React.PureComponent<Props, null> {
   }
 
   render() {
-    const {handleFieldChange} = this.props;
+    const {
+      handleFieldChange,
+      formErrors
+    } = this.props;
+
+    const classes = classNames({
+      'sign-in__field': true,
+      'sign-in__field--error': formErrors,
+    });
 
     return (
       <div className="user-page">
@@ -41,8 +52,16 @@ export default class SignIn extends React.PureComponent<Props, null> {
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={this.handleSubmit}>
+
+            {
+              formErrors &&
+              <div className="sign-in__message">
+                <p>Please enter a valid email address</p>
+              </div>
+            }
+
             <div className="sign-in__fields">
-              <div className="sign-in__field">
+              <div className={classes}>
                 <input className="sign-in__input" type="email" placeholder="Email address" name="email" id="user-email" onChange={handleFieldChange} required/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
@@ -74,3 +93,11 @@ export default class SignIn extends React.PureComponent<Props, null> {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    formErrors: state[`USER`].formErrors,
+  });
+};
+
+export default  connect(mapStateToProps, null)(SignIn);
