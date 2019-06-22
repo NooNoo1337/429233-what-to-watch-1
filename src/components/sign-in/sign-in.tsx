@@ -100,4 +100,6 @@ const mapStateToProps = (state, ownProps) => {
   });
 };
 
+export {SignIn}
+
 export default  connect(mapStateToProps, null)(SignIn);
