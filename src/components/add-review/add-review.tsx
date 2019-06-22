@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Link, RouteComponentProps} from 'react-router-dom'
+import {RouteComponentProps} from 'react-router-dom'
 
 // Components
 import Header from '../header/header';
@@ -19,7 +19,6 @@ import {Film} from '../../types'
 
 interface Props {
   films: Film[]
-  activeFilm: null | number,
   filmsFetched: boolean,
   handleFieldChange: (evt) => void,
   formReset: (evt) => void,
