@@ -36,7 +36,7 @@ interface Props {
 }
 
 class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null> {
-  chosenFilm = +this.props.match.params.id;
+  private chosenFilm: number = +this.props.match.params.id;
 
   constructor(props) {
     super(props);
