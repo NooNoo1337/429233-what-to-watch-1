@@ -77,6 +77,27 @@ describe(`DataReducer`, () => {
       });
   });
 
+  it(`Should make a correct API GET call to /comments/:id`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const mockFilm = {id: 1};
+    const commentsLoader = Operations.loadComments(mockFilm.id);
+
+    apiMock
+      .onGet(`/comments/${mockFilm.id}`)
+      .reply(200, [{fake: true}]);
+
+    return commentsLoader(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_COMMENTS,
+          payload: [{fake: true}]
+        });
+      });
+  });
+
   it(`Should make a correct API POST call to /comments/:id`, () => {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);
@@ -93,6 +114,26 @@ describe(`DataReducer`, () => {
         expect(dispatch).toHaveBeenCalled();
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.ADD_COMMENT,
+          payload: [{fake: true}]
+        });
+      });
+  });
+
+  it(`Should make a correct API GET call to /favorite`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI(dispatch);
+    const apiMock = new MockAdapter(api);
+    const filmsLoader = Operations.loadFavoriteFilms();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [{fake: true}]);
+
+    return filmsLoader(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITE_FILMS,
           payload: [{fake: true}]
         });
       });

@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {accountData} from '../../types';
 
 interface Props {
   handleFieldChange: (evt) => void,
