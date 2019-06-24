@@ -34,7 +34,6 @@ describe(`FilmCardComponent`, () => {
           <FilmCard
             film={mockFilm}
             key={mockFilm.id}
-            onCardTitleClick={() => {}}
             onMouseEnter={() => mockFilm.id}
             onMouseLeave={() => {}}
             isVideoPlaying={false}

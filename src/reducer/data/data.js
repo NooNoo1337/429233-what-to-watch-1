@@ -19,7 +19,6 @@ const ActionType = {
   'LOAD_COMMENTS': `LOAD_COMMENTS`,
   'ADD_COMMENT': `ADD_COMMENT`,
   'CHANGE_FAVORITE': `CHANGE_FAVORITE`,
-  'SET_SERVER_ERROR': `SET_SERVER_ERROR`,
 };
 
 const ActionCreators = {
@@ -84,8 +83,7 @@ const ActionCreators = {
 const Operations = {
   loadPromoFilm: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
-      .then(({data, status}) => (status === 200) ?
-        dispatch(ActionCreators.loadPromoFilm(data)) : null);
+      .then(({data, status}) => (status === 200) ? dispatch(ActionCreators.loadPromoFilm(data)) : null);
   },
 
   loadFilms: () => (dispatch, getState, api) => {
@@ -105,7 +103,12 @@ const Operations = {
 
   addComment: ({comment, rating, filmId}) => (dispatch, getState, api) => {
     return api.post(`/comments/${filmId}`, {comment, rating})
-      .then(({status}) => (status === 200) ? history.goBack() : null);
+      .then(({data, status}) => {
+        if (status === 200) {
+          history.goBack();
+          dispatch(ActionCreators.addComment(data));
+        }
+      });
   },
 
   changeFavourite: ({id, is_favorite: isFavorite}) => (dispatch, getState, api) => {

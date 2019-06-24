@@ -50,7 +50,6 @@ interface Props {
   filmsToShow: number,
   genres: string[],
   isAuthenticationRequired: boolean,
-  onCardTitleClick: () => void,
   onGenreChange: (evt, genre: string) => void,
   onSignInSubmit: (evt, data: SignInData) => void,
   onFilmsLimitChange: (amount: number) => void,

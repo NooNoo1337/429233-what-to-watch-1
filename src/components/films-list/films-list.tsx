@@ -18,7 +18,6 @@ interface Props {
   activeCardId: number,
   onMouseEnter: (evt) => number,
   onMouseLeave: () => void,
-  onCardTitleClick: () => void,
   filmsToShow: number,
 }
 
@@ -29,7 +28,6 @@ const FilmsList = (props: Props) => {
     filmsToShow,
     onMouseEnter,
     onMouseLeave,
-    onCardTitleClick
   } = props;
 
   return (
@@ -38,7 +36,6 @@ const FilmsList = (props: Props) => {
         <FilCardWithVideoPlayer
           film={film}
           key={film.id}
-          onCardTitleClick={onCardTitleClick}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           isCardActive={activeCardId === film.id}

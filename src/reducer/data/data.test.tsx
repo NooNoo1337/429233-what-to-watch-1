@@ -1,6 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
-import {createAPI} from '../../api';
-import {reducer, ActionType, Operations} from './data';
+import {createAPI} from '../../api.js';
+import {reducer, ActionType, Operations} from './data.js';
 
 describe(`DataReducer`, () => {
   it(`Should return initial state by default`, () => {

@@ -21,11 +21,12 @@ export default class VideoPlayer extends React.PureComponent<Props, null> {
     const playPromise = video.play();
 
     if (playPromise !== undefined && playPromise !== null) {
-      playPromise.then(() => {
-        if (!this.props.isVideoPlaying) {
-          video.load();
-        }
-      });
+      playPromise
+        .then(() => {
+          if (!this.props.isVideoPlaying) {
+            video.load();
+          }
+        });
     }
   }
 

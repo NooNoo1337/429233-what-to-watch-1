@@ -29,7 +29,6 @@ describe(`AppComponent`, () => {
               activeGenre={mockGenres[0]}
               accountData={null}
               isAuthenticationRequired={false}
-              onCardTitleClick={() => {}}
               onSignInSubmit={() => {}}
               onGenreChange={() => {}}
               filmsCounter={mockFilms.length}

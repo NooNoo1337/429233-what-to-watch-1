@@ -9,7 +9,6 @@ import {Film} from "../../types";
 
 interface Props {
   film: Film,
-  onCardTitleClick: () => void,
   onMouseEnter: (evt) => void,
   onMouseLeave: () => void,
   isVideoPlaying: boolean
@@ -21,7 +20,6 @@ const FilmCard = (props: Props) => {
     isVideoPlaying,
     onMouseEnter,
     onMouseLeave,
-    onCardTitleClick
   } = props;
   return (
     <>
@@ -37,7 +35,7 @@ const FilmCard = (props: Props) => {
           />
         </Link>
         <h3 className="small-movie-card__title">
-          <Link to={`/film/${film.id}`} className="small-movie-card__link" onClick={onCardTitleClick}>
+          <Link to={`/film/${film.id}`} className="small-movie-card__link">
             {film.name}
           </Link>
         </h3>

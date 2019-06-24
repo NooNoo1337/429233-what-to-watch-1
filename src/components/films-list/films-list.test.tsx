@@ -38,7 +38,6 @@ describe(`FilmsListComponent`, () => {
           <FilmsList
             activeCardId={mockFilms[0].id}
             films={mockFilms}
-            onCardTitleClick={() => {}}
             onMouseEnter={() => {
               return mockFilms[0].id
             }}
