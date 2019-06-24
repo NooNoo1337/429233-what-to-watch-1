@@ -31,7 +31,7 @@ describe(`AddReview`, () => {
           <BrowserRouter>
             <AddReview
               films={mockFilms}
-              filmsFetched={true}
+              isFetchingFilms={false}
               match={mockParams}
               fetchData={mockFetchedData}
               handleFieldChange={() => {}}

@@ -39,30 +39,29 @@ interface Props {
   onFavouriteChange: (film) => void,
 }
 
-class Main extends React.PureComponent<Props, null> {
-  render() {
-    const {
-      isPlayerActive,
-      onPlayerButtonClick,
-      promoFilm
-    } = this.props;
+const Main = (props: Props) => {
+  const {
+    isPlayerActive,
+    onPlayerButtonClick,
+    promoFilm
+  } = props;
 
-    return (
-      <>
-        {isPlayerActive ?
-          <FullPlayerWithVideoProgress
-            videoSrc={promoFilm.video_link}
-            runTime={promoFilm.run_time}
-            onPlayerButtonClick={onPlayerButtonClick}
-          />
-          :
-          <MainScene {...this.props}/>
+  return (
+    <>
+      {isPlayerActive ?
+        <FullPlayerWithVideoProgress
+          videoSrc={promoFilm.video_link}
+          runTime={promoFilm.run_time}
+          onPlayerButtonClick={onPlayerButtonClick}
+        />
+        :
+        <MainScene {...props}/>
 
-        }
-      </>
-    );
-  }
-}
+      }
+    </>
+  );
+
+};
 
 const MainScene = (props) => {
   const {
@@ -88,7 +87,7 @@ const MainScene = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <HeaderWithAccountInfo />
+        <HeaderWithAccountInfo/>
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -126,7 +125,7 @@ const MainScene = (props) => {
                 </button>
                 {
                   accountData !== null ?
-                    <Link to={`/reviews/add/${promoFilm.id}`} className="btn movie-card__button">
+                    <Link to={`/film/${promoFilm.id}/review`} className="btn movie-card__button">
                       Add review
                     </Link>
                     :

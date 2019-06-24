@@ -1,6 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
-import {createAPI} from '../../api.js';
-import {reducer, ActionType, Operations} from './data.js';
+import {createAPI} from '../../api';
+import {reducer, ActionType, Operations} from './data';
 
 describe(`DataReducer`, () => {
   it(`Should return initial state by default`, () => {
@@ -36,6 +36,7 @@ describe(`DataReducer`, () => {
       filmsToShow: 40,
     });
   });
+
 
   it(`Should make a correct API GET call to /films`, () => {
     const dispatch = jest.fn();

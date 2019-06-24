@@ -5,7 +5,7 @@ import {Film} from '../../types';
 
 interface InjectedProps {
   films: Film[]
-  render: Boolean
+  isFetchingFilms: boolean
 }
 
 const withFilms = (WrappedComponent) => {
@@ -19,11 +19,11 @@ const withFilms = (WrappedComponent) => {
 
     render() {
       const {films} = this.props;
-      const filmsFetched = (films.length > 0);
+      const isFetchingFilms = (films.length > 0) ? false : true;
 
       return <WrappedComponent
         {...this.props}
-        filmsFetched={filmsFetched}
+        isFetchingFilms={isFetchingFilms}
       />;
     }
   }

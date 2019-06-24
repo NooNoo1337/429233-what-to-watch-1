@@ -3,6 +3,7 @@ import history from './history.js';
 
 const serverErrors = {
   accessForbidden: 403,
+  badRequest: 400,
 };
 
 export const createAPI = () => {
@@ -14,9 +15,15 @@ export const createAPI = () => {
 
   const onSuccess = (response) => response;
   const onFail = (error) => {
-    if (error.response.status === serverErrors.accessForbidden) {
-      history.push(`/login`);
+    switch (error.response.status) {
+      case serverErrors.accessForbidden:
+        history.push(`/login`);
+        break;
+      default:
+        history.push(`/error`);
+        break;
     }
+
     return error;
   };
 

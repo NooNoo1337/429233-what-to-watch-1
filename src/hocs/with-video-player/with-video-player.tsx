@@ -8,7 +8,7 @@ interface InjectedProps {
 
 interface State {
   isVideoPlaying: boolean,
-  timeoutID: any, // TODO: remove any, because it can be number | null | function that returns number (?)
+  timeoutID: any,
 }
 
 const withVideoPlayer = (WrappedComponent) => {

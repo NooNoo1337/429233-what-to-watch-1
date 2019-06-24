@@ -18,9 +18,8 @@ interface Props {
   filmsFetched: boolean
 }
 
-class MyList extends React.PureComponent<Props, null> {
-  render() {
-    const {filmsFetched, favoriteFilms} = this.props;
+const MyList = (props: Props) => {
+    const {filmsFetched, favoriteFilms} = props;
     return (
       <div className="user-page">
         <header className="page-header user-page__head">
@@ -64,7 +63,6 @@ class MyList extends React.PureComponent<Props, null> {
         </footer>
       </div>
     );
-  }
-}
+};
 
 export default MyList;

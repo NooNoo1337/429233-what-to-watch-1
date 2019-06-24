@@ -20,22 +20,16 @@ class Tabs extends React.PureComponent<Props, null> {
     switch (true) {
       case (rating <= 3):
         return `bad`;
-        break;
       case (rating >= 3 && rating <= 5):
         return `normal`;
-        break;
       case (rating >= 5 && rating <= 8):
         return `good`;
-        break;
       case (rating >= 8 && rating <= 10):
         return `very good`;
-        break;
       case (rating === 10):
         return `awesome`;
-        break;
       default:
         return `no rank`;
-        break;
     }
   }
 
@@ -52,7 +46,7 @@ class Tabs extends React.PureComponent<Props, null> {
         <nav className="movie-nav movie-card__nav">
           <ul className="movie-nav__list">
             <TabNav onTabClick={onTabClick} activeTab={activeTab} tabId={1}>Overview</TabNav>
-            <TabNav onTabClick={onTabClick} activeTab={activeTab} tabId={2}>Overview</TabNav>
+            <TabNav onTabClick={onTabClick} activeTab={activeTab} tabId={2}>Details</TabNav>
             <TabNav onTabClick={onTabClick} activeTab={activeTab} tabId={3}>Reviews</TabNav>
           </ul>
         </nav>

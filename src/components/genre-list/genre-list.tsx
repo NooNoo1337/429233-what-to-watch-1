@@ -7,21 +7,20 @@ interface Props {
   onGenreChange: (evt, genre: string) => void,
 }
 
-export default class GenreList extends React.Component<Props, null> {
-  render() {
-    const {genres, activeGenre, onGenreChange} = this.props;
+const GenreList = (props: Props) => {
+  const {genres, activeGenre, onGenreChange} = props;
+  return (
+    <ul className="catalog__genres-list">
+      {genres.map((genre) =>
+        <li className={classNames({
+          'catalog__genres-item': true,
+          'catalog__genres-item--active': activeGenre === genre,
+        })} key={`genre-${genre}`}>
+          <a href="#" className="catalog__genres-link" onClick={(evt) => onGenreChange(evt, genre)}>{genre}</a>
+        </li>
+      )}
+    </ul>
+  );
+};
 
-    return (
-      <ul className="catalog__genres-list">
-        {genres.map((genre) =>
-          <li className={classNames({
-            'catalog__genres-item': true,
-            'catalog__genres-item--active': activeGenre === genre,
-          })} key={`genre-${genre}`}>
-            <a href="#" className="catalog__genres-link" onClick={(evt) => onGenreChange(evt, genre)}>{genre}</a>
-          </li>
-        )}
-      </ul>
-    );
-  }
-}
+export default GenreList;

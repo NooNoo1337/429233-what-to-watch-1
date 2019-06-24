@@ -14,7 +14,7 @@ const store = createStore(
 );
 
 // Mocks
-import {mockFilms} from '../../mocks/films';
+import {mockFilms, mockAccountData} from '../../mocks/films';
 const mockParams = {params: {id: 1}};
 
 describe(`FilmDetails`, () => {
@@ -24,9 +24,12 @@ describe(`FilmDetails`, () => {
         <Provider store={store}>
           <BrowserRouter>
             <FilmDetails
+              accountData={mockAccountData}
               films={mockFilms}
+              isFetchingFilms={false}
               isPlayerActive={false}
               match={mockParams}
+              onPlayerButtonClick={() => {}}
             />
           </BrowserRouter>
         </Provider>

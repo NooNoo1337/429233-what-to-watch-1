@@ -28,34 +28,35 @@ import {Film} from '../../types';
 
 interface Props {
   films: Film[],
-  accountData: null | Object,
-  filmsFetched: boolean,
+  accountData: null | object,
+  match: {
+    params: {
+      id: number
+    }
+  }
+  isFetchingFilms: boolean,
   isPlayerActive: boolean,
   onPlayerButtonClick: () => void,
-  onFavouriteChange: ({filmId: number, isFavourite: boolean}) => void,
+  onFavouriteChange?: ({filmId: number, isFavourite: boolean}) => void,
 }
 
-class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null> {
-  private chosenFilm: number = +this.props.match.params.id;
+const FilmDetails = (props: Props) => {
+  const {
+    films,
+    isPlayerActive,
+    isFetchingFilms,
+    onPlayerButtonClick,
+  } = props;
 
-  constructor(props) {
-    super(props);
-  }
+  const chosenFilm = Number(props.match.params.id);
+  const film = films.filter((film) => (film.id === chosenFilm))[0];
 
-  render() {
-    const {
-      films,
-      isPlayerActive,
-      filmsFetched,
-      onPlayerButtonClick,
-    } = this.props;
-
-    const film = films.filter((film) => (film.id === this.chosenFilm))[0];
-
-    return (
-      <>
-        {
-          filmsFetched &&
+  return (
+    <>
+      {
+        isFetchingFilms ?
+          null
+          :
           <>
             {
               isPlayerActive ?
@@ -66,21 +67,20 @@ class FilmDetails extends React.PureComponent<Props & RouteComponentProps, null>
                 />
                 :
                 <FilmDetailsScreen
-                  {...this.props}
-                  chosenFilm={this.chosenFilm}
+                  {...props}
+                  chosenFilm={chosenFilm}
                 />
             }
           </>
-        }
-      </>
-    );
-  }
-}
+      }
+    </>
+  );
+};
 
 const FilmDetailsScreen = (props) => {
   const {
     films,
-    filmsFetched,
+    isFetchingFilms,
     accountData,
     onPlayerButtonClick,
     onFavouriteChange,
@@ -94,7 +94,9 @@ const FilmDetailsScreen = (props) => {
   return (
     <>
       {
-        filmsFetched &&
+        isFetchingFilms ?
+          null
+          :
           <>
             <section className="movie-card movie-card--full">
               <div className="movie-card__hero">
@@ -104,7 +106,7 @@ const FilmDetailsScreen = (props) => {
 
                 <h1 className="visually-hidden">WTW</h1>
 
-                <HeaderWithAccountInfo />
+                <HeaderWithAccountInfo/>
 
                 <div className="movie-card__wrap">
                   <div className="movie-card__desc">
@@ -121,7 +123,8 @@ const FilmDetailsScreen = (props) => {
                         </svg>
                         <span>Play</span>
                       </button>
-                      <button className="btn btn--list movie-card__button" type="button" onClick={() => onFavouriteChange(film)}>
+                      <button className="btn btn--list movie-card__button" type="button"
+                              onClick={() => onFavouriteChange(film)}>
                         <svg viewBox="0 0 18 14" width="18" height="14">
                           <use xlinkHref={film.is_favorite ? '#in-list' : '#add'}></use>
                         </svg>
@@ -129,7 +132,7 @@ const FilmDetailsScreen = (props) => {
                       </button>
                       {
                         accountData &&
-                        <Link to={`/reviews/add/${film.id}`} className="btn movie-card__button">
+                        <Link to={`/film/${film.id}/review`} className="btn movie-card__button">
                           Add review
                         </Link>
                       }

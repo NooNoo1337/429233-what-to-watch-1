@@ -19,13 +19,13 @@ import {Film} from '../../types'
 
 interface Props {
   films: Film[]
-  filmsFetched: boolean,
+  isFetchingFilms: boolean,
   handleFieldChange: (evt) => void,
   formReset: (evt) => void,
 }
 
 class AddReview extends React.PureComponent<Props & RouteComponentProps, null> {
-  chosenFilmId = +this.props.match.params.id;
+  chosenFilmId = Number(this.props.match.params.id);
 
   constructor(props) {
     super(props);
@@ -49,7 +49,7 @@ class AddReview extends React.PureComponent<Props & RouteComponentProps, null> {
   render() {
     const {
       films,
-      filmsFetched,
+      isFetchingFilms,
       fetchData: {
         rating,
         comment
@@ -57,11 +57,12 @@ class AddReview extends React.PureComponent<Props & RouteComponentProps, null> {
       handleFieldChange,
     } = this.props;
     const film = films.filter((film) => film.id === this.chosenFilmId)[0];
-
     return (
       <>
         {
-          filmsFetched ?
+          isFetchingFilms ?
+            null
+            :
             <section className="movie-card movie-card--full">
               <div className="movie-card__header">
                 <div className="movie-card__bg">
@@ -134,8 +135,6 @@ class AddReview extends React.PureComponent<Props & RouteComponentProps, null> {
                 </form>
               </div>
             </section>
-            :
-            null
         }
       </>
     );

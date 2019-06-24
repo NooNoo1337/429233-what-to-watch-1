@@ -22,23 +22,30 @@ interface Props {
   filmsToShow: number,
 }
 
-export default class FilmsList extends React.PureComponent<Props, null> {
-  render() {
-    const {films, activeCardId, filmsToShow, onMouseEnter, onMouseLeave, onCardTitleClick} = this.props;
+const FilmsList = (props: Props) => {
+  const {
+    films,
+    activeCardId,
+    filmsToShow,
+    onMouseEnter,
+    onMouseLeave,
+    onCardTitleClick
+  } = props;
 
-    return (
-      <div className="catalog__movies-list">
-        {films.slice(0, filmsToShow).map((film) =>
-          <FilCardWithVideoPlayer
-            film={film}
-            key={film.id}
-            onCardTitleClick={onCardTitleClick}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            isCardActive={activeCardId === film.id}
-          />
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="catalog__movies-list">
+      {films.slice(0, filmsToShow).map((film) =>
+        <FilCardWithVideoPlayer
+          film={film}
+          key={film.id}
+          onCardTitleClick={onCardTitleClick}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          isCardActive={activeCardId === film.id}
+        />
+      )}
+    </div>
+  );
+};
+
+export default FilmsList;

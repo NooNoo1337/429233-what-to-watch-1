@@ -3,12 +3,13 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 
-// Component
+// Components
 import SignIn from '../../components/sign-in/sign-in';
 import MyList from '../my-list/my-list';
 import Main from '../main/main';
 import FilmDetails from '../film-details/film-details';
 import AddReview from '../add-review/add-review';
+import ErrorMessage from '../error-message/error-message';
 
 // HOCS
 import withFormData from '../../hocs/with-form-data/with-form-data';
@@ -63,6 +64,8 @@ class App extends React.PureComponent<Props, null> {
       onSignInSubmit,
       onFavouriteChange,
     } = this.props;
+
+
     return (
       <>
         <SvgSprite/>
@@ -80,13 +83,15 @@ class App extends React.PureComponent<Props, null> {
               />}
           />
 
-          <Route path="/reviews/add/:id" exact render={
+          <Route path="/film/:id/review" exact render={
             (props) =>
               <AddReviewWithFormData
                 {...props}
               />}
           />
           <Route path="/mylist" exact component={MyListWithFavoritesFilms}/>
+
+          <Route path="/error" exact component={ErrorMessage}/>
         </Switch>
       </>
     );

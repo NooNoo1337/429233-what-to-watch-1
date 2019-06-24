@@ -1,3 +1,5 @@
+import history from '../../history';
+
 const initialState = {
   promoFilm: [],
   favoriteFilms: [],
@@ -17,6 +19,7 @@ const ActionType = {
   'LOAD_COMMENTS': `LOAD_COMMENTS`,
   'ADD_COMMENT': `ADD_COMMENT`,
   'CHANGE_FAVORITE': `CHANGE_FAVORITE`,
+  'SET_SERVER_ERROR': `SET_SERVER_ERROR`,
 };
 
 const ActionCreators = {
@@ -75,41 +78,39 @@ const ActionCreators = {
       payload: film
     };
   },
+
 };
 
 const Operations = {
   loadPromoFilm: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
-      .then((response) => dispatch(ActionCreators.loadPromoFilm(response.data)));
+      .then(({data, status}) => (status === 200) ?
+        dispatch(ActionCreators.loadPromoFilm(data)) : null);
   },
 
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
-      .then((response) => dispatch(ActionCreators.loadFilms(response.data)));
+      .then(({data, status}) => (status === 200) ? dispatch(ActionCreators.loadFilms(data)) : null);
   },
 
   loadFavoriteFilms: () => (dispatch, getState, api) => {
     return api.get(`/favorite`)
-      .then((response) => {
-        dispatch(ActionCreators.loadFavoriteFilms(response.data));
-      });
+      .then(({data, status}) => (status === 200) ? dispatch(ActionCreators.loadFavoriteFilms(data)) : null);
   },
 
   loadComments: (id) => (dispatch, getState, api) => {
     return api.get(`/comments/${id}`)
-      .then((response) => {
-        dispatch(ActionCreators.loadComments(response.data));
-      });
+      .then(({data, status}) => (status === 200) ? dispatch(ActionCreators.loadComments(data)) : null);
   },
 
   addComment: ({comment, rating, filmId}) => (dispatch, getState, api) => {
     return api.post(`/comments/${filmId}`, {comment, rating})
-      .then((response) => dispatch(ActionCreators.addComment(response.data)));
+      .then(({status}) => (status === 200) ? history.goBack() : null);
   },
 
   changeFavourite: ({id, is_favorite: isFavorite}) => (dispatch, getState, api) => {
     return api.post(`/favorite/${id}/${isFavorite ? `0` : `1`}`)
-      .then((response) => dispatch(ActionCreators.changeFavourite(response.data)));
+      .then(({data, status}) => (status === 200) ? dispatch(ActionCreators.changeFavourite(data)) : null);
   },
 };
 

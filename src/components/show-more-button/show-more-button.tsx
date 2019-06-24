@@ -6,9 +6,8 @@ interface Props {
   filmsToShow: number,
 }
 
-export default class ShowMoreButton extends React.PureComponent<Props, null> {
-  render() {
-    const {onFilmsLimitChange, filmsCounter, filmsToShow} = this.props;
+const ShowMoreButton = (props: Props) => {
+    const {onFilmsLimitChange, filmsCounter, filmsToShow} = props;
     const areAllFilmsShown = (filmsToShow >= filmsCounter);
     const multiplier = areAllFilmsShown ? 1 : 2;
     return (
@@ -22,5 +21,6 @@ export default class ShowMoreButton extends React.PureComponent<Props, null> {
         </button>
       </div>
     );
-  }
-}
+};
+
+export default ShowMoreButton;

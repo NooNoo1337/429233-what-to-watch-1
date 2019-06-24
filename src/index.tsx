@@ -15,17 +15,19 @@ import combineReducers from './reducer/index';
 import {Operations} from './reducer/data/data';
 import {createAPI} from './api';
 
-declare const __REDUX_DEVTOOLS_EXTENSION__: () => any;
+declare global {
+  interface Window { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any; }
+}
 
 const api = createAPI();
 
 /* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-    combineReducers,
-    compose(
-        applyMiddleware(thunk.withExtraArgument(api)),
-      __REDUX_DEVTOOLS_EXTENSION__ && __REDUX_DEVTOOLS_EXTENSION__()
-    )
+  combineReducers,
+  composeEnhancers(
+    applyMiddleware(thunk.withExtraArgument(api)),
+  )
 );
 /* eslint-enable */
 
@@ -33,10 +35,10 @@ store.dispatch(Operations.loadFilms());
 store.dispatch(Operations.loadPromoFilm());
 
 ReactDOM.render(
-    <Provider store={store}>
-      <Router history={history}>
-        <App/>
-      </Router>
-    </Provider>,
-    document.getElementById(`root`)
+  <Provider store={store}>
+    <Router history={history}>
+      <App/>
+    </Router>
+  </Provider>,
+  document.getElementById(`root`)
 );
