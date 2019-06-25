@@ -1,4 +1,3 @@
-// TODO: make e2e tests for App routes
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
